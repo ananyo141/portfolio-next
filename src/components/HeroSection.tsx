@@ -1,8 +1,6 @@
 "use client"; // this is a client component
 import React from "react";
 import Image from "next/image";
-import { Link } from "react-scroll/modules";
-import { HiArrowDown } from "react-icons/hi";
 import Typewriter from "typewriter-effect";
 
 import heroImage from "src/assets/HeroImage.png";
@@ -10,7 +8,7 @@ import heroImage from "src/assets/HeroImage.png";
 const HeroSection = () => {
   return (
     <section id="home" className="h-screen">
-      <div className="flex flex-col items-center justify-center gap-20 text-center sm:py-32 md:flex-row md:space-x-4 md:py-48 md:text-left">
+      <div className="flex h-full flex-col items-center justify-center gap-20 text-center sm:py-32 md:flex-row md:space-x-4 md:py-48 md:text-left">
         <Image
           src={heroImage}
           alt=""
@@ -30,7 +28,7 @@ const HeroSection = () => {
               </h1>
               <h1 className="text-6xl font-bold text-[#9b7c58]">
                 I'm a{"  "}
-                <div className="bg-yellow-800 font-semibold py-2 px-1 rounded-md text-gray-300 lg:inline-block">
+                <div className="rounded-md bg-yellow-800 px-1 py-2 font-semibold text-gray-300 lg:inline-block">
                   <Typewriter
                     options={{
                       strings: [
@@ -53,23 +51,6 @@ const HeroSection = () => {
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="flex items-center justify-center">
-        <Link
-          to="about"
-          activeClass="active"
-          spy={true}
-          smooth={true}
-          offset={-100}
-          duration={500}
-        >
-          <HiArrowDown
-            size={35}
-            color="teal"
-            className="animate-bounce cursor-pointer"
-          />
-        </Link>
       </div>
     </section>
   );
