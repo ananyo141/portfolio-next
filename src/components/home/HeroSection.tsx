@@ -7,7 +7,7 @@ import heroImage from "src/assets/HeroImage.png";
 
 const HeroSection = () => {
   return (
-    <section id="home" className="h-screen">
+    <section id="Home" className="min-h-fit h-screen">
       <div className="flex h-full flex-col items-center justify-center gap-20 text-center sm:py-32 md:flex-row md:space-x-4 md:py-48 md:text-left">
         <Image
           src={heroImage}

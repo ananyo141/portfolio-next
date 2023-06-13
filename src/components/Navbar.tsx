@@ -5,14 +5,12 @@ import Image from "next/image";
 
 import { GoHome, GoProject } from "react-icons/go";
 import { MdOutlineContactSupport } from "react-icons/md";
-import { GiSkills } from "react-icons/gi";
 import { GrContactInfo, GrWorkshop } from "react-icons/gr";
 
 // Navigation entries; have save section names
 const NavItemsData = [
   { name: "Home", icon: <GoHome className="scale-150" /> },
   { name: "About", icon: <MdOutlineContactSupport className="scale-150" /> },
-  { name: "Skills", icon: <GiSkills className="scale-150" /> },
   { name: "Experience", icon: <GrWorkshop className="scale-150" /> },
   { name: "Projects", icon: <GoProject className="scale-150" /> },
   { name: "Testimonials", icon: <GoHome className="scale-150" /> },
@@ -28,11 +26,12 @@ import MenuItem from "./MenuItems";
 // Top navigation bar for larger displays
 const Navtopbar = () => {
   return (
-    <nav className="fixed top-0 left-0 z-50 hidden w-full items-center justify-between py-2 px-2 backdrop-blur-md bg-transparent md:flex">
+    <nav className="fixed left-0 top-0 z-50 hidden w-full items-center justify-between bg-transparent px-2 py-2 backdrop-blur-md md:flex">
       <Image src={logo} className="ml-4 w-40 backdrop-blur-3xl" alt="Logo" />
       <ul className="flex justify-between pr-8 text-lg text-[#ccd6f6] sm:space-x-4 md:space-x-6 lg:space-x-12">
         {NavItemsData.map((item) => (
           <Link
+            key={`navtopitem_${item.name}`}
             activeClass="active"
             to={item.name}
             smooth={true}
@@ -87,7 +86,7 @@ const Navsidebar = () => {
       <motion.nav
         variants={sideVariants}
         animate={isOpen ? "open" : "closed"}
-        className="fixed top-0 left-0 bottom-0 z-50 w-full bg-gray-200 sm:w-[300px] md:hidden"
+        className="fixed bottom-0 left-0 top-0 z-50 w-full bg-gray-200 sm:w-[300px] md:hidden"
       >
         <RxCross1
           className="ml-7 mt-6 scale-150 cursor-pointer"
@@ -102,6 +101,7 @@ const Navsidebar = () => {
             >
               {NavItemsData.map((item) => (
                 <MenuItem
+                  key={`navsideitem_${item.name}`}
                   icon={item.icon}
                   title={item.name}
                   linkname={item.name}
