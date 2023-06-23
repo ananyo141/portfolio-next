@@ -1,6 +1,6 @@
-import smartshala from "../assets/smartshala_project.jpg";
-import computershop_project from "../assets/computershop_project.png";
-import snappio_project from "../assets/snappio_project.png";
+import smartshala from "@assets/smartshala_project.jpg";
+import computershop_project from "@assets/computershop_project.png";
+import snappio_project from "@assets/snappio_project.png";
 
 const ProjectsData = [
   {

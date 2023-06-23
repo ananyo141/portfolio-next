@@ -1,17 +1,3 @@
-import HeroSection from "src/components/home/HeroSection";
-import About from "src/components/home/About";
-import Navbar from "src/components/Navbar";
-import Experience from "src/components/home/Experience";
-import Testimonials from "src/components/home/Testimonials";
-
-export default function Home() {
-  return (
-    <main className="animate-fadeIn px-8 animation-delay-2 flex flex-col items-center justify-center bg-gradient-to-br from-[#0a192f] to-purple-900">
-      <Navbar />
-      <HeroSection />
-      <About />
-      <Experience />
-      <Testimonials />
-    </main>
-  );
+export default function Home({ params }: any) {
+  // redirect to home
 }

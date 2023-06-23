@@ -1,17 +1,17 @@
 import React from "react";
 
-import csslogo from "../../assets/css.png";
-import awslogo from "../../assets/aws.png";
-import firebaselogo from "../../assets/firebase.png";
-import githublogo from "../../assets/github.png";
-import htmllogo from "../../assets/html.png";
-import jslogo from "../../assets/javascript.png";
-import mongologo from "../../assets/mongo.png";
-import nodelogo from "../../assets/node.png";
-import reactlogo from "../../assets/react.png";
-import tailwindlogo from "../../assets/tailwind.png";
+import csslogo from "@assets/css.png";
+import awslogo from "@assets/aws.png";
+import firebaselogo from "@assets/firebase.png";
+import githublogo from "@assets/github.png";
+import htmllogo from "@assets/html.png";
+import jslogo from "@assets/javascript.png";
+import mongologo from "@assets/mongo.png";
+import nodelogo from "@assets/node.png";
+import reactlogo from "@assets/react.png";
+import tailwindlogo from "@assets/tailwind.png";
 
-import SkillItem from "../SkillItem";
+import SkillItem from "@components/SkillItem";
 
 type Props = {};
 

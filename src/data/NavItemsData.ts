@@ -5,13 +5,13 @@ import { GrContactInfo, GrWorkshop } from "react-icons/gr";
 
 // Navigation entries; have save section names
 const NavItems = [
-  { name: "Home", icon: <GoHome className="scale-150" /> },
-  { name: "About", icon: <MdOutlineContactSupport className="scale-150" /> },
-  { name: "Skills", icon: <GiSkills className="scale-150" /> },
-  { name: "Experience", icon: <GrWorkshop className="scale-150" /> },
-  { name: "Projects", icon: <GoProject className="scale-150" /> },
-  { name: "Testimonials", icon: <GoHome className="scale-150" /> },
-  { name: "Contact", icon: <GrContactInfo className="scale-150" /> },
+  { name: "Home", icon: GoHome },
+  { name: "About", icon: MdOutlineContactSupport },
+  { name: "Skills", icon: GiSkills },
+  { name: "Experience", icon: GrWorkshop },
+  { name: "Projects", icon: GoProject },
+  { name: "Testimonials", icon: GoHome },
+  { name: "Contact", icon: GrContactInfo },
 ];
 
 export default NavItems;

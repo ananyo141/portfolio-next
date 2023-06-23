@@ -1,8 +1,8 @@
 import React from "react";
 
-import ImageCard from "../ImageCard";
+import ImageCard from "@components/ImageCard";
 
-import TestmonialsData from "@src/data/TestmonialsData";
+import TestmonialsData from "@data/TestmonialsData";
 
 const Testimonials = () => {
   return (
