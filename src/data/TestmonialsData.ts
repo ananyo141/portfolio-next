@@ -6,7 +6,7 @@ const TestimonialsData = [
   {
     name: "Imon Kalyan Roy",
     image: imon,
-    designation: "Backend Developer @Copycat.dev",
+    designation: "Backend Developer @Writesonic",
     text: "Ananyobrata is a extremely fast learner who puts attention to detail at the highest priority.",
   },
   {

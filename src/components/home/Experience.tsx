@@ -8,7 +8,7 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-import ExperienceData from "src/data/ExperienceData";
+import ExperienceData from "@src/data/ExperienceData";
 
 const Skills = () => {
   const iconColorEven = React.useRef({
@@ -29,8 +29,6 @@ const Skills = () => {
     color: "#fff",
   });
 
-// bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500
-
   return (
     <div
       id="Experience"
@@ -42,7 +40,7 @@ const Skills = () => {
       <VerticalTimeline>
         {ExperienceData.map((data, i) => (
           <VerticalTimelineElement
-            key={`experience-${data.id}`}
+            key={`experience-${data.company}`}
             contentStyle={
               i & 1 ? contentColorOdd.current : contentColorEven.current
             }
