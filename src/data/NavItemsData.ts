@@ -7,7 +7,6 @@ import { GrContactInfo, GrWorkshop } from "react-icons/gr";
 const NavItems = [
   { name: "Home", icon: GoHome },
   { name: "About", icon: MdOutlineContactSupport },
-  { name: "Skills", icon: GiSkills },
   { name: "Experience", icon: GrWorkshop },
   { name: "Projects", icon: GoProject },
   { name: "Testimonials", icon: GoHome },

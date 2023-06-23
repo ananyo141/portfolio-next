@@ -3,25 +3,12 @@
 import React from "react";
 import { Link } from "react-scroll/modules";
 import Image from "next/image";
-
-import { GoHome, GoProject } from "react-icons/go";
-import { MdOutlineContactSupport } from "react-icons/md";
-import { GrContactInfo, GrWorkshop } from "react-icons/gr";
-
-// Navigation entries; have save section names
-const NavItemsData = [
-  { name: "Home", icon: <GoHome className="scale-150" /> },
-  { name: "About", icon: <MdOutlineContactSupport className="scale-150" /> },
-  { name: "Experience", icon: <GrWorkshop className="scale-150" /> },
-  { name: "Projects", icon: <GoProject className="scale-150" /> },
-  { name: "Testimonials", icon: <GoHome className="scale-150" /> },
-  { name: "Contact", icon: <GrContactInfo className="scale-150" /> },
-];
-
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { motion, useCycle } from "framer-motion";
 
-import logo from "../assets/logo.png";
+// Navigation entries; have save section names
+import NavItems from "@data/NavItemsData";
+import logo from "@assets/logo.png";
 import MenuItem from "./MenuItems";
 
 // Top navigation bar for larger displays
@@ -30,7 +17,7 @@ const Navtopbar = () => {
     <nav className="fixed left-0 top-0 z-50 hidden w-full items-center justify-between bg-transparent px-2 py-2 backdrop-blur-md md:flex">
       <Image src={logo} className="ml-4 w-40 backdrop-blur-3xl" alt="Logo" />
       <ul className="flex justify-between pr-8 text-lg text-[#ccd6f6] sm:space-x-4 md:space-x-6 lg:space-x-12">
-        {NavItemsData.map((item) => (
+        {NavItems.map((item) => (
           <Link
             key={`navtopitem_${item.name}`}
             activeClass="active"
@@ -100,7 +87,7 @@ const Navsidebar = () => {
               variants={listVariants}
               className="mt-5 w-full p-5 sm:w-[260px]"
             >
-              {NavItemsData.map((item) => (
+              {NavItems.map((item) => (
                 <MenuItem
                   key={`navsideitem_${item.name}`}
                   icon={item.icon}
