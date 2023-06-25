@@ -1,7 +1,7 @@
-"use client"; // this is a client component
+"use client";
 
 import React from "react";
-import { Link } from "react-scroll";
+import Link from "next/link";
 import Image from "next/image";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { motion, useCycle } from "framer-motion";
@@ -20,10 +20,7 @@ const Navtopbar = () => {
         {NavItems.map((item) => (
           <Link
             key={`navtopitem_${item.name}`}
-            activeClass="active"
-            to={item.name}
-            smooth={true}
-            duration={500}
+            href={item.route}
           >
             <li className="cursor-pointer">{item.name}</li>
           </Link>
@@ -92,7 +89,7 @@ const Navsidebar = () => {
                   key={`navsideitem_${item.name}`}
                   icon={item.icon}
                   title={item.name}
-                  linkname={item.name}
+                  linkname={item.route}
                   toggleCallback={toggleOpen}
                 />
               ))}

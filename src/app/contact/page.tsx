@@ -19,7 +19,7 @@ const Contact = () => {
   return (
     <div
       id="Contact"
-      className="flex h-full flex-col items-center justify-center gap-4 overflow-hidden bg-blue-900 px-2 py-9 text-gray-300 md:h-screen md:flex-row md:gap-12 md:py-0 xl:gap-32"
+      className="flex h-full flex-col items-center justify-center gap-4 overflow-hidden bg-gradient-to-r from-[#0a192f] to-blue-900 px-2 py-9 text-gray-300 md:h-screen md:flex-row md:gap-12 md:py-0 xl:gap-32"
     >
       <Image
         src={astranautImg}

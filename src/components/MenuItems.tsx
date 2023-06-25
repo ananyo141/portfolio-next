@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-scroll";
+import Link from "next/link";
 import { motion } from "framer-motion";
 
 const MenuItem = ({ title, linkname, toggleCallback, ...others }) => {
@@ -28,10 +28,7 @@ const MenuItem = ({ title, linkname, toggleCallback, ...others }) => {
     >
       <Link
         className="h-8 flex-1 px-4"
-        activeClass="active"
-        to={linkname}
-        smooth={true}
-        duration={500}
+        href={linkname}
         onClick={toggleCallback}
       >
         <div className="flex items-center gap-10">
