@@ -1,7 +1,7 @@
 "use client"; // this is a client component
 
 import React from "react";
-import { Link } from "react-scroll/modules";
+import { Link } from "react-scroll";
 import Image from "next/image";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { motion, useCycle } from "framer-motion";
