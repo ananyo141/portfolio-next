@@ -7,7 +7,7 @@ import Footer from "@components/Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ananyo's Portfolio",
+  title: "Portfolio",
   description:
     "Website powered by NextJS + FramerMotion + TailwindCSS + TypeScript",
 };

@@ -2,7 +2,13 @@ import React from "react";
 import Image from "next/image";
 import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
 
+import TransitionEffect from "@components/TransitionEffect";
 import astranautImg from "@assets/astronaut.svg";
+
+export const metadata = {
+  title: "Portfolio - Contact",
+  description: "Contact me",
+};
 
 const PaddedInputField = ({ name, type, placeholder }) => {
   return (
@@ -21,6 +27,7 @@ const Contact = () => {
       id="Contact"
       className="flex h-full flex-col items-center justify-center gap-4 overflow-hidden bg-gradient-to-r from-[#0a192f] to-blue-900 px-2 py-9 text-gray-300 md:h-screen md:flex-row md:gap-12 md:py-0 xl:gap-32"
     >
+      <TransitionEffect />
       <Image
         src={astranautImg}
         className="max-w-xs lg:max-w-md xl:max-w-xl"

@@ -11,13 +11,11 @@ const Footer = (props: Props) => {
     <footer className="bg-gray-200 dark:bg-gray-900">
       <div className="container mx-auto px-6 py-8">
         <div className="flex flex-col items-center text-center">
-          <a href="#">
-            <Image
-              className="h-20 w-auto bg-blue-700 rounded-full"
-              src={robotImg}
-              alt="Robot banging head"
-            />
-          </a>
+          <Image
+            className="h-20 w-auto rounded-full bg-blue-700"
+            src={robotImg}
+            alt="Robot banging head"
+          />
           <p className="mx-auto mt-4 max-w-md text-gray-500 dark:text-gray-400">
             Striving to build a better world, one line of code at a time.
           </p>
