@@ -18,7 +18,7 @@ const Navtopbar = () => {
 
   return (
     <nav className="fixed left-0 top-0 z-50 hidden w-full items-center justify-between bg-transparent px-2 py-2 backdrop-blur-md md:flex">
-      <Link href="/">
+      <Link href="/home">
         <Image
           src={logo}
           className="ml-4 w-40 cursor-pointer backdrop-blur-3xl"
