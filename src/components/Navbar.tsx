@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { RxHamburgerMenu, RxCross1 } from "react-icons/rx";
 import { motion, useCycle } from "framer-motion";
 
@@ -13,16 +14,33 @@ import MenuItem from "./MenuItems";
 
 // Top navigation bar for larger displays
 const Navtopbar = () => {
+  const path = usePathname();
+
   return (
     <nav className="fixed left-0 top-0 z-50 hidden w-full items-center justify-between bg-transparent px-2 py-2 backdrop-blur-md md:flex">
-      <Image src={logo} className="ml-4 w-40 backdrop-blur-3xl" alt="Logo" />
-      <ul className="flex justify-between pr-8 text-lg text-[#ccd6f6] sm:space-x-4 md:space-x-6 lg:space-x-12">
+      <Link href="/">
+        <Image
+          src={logo}
+          className="ml-4 w-40 cursor-pointer backdrop-blur-3xl"
+          alt="Logo"
+        />
+      </Link>
+      <ul
+        className={
+          "flex justify-between pr-8 text-lg sm:space-x-4 md:space-x-6 lg:space-x-12 " +
+          (path === "/projects" ? "text-gray-600" : "text-[#ccd6f6]")
+        }
+      >
         {NavItems.map((item) => (
-          <Link
-            key={`navtopitem_${item.name}`}
-            href={item.route}
-          >
-            <li className="cursor-pointer">{item.name}</li>
+          <Link key={`navtopitem_${item.name}`} href={item.route}>
+            <li
+              className={
+                "cursor-pointer" +
+                (path === item.route && ` border-b-2 border-b-red-500`)
+              }
+            >
+              {item.name}
+            </li>
           </Link>
         ))}
       </ul>

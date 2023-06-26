@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { MdOutlinePlayCircle } from "react-icons/md";
 
@@ -22,10 +23,12 @@ const Footer = (props: Props) => {
           <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-center">
             <button className="order-1 mt-3 flex w-full transform items-center justify-center rounded-md border border-gray-400 px-2 py-2 text-sm capitalize tracking-wide text-gray-600 transition-colors duration-300 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40 dark:border-gray-400 dark:text-gray-300 dark:hover:bg-gray-800 sm:mx-2 sm:mt-0 sm:w-auto">
               <MdOutlinePlayCircle className="mx-1 h-5 w-5" />
-              <span className="mx-1">Explore Projects</span>
+              <Link href="/projects" className="mx-1">Explore Projects</Link>
             </button>
             <button className="w-full transform rounded-md bg-blue-600 px-5 py-2 text-sm capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80 sm:order-2 sm:mx-2 sm:w-auto">
+              <Link href="/contact">
               Contact Me
+              </Link>
             </button>
           </div>
         </div>
@@ -35,30 +38,33 @@ const Footer = (props: Props) => {
             © Copyright 2023 - Present. All Rights Reserved.
           </p>
           <div className="-mx-2 mt-3 flex sm:mt-0">
-            <a
-              href="#"
+            <Link
+              href="https://github.com/ananyo141"
               className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"
-              aria-label="Reddit"
+              aria-label="Github"
+              target="_blank"
             >
               {" "}
               Github{" "}
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="https://www.linkedin.com/in/ananyobrata-pal-7b5178200/"
               className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"
-              aria-label="Reddit"
+              aria-label="LinkedIn"
+              target="_blank"
             >
               {" "}
               LinkedIn{" "}
-            </a>
-            <a
-              href="#"
+            </Link>
+            <Link
+              href="https://leetcode.com/ananyo141/"
               className="mx-2 text-sm text-gray-500 transition-colors duration-300 hover:text-gray-500 dark:hover:text-gray-300"
-              aria-label="Reddit"
+              aria-label="Leetcode"
+              target="_blank"
             >
               {" "}
               Leetcode{" "}
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -11,9 +11,14 @@ export const metadata = {
 
 const ProjectsSection = () => {
   return (
-    <section id="Projects" className="mt-20 min-h-screen">
+    <section
+      id="Projects"
+      className="flex min-h-screen flex-col items-center bg-gradient-to-r from-gray-200 to-pink-200 pb-8 pt-20"
+    >
       <TransitionEffect />
-      <h1 className="text-center text-4xl mb-12 font-bold">Projects</h1>
+      <h1 className="mb-12 border-b-4 border-red-600 text-center text-4xl font-bold text-[#231123]">
+        Projects
+      </h1>
       <div className="flex flex-col items-center">
         <div className="flex flex-col items-start gap-10">
           {ProjectsData.map((project) => (
