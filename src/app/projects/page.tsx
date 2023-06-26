@@ -1,9 +1,8 @@
-import Image from "next/image";
-import Link from "next/link";
-import { BsGithub, BsArrowUpRightSquare } from "react-icons/bs";
+import React from "react";
 
 import ProjectsData from "@data/ProjectsData";
 import TransitionEffect from "@components/TransitionEffect";
+import ProjectTile from "./ProjectTile";
 
 export const metadata = {
   title: "Portfolio - Projects",
@@ -12,9 +11,20 @@ export const metadata = {
 
 const ProjectsSection = () => {
   return (
-    <section id="Projects">
+    <section id="Projects" className="mt-20 min-h-screen">
       <TransitionEffect />
-      <div></div>
+      <h1 className="text-center text-4xl mb-12 font-bold">Projects</h1>
+      <div className="flex flex-col items-center">
+        <div className="flex flex-col items-start gap-10">
+          {ProjectsData.map((project) => (
+            <ProjectTile
+              key={`project-${project.title}`}
+              {...project}
+              className=""
+            />
+          ))}
+        </div>
+      </div>
     </section>
   );
 };
