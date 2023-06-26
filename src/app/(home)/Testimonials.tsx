@@ -15,7 +15,7 @@ const Testimonials = () => {
           Testimonials
         </h3>
         <p className="mb-6 pb-2 font-light text-gray-300 md:mb-12 md:pb-0">
-          Let's see what my colleagues and mentors say about me
+          Let&apos;s see what my colleagues and mentors say about me
         </p>
       </div>
 

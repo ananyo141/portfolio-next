@@ -27,7 +27,7 @@ const HeroSection = () => {
                 Ananyobrata Pal
               </h1>
               <h1 className="text-6xl font-bold text-[#9b7c58]">
-                I'm a{"  "}
+                I&apos;m a{"  "}
                 <div className="rounded-md bg-yellow-800 px-1 py-2 font-semibold text-gray-300 lg:inline-block">
                   <Typewriter
                     options={{
