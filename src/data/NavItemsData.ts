@@ -1,6 +1,5 @@
 import { GoHome, GoProject } from "react-icons/go";
-import { MdOutlineContactSupport } from "react-icons/md";
-import { GrContactInfo, GrWorkshop } from "react-icons/gr";
+import { GrContactInfo } from "react-icons/gr";
 
 // Navigation entries; have save section names
 const NavItems = [
