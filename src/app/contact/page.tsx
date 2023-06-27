@@ -1,27 +1,63 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
 import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
 
 import TransitionEffect from "@components/TransitionEffect";
 import astranautImg from "@assets/astronaut.svg";
-
-export const metadata = {
-  title: "Portfolio - Contact",
-  description: "Contact me",
-};
-
-const PaddedInputField = ({ name, type, placeholder }) => {
-  return (
-    <input
-      name={name}
-      type={type}
-      placeholder={placeholder}
-      className="rounded-xl border bg-white/10 p-4"
-    />
-  );
-};
+import PaddedInputField from "./PaddedInput";
 
 const Contact = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [contactEmail, setContactEmail] = useState("");
+  const [contactPhone, setContactPhone] = useState("");
+  const [contactMessage, setContactMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  type EventType = React.ChangeEvent<HTMLInputElement>;
+  const handleFirstNameChange = (e: EventType) => setFirstName(e.target.value);
+  const handleLastNameChange = (e: EventType) => setLastName(e.target.value);
+  const handleContactEmailChange = (e: EventType) =>
+    setContactEmail(e.target.value);
+  const handleContactPhoneChange = (e: EventType) =>
+    setContactPhone(e.target.value);
+  const handleContactMessageChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => setContactMessage(e.target.value);
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      name: firstName + " " + lastName,
+      email: contactEmail,
+      phone: contactPhone,
+      message: contactMessage,
+    };
+
+    fetch("/api/contact", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }).then((res) => {
+      console.log("Response received", res);
+      if (res.status === 200) {
+        console.log("Response succeeded!", res);
+        setSubmitted(true);
+
+        // Reset form
+        setFirstName("");
+        setLastName("");
+        setContactEmail("");
+        setContactPhone("");
+        setContactMessage("");
+      }
+    });
+  };
+
   return (
     <div
       id="Contact"
@@ -44,31 +80,41 @@ const Contact = () => {
           <p className="mx-4 mb-0 text-center font-semibold">Or</p>
         </div>
         <h2 className="text-3xl font-semibold">Send me a hello!</h2>
-        <form action="#" className="text-gray-300" method="POST">
+        <form onSubmit={handleSubmit} className="text-gray-300">
           <div className="grid grid-cols-2 gap-3">
             <PaddedInputField
               name="firstname"
               type="text"
+              onChange={handleFirstNameChange}
+              value={firstName}
               placeholder="First Name"
             />
             <PaddedInputField
               name="lastname"
               type="text"
+              onChange={handleLastNameChange}
+              value={lastName}
               placeholder="Last Name"
             />
             <PaddedInputField
               name="email"
               type="email"
+              onChange={handleContactEmailChange}
+              value={contactEmail}
               placeholder="Email Address"
             />
             <PaddedInputField
               name="phone"
               type="tel"
+              onChange={handleContactPhoneChange}
+              value={contactPhone}
               placeholder="Phone Number"
             />
             <textarea
               name="contact-message"
               placeholder="You message here..."
+              onChange={handleContactMessageChange}
+              value={contactMessage}
               className="col-span-2 h-60 rounded-xl border bg-white/10 p-5"
             ></textarea>
             <button
