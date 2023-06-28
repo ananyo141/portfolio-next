@@ -28,12 +28,17 @@ const sendMail = ({ email, message, subject }: sendMailType) => {
     throw new Error("MAIL_RECEIVER is should be set");
   }
 
-  mailTransporter.sendMail(mailData, function (err, info) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("Email sent successfully");
-    }
+  // returning and awaiting a new Promise is important as vercel will not wait for the mail to be sent
+  return new Promise((resolve, reject) => {
+    mailTransporter.sendMail(mailData, function (err, info) {
+      if (err) {
+        console.log(err);
+        reject(err);
+      } else {
+        console.log("Email sent successfully");
+        resolve(info);
+      }
+    });
   });
 };
 
