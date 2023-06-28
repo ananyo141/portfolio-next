@@ -14,14 +14,16 @@ type sendMailType = {
   email: string;
   message: string;
   subject: string;
+  html?: any;
 };
 
-const sendMail = ({ email, message, subject }: sendMailType) => {
+const sendMail = ({ email, message, subject, html }: sendMailType) => {
   const mailData = {
     from: process.env.MAIL_USER,
     to: [email, process.env.MAIL_RECEIVER as string],
     subject: subject,
     text: message,
+    html: html,
   };
   if (process.env.MAIL_RECEIVER === undefined) {
     console.log(mailData);
