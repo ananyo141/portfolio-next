@@ -80,7 +80,7 @@ export const ContactFeedbackMail = ({
                 </Text>
 
                 <Text style={paragraph}>
-                  Here's a quick summary of what you just sent me:
+                  Here&apos;s a quick summary of what you just sent me:
                 </Text>
                 <b>Time: </b>
                 {formattedDate}
