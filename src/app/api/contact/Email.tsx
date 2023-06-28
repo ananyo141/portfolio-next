@@ -39,10 +39,6 @@ export const ContactFeedbackMail = ({
       <Preview>You sire, are the best.</Preview>
       <Body style={main}>
         <Container>
-          <Section style={logo}>
-            <Img src="" />
-          </Section>
-
           <Section style={content}>
             <Img
               width={620}
@@ -56,9 +52,10 @@ export const ContactFeedbackMail = ({
                     fontSize: 32,
                     fontWeight: "bold",
                     textAlign: "center",
+                    textTransform: "capitalize",
                   }}
                 >
-                  Hi {username.toUpperCase()},
+                  Hi {username},
                 </Heading>
                 <Heading
                   as="h2"

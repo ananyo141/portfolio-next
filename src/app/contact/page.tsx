@@ -43,9 +43,7 @@ const Contact = () => {
       },
       body: JSON.stringify(data),
     }).then((res) => {
-      console.log("Response received", res);
       if (res.status === 200) {
-        console.log("Response succeeded!", res);
         setSubmitted(true);
 
         // Reset form

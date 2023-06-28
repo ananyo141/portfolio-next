@@ -26,7 +26,6 @@ const sendMail = ({ email, message, subject, html }: sendMailType) => {
     html: html,
   };
   if (process.env.MAIL_RECEIVER === undefined) {
-    console.log(mailData);
     throw new Error("MAIL_RECEIVER is should be set");
   }
 
