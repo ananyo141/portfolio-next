@@ -1,13 +1,11 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 import ProjectsData from "@data/ProjectsData";
 import TransitionEffect from "@components/TransitionEffect";
 import ProjectTile from "./ProjectTile";
-
-export const metadata = {
-  title: "Portfolio - Projects",
-  description: "Projects I have worked on",
-};
 
 const ProjectsSection = () => {
   return (
@@ -20,15 +18,20 @@ const ProjectsSection = () => {
         Projects
       </h1>
       <div className="flex flex-col items-center">
-        <div className="flex flex-col items-start gap-10">
+        <motion.div
+          transition={{ staggerChildren: 1, delayChildren: 2 }}
+          className="flex flex-col items-start gap-10"
+        >
           {ProjectsData.map((project) => (
-            <ProjectTile
-              key={`project-${project.title}`}
-              {...project}
-              className=""
-            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ProjectTile key={`project-${project.title}`} {...project} />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

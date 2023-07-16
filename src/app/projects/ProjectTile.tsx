@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsGithub, BsArrowUpRightSquare, BsYoutube } from "react-icons/bs";
+import { motion } from "framer-motion";
 
 import { ProjectType } from "@data/ProjectsData";
 
@@ -26,6 +27,26 @@ const bgColors = [
 const randomColor = () => bgColors[Math.floor(Math.random() * bgColors.length)];
 
 const ProjectTile = (props: Props) => {
+  const hoverAnimation = {
+    borderBottom: "2px solid rgb(236 72 153 / var(--tw-border-opacity))",
+    transition: {
+      duration: 0.3,
+    },
+  };
+
+  const hoverVariants = {
+    initial: {
+      borderBottomWidth: 0,
+    },
+    hover: {
+      borderBottomWidth: "100%",
+      borderBottom: "2px solid rgb(236 72 153 / var(--tw-border-opacity))",
+      transition: {
+        duration: 0.1,
+      },
+    },
+  };
+
   return (
     <div className={props.className}>
       <div className="flex max-w-4xl flex-col justify-center gap-12 md:flex-row">
@@ -42,13 +63,22 @@ const ProjectTile = (props: Props) => {
           />
         </div>
         <div className="flex w-3/4 flex-col justify-center">
-          <h3 className="text-2xl text-[#2D3047] border-b border-b-pink-500 mb-2 font-bold">{props.title}</h3>
+          <div className="group">
+          <h3 className="mb-2 cursor-pointer text-2xl font-bold text-[#2D3047]">
+            {props.title}
+          </h3>
+          <hr
+            className="group-hover:border-red-600 pb-2 transition-all duration-300"
+          />
+          </div>
           <p className="text-lg text-[#82204A]">{props.description}</p>
           <p className="mt-4 text-sm">
-            <span className="font-bold text-[#558C8C]">Tech Used:{" "}</span>
-            <span className="italic text-[#3F3047]">{props.techStack.join(", ")} </span>
+            <span className="font-bold text-[#558C8C]">Tech Used: </span>
+            <span className="italic text-[#3F3047]">
+              {props.techStack.join(", ")}{" "}
+            </span>
           </p>
-          <div className="mt-4 text-[#2D3047] flex gap-8">
+          <div className="mt-4 flex gap-8 text-[#2D3047]">
             <Link
               href={props.github}
               target="_blank"
