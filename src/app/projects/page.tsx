@@ -22,13 +22,14 @@ const ProjectsSection = () => {
           transition={{ staggerChildren: 1, delayChildren: 2 }}
           className="flex flex-col items-start gap-10"
         >
-          {ProjectsData.map((project) => (
+          {ProjectsData.map((project, index) => (
             <motion.div
+              key={`projectsection-${index}`}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.3 }}
             >
-              <ProjectTile key={`project-${project.title}`} {...project} />
+              <ProjectTile {...project} />
             </motion.div>
           ))}
         </motion.div>
