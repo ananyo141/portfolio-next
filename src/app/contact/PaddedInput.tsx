@@ -6,6 +6,7 @@ type PaddedInputFieldProps = {
   placeholder: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  [x: string]: any;
 };
 
 const PaddedInputField = ({
@@ -14,6 +15,7 @@ const PaddedInputField = ({
   placeholder,
   onChange,
   value,
+  ...props
 }: PaddedInputFieldProps) => {
   return (
     <input
@@ -23,6 +25,7 @@ const PaddedInputField = ({
       onChange={onChange}
       value={value}
       className="rounded-xl border bg-white/10 p-4"
+      {...props}
     />
   );
 };

@@ -1,12 +1,19 @@
 "use client";
 
+import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import Image from "next/image";
 import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
+import { ToastContainer, type ToastOptions, toast } from "react-toastify";
 
 import TransitionEffect from "@components/TransitionEffect";
 import astranautImg from "@assets/astronaut.svg";
 import PaddedInputField from "./PaddedInput";
+
+const ToastStyle: ToastOptions = {
+  hideProgressBar: true,
+  position: "bottom-right",
+};
 
 const Contact = () => {
   const [firstName, setFirstName] = useState("");
@@ -14,7 +21,7 @@ const Contact = () => {
   const [contactEmail, setContactEmail] = useState("");
   const [contactPhone, setContactPhone] = useState("");
   const [contactMessage, setContactMessage] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   type EventType = React.ChangeEvent<HTMLInputElement>;
   const handleFirstNameChange = (e: EventType) => setFirstName(e.target.value);
@@ -27,8 +34,9 @@ const Contact = () => {
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => setContactMessage(e.target.value);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       name: firstName + " " + lastName,
       email: contactEmail,
@@ -36,24 +44,33 @@ const Contact = () => {
       message: contactMessage,
     };
 
-    fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    }).then((res) => {
-      if (res.status === 200) {
-        setSubmitted(true);
-
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const json = await response.json();
+      if (response.status === 201) {
         // Reset form
         setFirstName("");
         setLastName("");
         setContactEmail("");
         setContactPhone("");
         setContactMessage("");
+        toast.success("Message sent successfully!", ToastStyle);
+      } else {
+        console.error("Error");
+        toast.error("Error sending message! " + json.message, ToastStyle);
       }
-    });
+    } catch (err) {
+      console.error(err);
+      toast.error("Sorry, please try again.", ToastStyle);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -83,6 +100,7 @@ const Contact = () => {
             <PaddedInputField
               name="firstname"
               type="text"
+              required
               onChange={handleFirstNameChange}
               value={firstName}
               placeholder="First Name"
@@ -90,6 +108,7 @@ const Contact = () => {
             <PaddedInputField
               name="lastname"
               type="text"
+              required
               onChange={handleLastNameChange}
               value={lastName}
               placeholder="Last Name"
@@ -97,6 +116,7 @@ const Contact = () => {
             <PaddedInputField
               name="email"
               type="email"
+              required
               onChange={handleContactEmailChange}
               value={contactEmail}
               placeholder="Email Address"
@@ -110,6 +130,7 @@ const Contact = () => {
             />
             <textarea
               name="contact-message"
+              required
               placeholder="You message here..."
               onChange={handleContactMessageChange}
               value={contactMessage}
@@ -119,10 +140,15 @@ const Contact = () => {
               className="rounded-2xl border bg-pink-600 p-4 font-semibold text-white"
               value="submit"
             >
-              Submit
+              {loading ? (
+                <span className="loading loading-spinner"></span>
+              ) : (
+                "Submit"
+              )}
             </button>
           </div>
         </form>
+        <ToastContainer />
       </div>
     </div>
   );

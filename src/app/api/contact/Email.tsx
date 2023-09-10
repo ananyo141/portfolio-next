@@ -28,10 +28,13 @@ export const ContactFeedbackMail = ({
   userPhone,
   userMessage,
 }: EmailProps) => {
-  const formattedDate = new Intl.DateTimeFormat("en", {
-    dateStyle: "long",
-    timeStyle: "short",
-  }).format(loginDate);
+  const formattedDate = loginDate.toLocaleTimeString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    timeZone: "Asia/Kolkata",
+  });
 
   return (
     <Html>
@@ -83,7 +86,7 @@ export const ContactFeedbackMail = ({
                   Here&apos;s a quick summary of what you just sent me:
                 </Text>
                 <b>Time: </b>
-                {formattedDate}
+                {formattedDate} IST
                 <br />
                 <b>Phone: </b>
                 {userPhone}

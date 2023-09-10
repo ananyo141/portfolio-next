@@ -26,7 +26,7 @@ const sendMail = ({ email, message, subject, html }: sendMailType) => {
     html: html,
   };
   if (process.env.MAIL_RECEIVER === undefined) {
-    throw new Error("MAIL_RECEIVER is should be set");
+    throw new Error("MAIL_RECEIVER should be set");
   }
 
   // returning and awaiting a new Promise is important as vercel will not wait for the mail to be sent
