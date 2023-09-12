@@ -4,7 +4,7 @@ import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 
 const ImageCard = ({ image, name, text, designation }) => {
   return (
-    <div className="block w-72 rounded-lg bg-gray-300 shadow-lg">
+    <div className="h-full w-72 rounded-lg bg-gray-300 shadow-lg">
       <div className="h-28 overflow-hidden rounded-t-lg bg-cyan-600"></div>
       <div className="mx-auto -mt-12 w-24 overflow-hidden rounded-full border-2 border-white bg-white">
         <Image alt="" src={image} />

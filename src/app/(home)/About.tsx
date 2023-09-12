@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 import csslogo from "@assets/css.png";
 import awslogo from "@assets/aws.png";
@@ -18,7 +21,15 @@ type Props = {};
 const About = (props: Props) => {
   return (
     <div id="About" className="flex min-h-screen flex-col gap-9 lg:flex-row">
-      <div className="flex flex-col items-center justify-center gap-5 text-center text-[#ccd6f6] md:max-w-lg lg:max-w-xl lg:items-end lg:text-right">
+      <motion.div
+        initial={{ x: -220, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 1.5,
+        }}
+        className="flex flex-col items-center justify-center gap-5 text-center text-[#ccd6f6] md:max-w-lg lg:max-w-xl lg:items-end lg:text-right"
+      >
         <h3 className="border-b-4 border-pink-500 pb-2 text-3xl font-bold">
           About
         </h3>
@@ -36,8 +47,16 @@ const About = (props: Props) => {
           would you do if you had a software expert available at your
           fingertips?
         </p>
-      </div>
-      <div className="flex flex-col items-center justify-center text-gray-300 lg:items-start">
+      </motion.div>
+      <motion.div
+        initial={{ x: 220, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 1.5,
+        }}
+        className="flex flex-col items-center justify-center text-gray-300 lg:items-start"
+      >
         <h3 className="border-b-4 border-pink-500 pb-2 text-3xl font-bold">
           Skills
         </h3>
@@ -53,7 +72,7 @@ const About = (props: Props) => {
           <SkillItem imgfile={firebaselogo} proficiency={86} />
           <SkillItem imgfile={awslogo} proficiency={79} />
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

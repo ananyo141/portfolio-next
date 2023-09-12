@@ -2,7 +2,9 @@
 
 import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
+import Link from "next/link";
 import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
 import { ToastContainer, type ToastOptions, toast } from "react-toastify";
 
@@ -79,17 +81,44 @@ const Contact = () => {
       className="flex h-full flex-col items-center justify-center gap-4 overflow-hidden bg-gradient-to-r from-[#0a192f] to-blue-900 px-2 py-9 text-gray-300 md:h-screen md:flex-row md:gap-12 md:py-0 xl:gap-32"
     >
       <TransitionEffect />
-      <Image
-        src={astranautImg}
-        className="max-w-xs lg:max-w-md xl:max-w-xl"
-        alt="Astranaut in space"
-      />
+      <motion.div
+        initial={{ rotate: 270 }}
+        animate={{ rotate: 0 }}
+        whileTap={{ rotate: 320, transition: { delay: 0, duration: 0.5 } }}
+        drag
+        dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+        transition={{ delay: 0.55, duration: 1, type: "spring", stiffness: 50 }}
+      >
+        <Image
+          src={astranautImg}
+          className="pointer-events-none max-w-xs cursor-pointer lg:max-w-md xl:max-w-xl"
+          alt="Astranaut in space"
+        />
+      </motion.div>
       <div className="space-y-5">
         <div className="flex gap-4 text-xl">
           <p>Follow me on</p>
-          <BsFacebook />
-          <BsLinkedin />
-          <BsGithub />
+          <Link
+            className="duration-200 hover:scale-125"
+            href="https://www.facebook.com/ananyobrata.pal/"
+            target="_blank"
+          >
+            <BsFacebook />
+          </Link>
+          <Link
+            className="duration-200 hover:scale-125"
+            href="https://www.linkedin.com/in/ananyobrata-pal-7b5178200/"
+            target="_blank"
+          >
+            <BsLinkedin />
+          </Link>
+          <Link
+            className="duration-200 hover:scale-125"
+            href="https://github.com/ananyo141"
+            target="_blank"
+          >
+            <BsGithub />
+          </Link>
         </div>
         <div className="my-4 flex items-center before:mt-0.5 before:flex-1 before:border-t before:border-gray-300 after:mt-0.5 after:flex-1 after:border-t after:border-gray-300">
           <p className="mx-4 mb-0 text-center font-semibold">Or</p>

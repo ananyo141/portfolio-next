@@ -27,9 +27,10 @@ const ProjectsSection = () => {
               key={`projectsection-${index}`}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
               transition={{ duration: 0.3 }}
             >
-              <ProjectTile {...project} />
+              <ProjectTile className="hover:scale-105 cursor-pointer duration-300" {...project} />
             </motion.div>
           ))}
         </motion.div>

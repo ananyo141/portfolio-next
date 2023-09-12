@@ -49,7 +49,7 @@ const ProjectTile = (props: Props) => {
 
   return (
     <div className={props.className}>
-      <div className="flex max-w-4xl flex-col justify-center gap-12 md:flex-row">
+      <div className="flex group max-w-4xl flex-col justify-center gap-12 md:flex-row">
         <div
           className="relative h-56 w-[840px] rounded-xl shadow-lg shadow-gray-400"
           style={{ backgroundColor: props.bgColor ?? randomColor() }}

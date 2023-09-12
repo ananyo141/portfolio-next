@@ -1,10 +1,18 @@
+"use client";
+
 import React from "react";
+import { motion } from "framer-motion";
 
 import ImageCard from "@components/ImageCard";
 
 import TestmonialsData from "@data/TestmonialsData";
 
 const Testimonials = () => {
+  const itemVariants = {
+    initial: { opacity: 0, y: -50 },
+    animate: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
     <section
       id="Testimonials"
@@ -20,14 +28,25 @@ const Testimonials = () => {
       </div>
 
       <div className="flex flex-wrap justify-center gap-4 text-center">
-        {TestmonialsData.map((testmObj) => (
-          <ImageCard
+        {TestmonialsData.map((testmObj, i) => (
+          <motion.div
             key={`testmonial-${testmObj.name}`}
-            image={testmObj.image}
-            name={testmObj.name}
-            text={testmObj.text}
-            designation={testmObj.designation}
-          />
+            initial={{ x: 220, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{
+              duration: 1.5,
+              delay: i * 0.2,
+            }}
+          >
+            <ImageCard
+              key={`testmonial-${testmObj.name}`}
+              image={testmObj.image}
+              name={testmObj.name}
+              text={testmObj.text}
+              designation={testmObj.designation}
+            />
+          </motion.div>
         ))}
       </div>
     </section>
