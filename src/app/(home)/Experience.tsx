@@ -54,6 +54,24 @@ const Skills = () => {
               {data.location}
             </h4>
             <p>{data.designation}</p>
+            {data.description !== undefined && (
+              <ul className="text-sm list-inside list-disc">
+                {data.description.map((desc, i) => (
+                  <li key={`desc-${i}`}>
+                    {desc}
+                    <br />
+                  </li>
+                ))}
+              </ul>
+            )}
+
+            {data.techStack !== undefined && (
+              <p>
+                <i className="text-sm">
+                  Tech Used: {data.techStack?.join(", ")}
+                </i>
+              </p>
+            )}
           </VerticalTimelineElement>
         ))}
       </VerticalTimeline>
