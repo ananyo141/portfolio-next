@@ -34,9 +34,9 @@ const Skills = () => {
       id="Experience"
       className="flex py-9 h-fit min-h-screen w-full flex-col items-center justify-center"
     >
-      <h1 className="mb-5 border-b-4 border-pink-500 pb-2 text-4xl font-bold text-[#ccd6f6]">
+      <h3 className="mb-5 border-b-4 border-pink-500 pb-2 text-3xl font-bold text-[#ccd6f6]">
         Experience
-      </h1>
+      </h3>
       <VerticalTimeline>
         {ExperienceData.map((data, i) => (
           <VerticalTimelineElement

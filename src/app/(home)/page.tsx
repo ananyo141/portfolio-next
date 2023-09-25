@@ -12,7 +12,7 @@ export const metadata = {
 
 export default function Home() {
   return (
-    <main className="animate-fadeIn animation-delay-2 flex flex-col items-center justify-center bg-gradient-to-br from-[#0a192f] to-purple-900 px-8">
+    <main className="animate-fadeIn animation-delay-2 flex flex-col items-center justify-center gap-16 md:gap-8 bg-gradient-to-br from-[#0a192f] to-purple-900 px-8">
       <TransitionEffect />
       <HeroSection />
       <About />

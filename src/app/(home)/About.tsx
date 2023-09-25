@@ -20,7 +20,7 @@ type Props = {};
 
 const About = (props: Props) => {
   return (
-    <div id="About" className="flex min-h-screen flex-col gap-9 lg:flex-row">
+    <div id="About" className="flex min-h-screen flex-col gap-16 md:gap-9 lg:flex-row">
       <motion.div
         initial={{ x: -220, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}

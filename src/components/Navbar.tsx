@@ -35,7 +35,7 @@ const Navtopbar = () => {
           <Link key={`navtopitem_${item.name}`} href={item.route}>
             <li
               className={
-                "cursor-pointer" +
+                "hover:scale-105 duration-100 cursor-pointer " +
                 (path === item.route && ` border-b-2 border-b-red-500`)
               }
             >

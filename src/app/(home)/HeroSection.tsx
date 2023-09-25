@@ -7,7 +7,7 @@ import heroImage from "@assets/HeroImage.png";
 
 const HeroSection = () => {
   return (
-    <section id="Home" className="md:h-screen min-h-fit py-9">
+    <section id="Home" className="md:h-screen min-h-fit mt-16">
       <div className="flex h-full flex-col items-center md:justify-center gap-8 md:gap-20 text-center md:flex-row md:space-x-4 md:py-48 md:text-left">
         <Image
           src={heroImage}
@@ -23,7 +23,7 @@ const HeroSection = () => {
               <h4 className="-mb-6 text-xl text-pink-400">
                 Hello World, my name is
               </h4>
-              <h1 className="text-3xl font-bold -mb-96 text-[#ccd6f6] md:text-6xl">
+              <h1 className="text-4xl font-bold -mb-96 text-[#ccd6f6] md:text-6xl">
                 Ananyobrata Pal
               </h1>
               <h1 className="text-3xl -mt-9 font-bold text-[#9b7c58] md:text-6xl">

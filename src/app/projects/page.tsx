@@ -20,7 +20,7 @@ const ProjectsSection = () => {
       <div className="flex flex-col items-center">
         <motion.div
           transition={{ staggerChildren: 1, delayChildren: 2 }}
-          className="flex flex-col items-start gap-10"
+          className="flex flex-col divide-y divide-red-300 items-center md:items-start"
         >
           {ProjectsData.map((project, index) => (
             <motion.div
@@ -30,7 +30,7 @@ const ProjectsSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
             >
-              <ProjectTile className="hover:scale-105 cursor-pointer duration-300" {...project} />
+              <ProjectTile className="hover:scale-105 my-8 cursor-pointer duration-300" {...project} />
             </motion.div>
           ))}
         </motion.div>

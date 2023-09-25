@@ -16,10 +16,10 @@ const Testimonials = () => {
   return (
     <section
       id="Testimonials"
-      className="mb-20 flex h-fit flex-col items-center justify-center text-gray-700 sm:h-screen"
+      className="mb-14 flex h-fit flex-col items-center justify-center text-gray-700"
     >
       <div className="flex flex-col items-center justify-center gap-4 text-center">
-        <h3 className="border-b-4 border-pink-500 pb-2 text-3xl font-bold text-white">
+        <h3 className="mb-5 border-b-4 border-pink-500 pb-2 text-3xl font-bold text-[#ccd6f6]">
           Testimonials
         </h3>
         <p className="mb-6 pb-2 font-light text-gray-300 md:mb-12 md:pb-0">

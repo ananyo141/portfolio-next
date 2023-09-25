@@ -2,7 +2,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { BsGithub, BsArrowUpRightSquare, BsYoutube } from "react-icons/bs";
-import { motion } from "framer-motion";
 
 import { ProjectType } from "@data/ProjectsData";
 
@@ -27,49 +26,29 @@ const bgColors = [
 const randomColor = () => bgColors[Math.floor(Math.random() * bgColors.length)];
 
 const ProjectTile = (props: Props) => {
-  const hoverAnimation = {
-    borderBottom: "2px solid rgb(236 72 153 / var(--tw-border-opacity))",
-    transition: {
-      duration: 0.3,
-    },
-  };
-
-  const hoverVariants = {
-    initial: {
-      borderBottomWidth: 0,
-    },
-    hover: {
-      borderBottomWidth: "100%",
-      borderBottom: "2px solid rgb(236 72 153 / var(--tw-border-opacity))",
-      transition: {
-        duration: 0.1,
-      },
-    },
-  };
-
   return (
     <div className={props.className}>
-      <div className="flex group max-w-4xl flex-col justify-center gap-12 md:flex-row">
+      <div className="group px-4 flex max-w-4xl flex-col justify-center gap-12 md:flex-row">
         <div
-          className="relative h-56 w-[840px] rounded-xl shadow-lg shadow-gray-400"
-          style={{ backgroundColor: props.bgColor ?? randomColor() }}
+          className="relative border h-56 mx-auto rounded-xl shadow-lg shadow-gray-400 md:w-[840px]"
+          style={{
+            backgroundColor: props.bgColor ?? randomColor(),
+          }}
         >
           <Image
             src={props.image}
             alt={props.title}
             width={400}
             height={250}
-            className="absolute bottom-0 left-20 h-40 w-80 rounded-tl-lg rounded-tr-lg"
+            className="md:absolute w-full object-scale-down h-full bottom-0 md:left-20 rounded-tl-lg rounded-tr-lg md:h-40 md:w-80"
           />
         </div>
-        <div className="flex w-3/4 flex-col justify-center">
+        <div className="flex flex-col items-center md:items-start justify-center md:w-3/4">
           <div className="group">
-          <h3 className="mb-2 cursor-pointer text-2xl font-bold text-[#2D3047]">
-            {props.title}
-          </h3>
-          <hr
-            className="group-hover:border-red-600 pb-2 transition-all duration-300"
-          />
+            <h3 className="mb-2 cursor-pointer text-2xl font-bold text-[#2D3047]">
+              {props.title}
+            </h3>
+            <hr className="pb-2 transition-all duration-300 group-hover:border-red-600" />
           </div>
           <p className="text-lg text-[#82204A]">{props.description}</p>
           <p className="mt-4 text-sm">
