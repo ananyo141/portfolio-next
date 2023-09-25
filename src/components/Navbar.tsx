@@ -83,7 +83,7 @@ const Navsidebar = () => {
   return (
     <>
       <RxHamburgerMenu
-        className="fixed z-50 -ml-3 mt-2 scale-150 cursor-pointer text-white backdrop-blur md:hidden"
+        className="fixed z-50 ml-4 mt-4 scale-150 cursor-pointer text-white backdrop-blur md:hidden"
         onClick={() => toggleOpen()}
       />
       <motion.nav

@@ -33,11 +33,11 @@ const About = (props: Props) => {
         <h3 className="border-b-4 border-pink-500 pb-2 text-3xl font-bold">
           About
         </h3>
-        <p className="text-2xl font-bold">
+        <p className="text-xl md:text-2xl font-bold">
           Hey, I am Ananyobrata Pal, nice to meet you! You can contact me, or
           just have a look around!
         </p>
-        <p className="text-lg font-light text-gray-400">
+        <p className="text-base md:text-lg font-light text-gray-400">
           I am a CSE Undergrad diving into the world of technology, interested
           in building full stack apps. An Open Source advocate obsessed with
           ArchLinux and (N)vim. I am passionate about building excellent

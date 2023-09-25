@@ -32,7 +32,7 @@ const Skills = () => {
   return (
     <div
       id="Experience"
-      className="flex h-fit min-h-screen w-full flex-col items-center justify-center"
+      className="flex py-9 h-fit min-h-screen w-full flex-col items-center justify-center"
     >
       <h1 className="mb-5 border-b-4 border-pink-500 pb-2 text-4xl font-bold text-[#ccd6f6]">
         Experience

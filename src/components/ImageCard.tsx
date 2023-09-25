@@ -13,7 +13,7 @@ const ImageCard = ({ image, name, text, designation }) => {
         <h4 className="mb-4 text-2xl font-semibold">{name}</h4>
         <hr />
         <em className="block py-2">{designation}</em>
-        <p className="mt-2">
+        <p className="mt-2 text-sm md:text-lg">
           <FaQuoteLeft className="float-left inline" />
           {text}
         </p>

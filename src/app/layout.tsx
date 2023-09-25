@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar />
-        {children}
+        <div className="scale-100 overflow-x-clip">{children}</div>
         <ToastContainer />
         <Footer />
       </body>
