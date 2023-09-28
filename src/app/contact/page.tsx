@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { BsFacebook, BsLinkedin, BsGithub } from "react-icons/bs";
-import { ToastContainer, type ToastOptions, toast } from "react-toastify";
+import { type ToastOptions, toast } from "react-toastify";
 
 import TransitionEffect from "@components/TransitionEffect";
 import astranautImg from "@assets/astronaut.svg";
@@ -177,7 +177,6 @@ const Contact = () => {
             </button>
           </div>
         </form>
-        <ToastContainer />
       </div>
     </div>
   );
