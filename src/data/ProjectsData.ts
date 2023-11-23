@@ -8,6 +8,7 @@ import cipherschools_project from "@assets/cipherschools_project.png";
 import fabric_project from "@assets/fabric_project.png";
 import peermessage_project from "@assets/peermessage_project.png";
 import jwtposts_project from "@assets/jwtposts_project.png";
+import analytics_project from "@assets/analytics_api_project.png";
 
 export interface ProjectType {
   title: string;
@@ -20,6 +21,20 @@ export interface ProjectType {
 }
 
 const ProjectsData: ProjectType[] = [
+  {
+    title: "Analytics API",
+    techStack: [
+      "Next.js",
+      "Django Rest Framework",
+      "Typescript",
+      "Python",
+    ],
+    description: "An admin panel dashboard for analytics of user activity and engagement.",
+    image: analytics_project,
+    github: "https://github.com/ananyo141/analytics-api",
+    demo: "https://analytics-dashboard-frontend.vercel.app/",
+    youtube: "https://www.youtube.com/watch?v=4kpaeNSYbLI",
+  },
   {
     title: "Computer Shop",
     techStack: [
@@ -48,7 +63,7 @@ const ProjectsData: ProjectType[] = [
     image: snappio_project,
     github: "https://github.com/Snappio/snappio_backend",
     demo: "https://api-snappio.onrender.com/docs/swagger/",
-    youtube: "https://www.youtube.com/watch?v=jW3PfbTArEA",
+    youtube: "https://www.youtube.com/watch?v=judvqLhOCjs",
   },
   {
     title: "SmartShala (SIH 2022)",
