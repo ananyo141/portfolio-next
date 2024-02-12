@@ -11,7 +11,7 @@ const dateFont = VT323({ weight: "400", subsets: ["latin"] });
 
 const PostComponent = ({ post }: Props) => {
   return (
-    <div className="mb-8 cursor-pointer rounded-md border border-gray-300 p-4 shadow-sm shadow-purple-950 bg-purple-700 hover:bg-purple-800 text-white hover:shadow-md">
+    <div className="mb-8 cursor-pointer rounded-md border border-gray-300 p-4 shadow-sm shadow-purple-950 bg-purple-700 active:scale-95 duration-200 hover:bg-purple-800 text-white hover:shadow-md">
       <Link href={`/blogs/${post?.slug?.current}`}>
         <h2 className={`${font.className} text-2xl `}>
           {post?.title}
