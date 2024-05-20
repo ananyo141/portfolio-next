@@ -1,6 +1,7 @@
 import { StaticImageData } from "next/image";
 
 import smartshala from "@assets/smartshala_project.jpg";
+import vimero from "@assets/vimero_demo.png";
 import computershop_project from "@assets/computershop_project.png";
 import snappio_project from "@assets/snappio_project.png";
 import calories_project from "@assets/calories_project.png";
@@ -22,14 +23,28 @@ export interface ProjectType {
 
 const ProjectsData: ProjectType[] = [
   {
-    title: "Analytics API",
+    title: "Vimero",
     techStack: [
       "Next.js",
-      "Django Rest Framework",
-      "Typescript",
-      "Python",
+      "Golang",
+      "Rust",
+      "Node.js",
+      "Redis",
+      "RabbitMQ",
+      "System Design",
     ],
-    description: "An admin panel dashboard for analytics of user activity and engagement.",
+    description:
+      "A microservices application that shares user videos scalably.",
+    image: vimero,
+    github: "https://github.com/ananyo141/video-sharing-platform",
+    demo: "https://vimero.vercel.app/",
+    youtube: "https://youtu.be/DHSdUD67kjY",
+  },
+  {
+    title: "Analytics API",
+    techStack: ["Next.js", "Django Rest Framework", "Typescript", "Python"],
+    description:
+      "An admin panel dashboard for analytics of user activity and engagement.",
     image: analytics_project,
     github: "https://github.com/ananyo141/analytics-api",
     demo: "https://analytics-dashboard-frontend.vercel.app/",
