@@ -20,17 +20,25 @@ const ProjectsSection = () => {
       <div className="flex flex-col items-center">
         <motion.div
           transition={{ staggerChildren: 1, delayChildren: 2 }}
-          className="flex flex-col divide-y divide-red-300 items-center md:items-start"
+          className="flex flex-col items-center divide-y divide-red-300 md:items-start"
         >
           {ProjectsData.map((project, index) => (
             <motion.div
               key={`projectsection-${index}`}
+              onClick={() =>
+                window
+                  .open(project.youtube ?? project.github, "_blank")
+                  ?.focus()
+              }
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.3 }}
             >
-              <ProjectTile className="hover:scale-105 my-8 cursor-pointer duration-300" {...project} />
+              <ProjectTile
+                className="my-8 cursor-pointer duration-300 hover:scale-105"
+                {...project}
+              />
             </motion.div>
           ))}
         </motion.div>

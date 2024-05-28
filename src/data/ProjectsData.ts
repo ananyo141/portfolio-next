@@ -10,6 +10,7 @@ import fabric_project from "@assets/fabric_project.png";
 import peermessage_project from "@assets/peermessage_project.png";
 import jwtposts_project from "@assets/jwtposts_project.png";
 import analytics_project from "@assets/analytics_api_project.png";
+import code_grader_project from "@assets/code_grader.png";
 
 export interface ProjectType {
   title: string;
@@ -22,6 +23,15 @@ export interface ProjectType {
 }
 
 const ProjectsData: ProjectType[] = [
+  {
+    title: "Code Grader",
+    techStack: ["Langchain", "Codellama LLM", "FastAPI",  "Next.js"],
+    description:
+      "A platform for grading and optimising user code submissions using Large Language models.",
+    image: code_grader_project,
+    github: "https://github.com/code-grader/backend",
+    youtube: "https://youtu.be/CbBZT48CM-U",
+  },
   {
     title: "Vimero",
     techStack: [
