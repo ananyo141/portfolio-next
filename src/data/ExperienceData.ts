@@ -50,21 +50,9 @@ const ExperienceData: ExperienceType[] = [
   },
   {
     icon: MdAssignmentTurnedIn,
-    company: "ScalenowTech",
-    location: "Remote",
-    date: "July 2023 - Present",
-    designation: "Frontend Developer",
-    description: [
-      "Built the company landing website , deployed using DigitalOcean droplet",
-      "Increased the website reach by 80% using best practices for Search Engine Optimisation (SEO) .",
-    ],
-    techStack: ["NextJS13", "TailwindCSS", "Framer Motion", "Google Analytics"],
-  },
-  {
-    icon: MdAssignmentTurnedIn,
     company: "Varlyq Technologies",
     location: "Remote",
-    date: "May 2023 - Present",
+    date: "May 2023 - January 2024",
     designation: "Backend Developer",
     description: [
       "Migrated 200+ apis from CORE PHP to Node + ExpressJS with TypeScript.",
@@ -73,6 +61,29 @@ const ExperienceData: ExperienceType[] = [
     ],
     techStack: ["ExpressJS", "MongoDB Aggregation", "Typescript"],
   },
-];
+  {
+    icon: MdAssignmentTurnedIn,
+    company: "ScalenowTech",
+    location: "Remote",
+    date: "July 2023 - June 2024",
+    designation: "Full Stack Developer",
+    description: [
+      "Built the company landing website , deployed using DigitalOcean droplet",
+      "Increased the website reach by 80% using best practices for Search Engine Optimisation (SEO) .",
+    ],
+    techStack: ["NextJS13", "ExpressJS", "Docker", "CI/CD", "Google Analytics"],
+  },
+  {
+    icon: MdAssignmentTurnedIn,
+    company: "rtCamp Solutions",
+    location: "Remote / Hybrid",
+    date: "July 2024 - Present",
+    designation: "Software Engineer",
+    description: [
+      "Help the dynamic team to build scalable and maintainable applications",
+    ],
+    techStack: ["Python"],
+  },
+].reverse();
 
 export default ExperienceData;
