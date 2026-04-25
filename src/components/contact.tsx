@@ -1,8 +1,51 @@
+"use client";
+
+import { useState } from "react";
+import { toast } from "react-toastify";
 import contact from "@data/contact.json";
-import type { ContactInfo } from "@data/types";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Contact() {
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+
+      const data = await response.json();
+
+      if (response.status === 201) {
+        toast.success("Message sent successfully!");
+        setForm({ name: "", email: "", phone: "", message: "" });
+      } else if (response.status === 429) {
+        toast.error("Too many messages. Please try again in a few minutes.");
+      } else {
+        toast.error(data.message || "Failed to send message.");
+      }
+    } catch {
+      toast.error("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section id="contact" className="bg-bg-warm px-6 py-20 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
@@ -20,6 +63,55 @@ export default function Contact() {
             >
               {contact.email}
             </a>
+          </StaggerItem>
+
+          <StaggerItem className="mt-12">
+            <form onSubmit={handleSubmit} className="max-w-2xl">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <input
+                  name="name"
+                  type="text"
+                  required
+                  placeholder="Name"
+                  value={form.name}
+                  onChange={handleChange}
+                  className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 rounded-lg border px-4 py-3 text-base transition-all outline-none focus:ring-2"
+                />
+                <input
+                  name="email"
+                  type="email"
+                  required
+                  placeholder="Email"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 rounded-lg border px-4 py-3 text-base transition-all outline-none focus:ring-2"
+                />
+                <input
+                  name="phone"
+                  type="tel"
+                  placeholder="Phone (optional)"
+                  value={form.phone}
+                  onChange={handleChange}
+                  className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 rounded-lg border px-4 py-3 text-base transition-all outline-none focus:ring-2 md:col-span-2"
+                />
+                <textarea
+                  name="message"
+                  required
+                  placeholder="Your message..."
+                  rows={5}
+                  value={form.message}
+                  onChange={handleChange}
+                  className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 resize-none rounded-lg border px-4 py-3 text-base transition-all outline-none focus:ring-2 md:col-span-2"
+                />
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-accent hover:bg-accent/90 mt-6 cursor-pointer rounded-lg px-8 py-3 font-mono text-sm font-medium text-white transition-colors disabled:opacity-50"
+              >
+                {loading ? "Sending..." : "Send Message →"}
+              </button>
+            </form>
           </StaggerItem>
 
           <StaggerItem className="mt-10">

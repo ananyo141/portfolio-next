@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 import Nav from "@components/nav";
 import Footer from "@components/footer";
 import site from "@data/site.json";
@@ -45,6 +47,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main-content">{children}</main>
         <Footer />
+        <ToastContainer
+          position="bottom-right"
+          autoClose={4000}
+          hideProgressBar
+          closeOnClick
+          pauseOnHover
+          theme="light"
+        />
       </body>
     </html>
   );
