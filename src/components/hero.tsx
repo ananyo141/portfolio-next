@@ -46,7 +46,9 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.button
-          onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() =>
+            document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })
+          }
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
           className="text-text-muted hover:text-accent cursor-pointer transition-colors"
@@ -69,3 +71,4 @@ export default function Hero() {
     </section>
   );
 }
+// test
