@@ -9,7 +9,7 @@ const MenuItem = ({ title, linkname, toggleCallback, ...others }) => {
       opacity: 1,
       transition: {
         duration: 0.4,
-        ease: [0.6, 0.05, 0.01, 0.9],
+        ease: [0.6, 0.05, 0.01, 0.9] as const,
       },
     },
     closed: {
@@ -17,20 +17,13 @@ const MenuItem = ({ title, linkname, toggleCallback, ...others }) => {
       opacity: 0,
       transition: {
         duration: 0.4,
-        ease: [0.6, 0.05, 0.01, 0.9],
+        ease: [0.6, 0.05, 0.01, 0.9] as const,
       },
     },
   };
   return (
-    <motion.li
-      variants={menuVariants}
-      className="mb-5 flex cursor-pointer items-center space-x-6"
-    >
-      <Link
-        className="h-8 flex-1 px-4"
-        href={linkname}
-        onClick={toggleCallback}
-      >
+    <motion.li variants={menuVariants} className="mb-5 flex cursor-pointer items-center space-x-6">
+      <Link className="h-8 flex-1 px-4" href={linkname} onClick={toggleCallback}>
         <div className="flex items-center gap-10">
           <div className="scale-150">
             <others.icon />
