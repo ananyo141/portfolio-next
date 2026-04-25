@@ -16,7 +16,7 @@ export default async function BlogList() {
         return (
           <StaggerItem key={post._id || post.slug?.current}>
             <article className="group">
-              <Link href={`/blog/${post.slug?.current}`} className="block">
+              <Link href={`/blog/${post.slug?.current}`} className="block cursor-pointer">
                 <h2 className="text-text-primary group-hover:text-accent font-serif text-2xl font-bold transition-colors md:text-3xl">
                   <span className="from-accent to-accent bg-gradient-to-r bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-300 group-hover:bg-[length:100%_2px]">
                     {post.title}

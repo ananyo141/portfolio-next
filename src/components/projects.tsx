@@ -19,7 +19,7 @@ function ProjectLinks({
           href={github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-text-primary hover:text-accent text-sm transition-colors"
+          className="text-text-primary hover:text-accent cursor-pointer text-sm transition-colors"
         >
           GitHub →
         </Link>
@@ -29,7 +29,7 @@ function ProjectLinks({
           href={live}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-text-primary hover:text-accent text-sm transition-colors"
+          className="text-text-primary hover:text-accent cursor-pointer text-sm transition-colors"
         >
           Live →
         </Link>
@@ -39,7 +39,7 @@ function ProjectLinks({
           href={youtube}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-text-primary hover:text-accent text-sm transition-colors"
+          className="text-text-primary hover:text-accent cursor-pointer text-sm transition-colors"
         >
           Video →
         </Link>
@@ -70,14 +70,14 @@ export default function Projects() {
           {/* Featured project */}
           {featured && (
             <StaggerItem className="mb-16">
-              <div className="group">
+                <div className="group cursor-pointer">
                 <div className="bg-border-subtle relative mb-6 aspect-[2/1] w-full overflow-hidden rounded-lg">
                   {featured.image ? (
                     <Image
                       src={featured.image}
                       alt={featured.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover"
                       sizes="(max-width: 1200px) 100vw, 1200px"
                     />
                   ) : (
@@ -133,14 +133,14 @@ export default function Projects() {
           <div className="grid gap-8 md:grid-cols-2">
             {regular.map((project) => (
               <StaggerItem key={project.id}>
-                <div className="group">
+                <div className="group cursor-pointer">
                   <div className="bg-border-subtle relative mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg">
                     {project.image ? (
                       <Image
                         src={project.image}
                         alt={project.title}
                         fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className="object-cover"
                         sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     ) : (

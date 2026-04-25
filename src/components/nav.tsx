@@ -51,7 +51,7 @@ export default function Nav() {
       {/* Skip link */}
       <a
         href="#main-content"
-        className="focus:bg-accent sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-white"
+        className="focus:bg-accent sr-only cursor-pointer focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-white"
       >
         Skip to content
       </a>
@@ -65,7 +65,7 @@ export default function Nav() {
           {/* Monogram */}
           <Link
             href="/"
-            className="text-text-primary hover:text-accent font-mono text-lg font-bold tracking-tight transition-colors"
+            className="text-text-primary hover:text-accent cursor-pointer font-mono text-lg font-bold tracking-tight transition-colors"
           >
             A
           </Link>
@@ -77,7 +77,7 @@ export default function Nav() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`relative text-sm font-medium transition-colors ${
+                className={`relative cursor-pointer text-sm font-medium transition-colors ${
                   activeSection === item.href.slice(1)
                     ? "text-accent after:bg-accent after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full"
                     : "text-text-primary hover:text-accent"
@@ -91,7 +91,7 @@ export default function Nav() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative flex h-8 w-8 flex-col items-center justify-center gap-1.5 md:hidden"
+            className="relative flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-1.5 md:hidden"
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
@@ -119,7 +119,7 @@ export default function Nav() {
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 bg-[#F5F5F0] md:hidden">
           <button
             onClick={() => setMobileOpen(false)}
-            className="absolute top-4 right-6 font-mono text-2xl"
+            className="absolute top-4 right-6 cursor-pointer font-mono text-2xl"
             aria-label="Close menu"
           >
             ✕
@@ -129,7 +129,7 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="text-text-primary hover:text-accent font-serif text-4xl transition-colors"
+              className="text-text-primary hover:text-accent cursor-pointer font-serif text-4xl transition-colors"
             >
               {item.label}
             </a>

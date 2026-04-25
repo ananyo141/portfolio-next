@@ -38,7 +38,7 @@ const PortableTextComponents = {
         </SyntaxHighlighter>
         <button
           onClick={() => navigator.clipboard.writeText(value.code)}
-          className="absolute top-2 right-3 rounded-md bg-[#1e1e1e] px-2 py-1 font-mono text-xs text-gray-300 transition-colors hover:bg-[#333]"
+          className="absolute top-2 right-3 cursor-pointer rounded-md bg-[#1e1e1e] px-2 py-1 font-mono text-xs text-gray-300 transition-colors hover:bg-[#333]"
         >
           Copy
         </button>
@@ -118,7 +118,7 @@ export default function BlogPost({ post }: BlogPostProps) {
       <div className="border-border-subtle mt-16 border-t pt-8">
         <Link
           href="/blog"
-          className="text-text-primary hover:text-accent font-mono text-sm underline underline-offset-4 transition-colors"
+          className="text-text-primary hover:text-accent cursor-pointer font-mono text-sm underline underline-offset-4 transition-colors"
         >
           ← Back to writing
         </Link>

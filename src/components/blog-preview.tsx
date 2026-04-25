@@ -23,7 +23,7 @@ const readTime = calculateReadingTime(post.body || []);
               const excerpt = post.excerpt || getExcerptFromPortableText(post.body || []);
               return (
                 <StaggerItem key={post._id || post.slug?.current}>
-                  <Link href={`/blog/${post.slug?.current}`} className="group block">
+                  <Link href={`/blog/${post.slug?.current}`} className="group block cursor-pointer">
                     <h3 className="text-text-primary group-hover:text-accent font-serif text-xl font-bold transition-colors md:text-2xl">
                       <span className="from-accent to-accent bg-gradient-to-r bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-300 group-hover:bg-[length:100%_2px]">
                         {post.title}
@@ -46,7 +46,7 @@ const readTime = calculateReadingTime(post.body || []);
           <StaggerItem className="mt-10">
             <Link
               href="/blog"
-              className="text-text-primary hover:text-accent font-mono text-sm underline underline-offset-4 transition-colors"
+              className="text-text-primary hover:text-accent cursor-pointer font-mono text-sm underline underline-offset-4 transition-colors"
             >
               View all writing →
             </Link>
