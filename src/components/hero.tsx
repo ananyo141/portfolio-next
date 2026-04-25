@@ -1,19 +1,41 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Typewriter from "typewriter-effect";
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-end px-6 pt-32 pb-16 md:px-8"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-8"
     >
-      <div className="mx-auto w-full max-w-6xl">
+      {/* Animated gradient mesh background */}
+      <div className="pointer-events-none absolute inset-0 opacity-40">
+        <div className="hero-gradient-mesh absolute inset-0" />
+      </div>
+
+      {/* Subtle dot grid pattern */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `radial-gradient(circle, #7c3aed 1px, transparent 1px)`,
+          backgroundSize: "32px 32px",
+        }}
+      />
+
+      <div className="relative z-10 mx-auto w-full max-w-6xl">
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-accent mb-6 font-mono text-sm tracking-widest uppercase"
+          className="text-accent mb-8 font-mono text-sm tracking-widest uppercase"
         >
           Software Engineer
         </motion.p>
@@ -22,27 +44,56 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-text-primary mb-8 max-w-4xl font-serif text-5xl leading-[1.1] font-bold tracking-tight md:text-7xl lg:text-8xl"
+          className="text-text-primary mb-8 max-w-5xl font-serif text-5xl leading-[1.08] font-bold tracking-tight md:text-7xl lg:text-8xl"
         >
-          Building systems that outlast the hype cycles.
+          Building systems that{" "}
+          <span className="relative inline-block">
+            <span className="relative z-10">outlast the hype</span>
+            <span
+              className="absolute bottom-1 left-0 -z-0 h-[0.35em] w-full bg-[#7c3aed]/20 md:bottom-2"
+              aria-hidden="true"
+            />
+          </span>{" "}
+          cycles.
         </motion.h1>
 
-        <motion.p
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="text-text-muted max-w-xl text-lg leading-relaxed"
         >
-          Senior software engineer focused on distributed systems, developer experience, and the
-          long game of software craft.
-        </motion.p>
+          <p className="mb-2">
+            Senior software engineer focused on{" "}
+            {mounted && (
+              <span className="text-accent inline-block min-w-[180px] font-mono text-sm">
+                <Typewriter
+                  options={{
+                    strings: [
+                      "distributed systems",
+                      "developer experience",
+                      "software craft",
+                      "scalable architecture",
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    deleteSpeed: 30,
+                    cursor: "|",
+                  }}
+                />
+              </span>
+            )}
+          </p>
+          <p>and the long game of building things that last.</p>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2, duration: 1 }}
+        transition={{ delay: 1.5, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.button
