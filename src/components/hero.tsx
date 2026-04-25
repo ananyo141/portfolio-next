@@ -14,7 +14,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 md:px-8"
+      className="relative flex min-h-[calc(100vh-4rem)] flex-col justify-end overflow-hidden px-6 pt-32 pb-16 md:px-8"
     >
       {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -35,22 +35,23 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-          className="text-accent mb-8 font-mono text-sm tracking-widest uppercase"
+          className="text-accent mb-6 font-mono text-sm tracking-widest uppercase"
         >
-          Software Engineer
+          Ananyobrata Pal — Software Engineer
         </motion.p>
 
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="text-text-primary mb-8 max-w-5xl font-serif text-5xl leading-[1.08] font-bold tracking-tight md:text-7xl lg:text-8xl"
+          className="text-text-primary mb-8 max-w-4xl font-serif text-5xl leading-[1.1] font-bold tracking-tight md:text-7xl lg:text-8xl"
         >
           Building systems that{" "}
           <span className="relative inline-block">
             <span className="relative z-10">outlast the hype</span>
             <span
-              className="absolute bottom-1 left-0 -z-0 h-[0.35em] w-full bg-[#7c3aed]/20 md:bottom-2"
+              className="absolute -bottom-1 left-[-2%] -z-0 h-[0.4em] w-[104%] rounded-sm bg-[#7c3aed]/25 md:-bottom-2"
+              style={{ transform: "rotate(-1.5deg)" }}
               aria-hidden="true"
             />
           </span>{" "}
@@ -93,7 +94,7 @@ export default function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 1 }}
+        transition={{ delay: 1.2, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
         <motion.button
