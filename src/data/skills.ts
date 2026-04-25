@@ -1,0 +1,25 @@
+export interface SkillCategory {
+  category: string;
+  items: string[];
+  highlight?: boolean;
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    category: "Languages",
+    items: ["TypeScript", "Python", "Go", "Rust", "SQL"],
+  },
+  {
+    category: "Frameworks",
+    items: ["Next.js", "React", "Node.js", "Express", "Django", "FastAPI"],
+  },
+  {
+    category: "Infrastructure",
+    items: ["Docker", "PostgreSQL", "MongoDB", "Redis", "RabbitMQ", "AWS", "Vercel"],
+  },
+  {
+    category: "Currently Exploring",
+    items: ["LangChain", "LLM Orchestration", "Distributed Systems"],
+    highlight: true,
+  },
+];

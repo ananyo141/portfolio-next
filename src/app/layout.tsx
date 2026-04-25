@@ -1,31 +1,49 @@
+import type { Metadata } from "next";
+import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
+
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
+import Nav from "@components/nav";
+import Footer from "@components/footer";
 
-import { Inter } from "next/font/google";
-import { ToastContainer } from "react-toastify";
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 
-import Navbar from "@components/Navbar";
-import Footer from "@components/Footer";
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
-const inter = Inter({ subsets: ["latin"] });
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
-export const metadata = {
-  title: "Portfolio",
+export const metadata: Metadata = {
+  title: {
+    default: "Ananyo Bhowmick",
+    template: "%s | Ananyo Bhowmick",
+  },
   description:
-    "Website powered by NextJS + FramerMotion + TailwindCSS + TypeScript",
+    "Software engineer writing about system design, scalable architecture, and the craft of building software.",
+  metadataBase: new URL("https://ananyobhowmick.dev"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Ananyo Bhowmick",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        <div className="scale-100 overflow-x-clip">{children}</div>
-        <ToastContainer />
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}>
+      <body className="font-sans antialiased">
+        <Nav />
+        <main id="main-content">{children}</main>
         <Footer />
       </body>
     </html>

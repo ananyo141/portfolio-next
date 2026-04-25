@@ -7,10 +7,12 @@ export async function getPosts() {
     slug,
     publishedAt,
     excerpt,
-    tags[]-> {
+    body,
+    tags,
+    categories[]-> {
       _id,
       slug,
-      name
+      title
     }
   }
   `;
@@ -20,20 +22,27 @@ export async function getPosts() {
 
 export async function getPost(slug: string) {
   const query = `
-  *[_type == "post" && slug.current == "${slug}"][0] {
+  *[_type == "post" && slug.current == $slug][0] {
     title,
     slug,
     publishedAt,
     excerpt,
     _id,
     body,
-    tags[]-> {
+    tags,
+    categories[]-> {
       _id,
       slug,
-      name
+      title
     }
   }
   `;
-  const post = await client.fetch(query);
+  const post = await client.fetch(query, { slug });
   return post;
+}
+
+export async function getAllPostSlugs() {
+  const query = `*[_type == "post" && defined(slug.current)]{ "slug": slug.current }`;
+  const slugs = await client.fetch(query);
+  return slugs;
 }
