@@ -101,7 +101,7 @@ export default function Projects() {
                       {featured.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-accent-warm-light text-accent-warm rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
+                          className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
                         >
                           {tag}
                         </span>
@@ -176,7 +176,7 @@ export default function Projects() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-accent-warm-light text-accent-warm rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
+                        className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
                       >
                         {tag}
                       </span>

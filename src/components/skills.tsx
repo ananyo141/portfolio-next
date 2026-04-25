@@ -16,11 +16,7 @@ export default function Skills() {
               <StaggerItem key={category.category}>
                 <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:gap-12">
                   <div className="flex min-w-[200px] items-center gap-3">
-                    <div
-                      className={`h-2 w-2 rounded-full ${
-                        category.highlight ? "bg-accent-warm" : "bg-accent"
-                      }`}
-                    />
+                    <div className="bg-accent h-2 w-2 rounded-full" />
                     <h3
                       className={`font-serif text-xl font-bold md:text-2xl ${
                         category.highlight ? "text-text-primary" : "text-text-primary"
