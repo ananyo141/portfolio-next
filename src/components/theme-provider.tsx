@@ -14,33 +14,60 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 });
 
-function getInitialTheme(): Theme {
+const STORAGE_KEY = "theme";
+
+function getStoredTheme(): Theme | null {
+  if (typeof window === "undefined") return null;
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored === "dark" || stored === "light") return stored;
+  return null;
+}
+
+function getSystemTheme(): Theme {
   if (typeof window === "undefined") return "light";
-  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme: Theme) {
+  const html = document.documentElement;
+  if (theme === "dark") {
+    html.classList.add("dark");
+  } else {
+    html.classList.remove("dark");
+  }
 }
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("light");
 
   useEffect(() => {
-    setTheme(getInitialTheme());
+    const stored = getStoredTheme();
+    const initial = stored ?? getSystemTheme();
+    applyTheme(initial);
+    setTheme(initial);
+  }, []);
+
+  useEffect(() => {
+    const mql = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = (e: MediaQueryListEvent) => {
+      // Only auto-switch if user hasn't set a manual preference
+      if (getStoredTheme() === null) {
+        const next = e.matches ? "dark" : "light";
+        applyTheme(next);
+        setTheme(next);
+      }
+    };
+    mql.addEventListener("change", handleChange);
+    return () => mql.removeEventListener("change", handleChange);
   }, []);
 
   const toggleTheme = useCallback(() => {
-    const html = document.documentElement;
-    const isDark = html.classList.contains("dark");
-    const nextTheme = isDark ? "light" : "dark";
-
-    if (isDark) {
-      html.classList.remove("dark");
-    } else {
-      html.classList.add("dark");
-    }
-    localStorage.setItem("theme", nextTheme);
-    setTheme(nextTheme);
-    // Dispatch storage event so other tabs update
-    window.dispatchEvent(new StorageEvent("storage", { key: "theme" }));
-  }, []);
+    const next = theme === "dark" ? "light" : "dark";
+    applyTheme(next);
+    localStorage.setItem(STORAGE_KEY, next);
+    setTheme(next);
+    window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY }));
+  }, [theme]);
 
   return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
