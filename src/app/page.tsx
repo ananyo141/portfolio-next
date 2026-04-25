@@ -4,11 +4,11 @@ import Experience from "@components/experience";
 import BlogPreview from "@components/blog-preview";
 import Skills from "@components/skills";
 import Contact from "@components/contact";
+import site from "@data/site.json";
 
 export const metadata = {
-  title: "Ananyo Bhowmick",
-  description:
-    "Software engineer writing about system design, scalable architecture, and the craft of building software.",
+  title: site.name,
+  description: site.description,
 };
 
 export default function Home() {

@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import BlogList from "@components/blog-list";
 import { StaggerContainer } from "@components/motion-wrapper";
+import site from "@data/site.json";
 
 export const metadata: Metadata = {
-  title: "Writing | Ananyo Bhowmick",
+  title: `Writing | ${site.name}`,
   description: "Essays on software engineering, system design, and the craft of building things.",
 };
 

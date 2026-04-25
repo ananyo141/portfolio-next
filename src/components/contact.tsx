@@ -1,3 +1,5 @@
+import contact from "@data/contact.json";
+import type { ContactInfo } from "@data/types";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Contact() {
@@ -13,17 +15,17 @@ export default function Contact() {
 
           <StaggerItem className="mt-8">
             <a
-              href="mailto:ananyo141@gmail.com"
+              href={`mailto:${contact.email}`}
               className="text-text-primary hover:text-accent inline-block font-serif text-2xl underline underline-offset-8 transition-colors md:text-3xl"
             >
-              ananyo141@gmail.com
+              {contact.email}
             </a>
           </StaggerItem>
 
           <StaggerItem className="mt-10">
             <div className="flex gap-6">
               <a
-                href="https://github.com/ananyo141"
+                href={contact.social.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -34,7 +36,7 @@ export default function Contact() {
                 </svg>
               </a>
               <a
-                href="https://linkedin.com/in/ananyo141"
+                href={contact.social.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -45,7 +47,7 @@ export default function Contact() {
                 </svg>
               </a>
               <a
-                href="https://twitter.com/ananyo141"
+                href={contact.social.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter / X"
@@ -56,7 +58,7 @@ export default function Contact() {
                 </svg>
               </a>
               <a
-                href="/feed.xml"
+                href={contact.social.rss}
                 aria-label="RSS Feed"
                 className="text-text-muted hover:text-accent transition-colors"
               >

@@ -1,4 +1,5 @@
-import { experiences } from "@data/experience";
+import experiences from "@data/experience.json";
+import type { Experience } from "@data/types";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Experience() {

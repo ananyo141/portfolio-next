@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { projects } from "@data/projects";
+import projects from "@data/projects.json";
+import type { Project } from "@data/types";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Projects() {

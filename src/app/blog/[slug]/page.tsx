@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getPost, getAllPostSlugs } from "@src/network/cmsHandlers";
 import BlogPost from "@components/blog-post";
+import site from "@data/site.json";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPost(slug);
   if (!post) return { title: "Not Found" };
   return {
-    title: `${post.title} | Ananyo Bhowmick`,
+    title: `${post.title} | ${site.name}`,
     description: post.excerpt || post.title,
   };
 }

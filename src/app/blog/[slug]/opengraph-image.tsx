@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { getPost } from "@src/network/cmsHandlers";
+import site from "@data/site.json";
 
 export const alt = "Blog post";
 export const size = { width: 1200, height: 630 };
@@ -44,7 +45,7 @@ export default async function Image({ params }: Props) {
           fontFamily: "monospace",
         }}
       >
-        ananyobhowmick.dev
+        {new URL(site.domain).hostname}
       </div>
     </div>,
     { ...size }

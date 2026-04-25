@@ -1,4 +1,5 @@
-import { skillCategories } from "@data/skills";
+import skillCategories from "@data/skills.json";
+import type { SkillCategory } from "@data/types";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Skills() {
