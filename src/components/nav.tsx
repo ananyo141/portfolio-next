@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { navItems } from "@data/nav-items";
+import ThemeToggle from "@components/theme-toggle";
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -70,14 +71,14 @@ export default function Nav() {
 
       <nav
         className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
-          scrolled ? "bg-[#F5F5F0]/90 shadow-sm backdrop-blur-md" : "bg-transparent"
+          scrolled ? "bg-bg-primary/90 shadow-sm backdrop-blur-md" : "bg-transparent"
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
           {/* Monogram */}
           <Link
             href="/"
-            className="text-text-primary hover:text-accent cursor-pointer font-mono text-lg font-bold tracking-tight transition-colors"
+            className="bg-accent flex h-8 w-8 items-center justify-center rounded-full font-mono text-sm font-bold text-white transition-transform hover:scale-110"
           >
             A
           </Link>
@@ -98,37 +99,43 @@ export default function Nav() {
                 {item.label}
               </a>
             ))}
+            <div className="border-border-subtle border-l pl-6">
+              <ThemeToggle />
+            </div>
           </div>
 
-          {/* Mobile hamburger */}
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="relative flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-1.5 md:hidden"
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            <span
-              className={`bg-text-primary block h-0.5 w-6 transition-transform duration-300 ${
-                mobileOpen ? "translate-y-2 rotate-45" : ""
-              }`}
-            />
-            <span
-              className={`bg-text-primary block h-0.5 w-6 transition-opacity duration-300 ${
-                mobileOpen ? "opacity-0" : ""
-              }`}
-            />
-            <span
-              className={`bg-text-primary block h-0.5 w-6 transition-transform duration-300 ${
-                mobileOpen ? "-translate-y-2 -rotate-45" : ""
-              }`}
-            />
-          </button>
+          {/* Mobile: theme toggle + hamburger */}
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="relative flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-1.5"
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
+              <span
+                className={`bg-text-primary block h-0.5 w-6 transition-transform duration-300 ${
+                  mobileOpen ? "translate-y-2 rotate-45" : ""
+                }`}
+              />
+              <span
+                className={`bg-text-primary block h-0.5 w-6 transition-opacity duration-300 ${
+                  mobileOpen ? "opacity-0" : ""
+                }`}
+              />
+              <span
+                className={`bg-text-primary block h-0.5 w-6 transition-transform duration-300 ${
+                  mobileOpen ? "-translate-y-2 -rotate-45" : ""
+                }`}
+              />
+            </button>
+          </div>
         </div>
       </nav>
 
       {/* Mobile overlay */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 bg-[#F5F5F0] md:hidden">
+        <div className="bg-bg-primary fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 md:hidden">
           <button
             onClick={() => setMobileOpen(false)}
             className="absolute top-4 right-6 cursor-pointer font-mono text-2xl"

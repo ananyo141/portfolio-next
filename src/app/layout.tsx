@@ -6,6 +6,8 @@ import "./globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import Nav from "@components/nav";
 import Footer from "@components/footer";
+import { ThemeProvider } from "@components/theme-provider";
+import { ThemeScript } from "@components/theme-script";
 import site from "@data/site.json";
 
 const playfair = Playfair_Display({
@@ -42,19 +44,27 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}
+    >
+      <head>
+        <ThemeScript />
+      </head>
       <body className="font-sans antialiased">
-        <Nav />
-        <main id="main-content">{children}</main>
-        <Footer />
-        <ToastContainer
-          position="bottom-right"
-          autoClose={4000}
-          hideProgressBar
-          closeOnClick
-          pauseOnHover
-          theme="light"
-        />
+        <ThemeProvider>
+          <Nav />
+          <main id="main-content">{children}</main>
+          <Footer />
+          <ToastContainer
+            position="bottom-right"
+            autoClose={4000}
+            hideProgressBar
+            closeOnClick
+            pauseOnHover
+          />
+        </ThemeProvider>
       </body>
     </html>
   );
