@@ -1,32 +1,54 @@
+import type { Metadata } from "next";
+import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
 
-import { Inter } from "next/font/google";
-import { ToastContainer } from "react-toastify";
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
+});
 
-import Navbar from "@components/Navbar";
-import Footer from "@components/Footer";
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
-const inter = Inter({ subsets: ["latin"] });
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
 
-export const metadata = {
-  title: "Portfolio",
+export const metadata: Metadata = {
+  title: {
+    default: "Thoughts on Engineering",
+    template: "%s | Thoughts on Engineering",
+  },
   description:
-    "Website powered by NextJS + FramerMotion + TailwindCSS + TypeScript",
+    "A software engineer's platform for deep dives, honest opinions, and the craft of building software.",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Thoughts on Engineering",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        <div className="scale-100 overflow-x-clip">{children}</div>
-        <ToastContainer />
-        <Footer />
+    <html lang="en" className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}>
+      <body>
+        <a href="#main-content" className="skip-link">
+          Skip to content
+        </a>
+        {children}
       </body>
     </html>
   );

@@ -1,12 +1,10 @@
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
+  output: "export",
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.sanity.io',
-        port: '',
-      },
-    ],
+    unoptimized: true,
   },
-}
+  trailingSlash: true,
+};
+
+module.exports = nextConfig;

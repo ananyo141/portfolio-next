@@ -1,0 +1,52 @@
+---
+title: "On Software Craft: Why I Still Care About Code Quality"
+date: "2024-03-22"
+excerpt: "In an industry obsessed with shipping fast, taking time to write good code is a radical act. Here's why I refuse to compromise."
+tags: ["craft", "engineering"]
+readTime: "7 min"
+---
+
+There's a tension in software engineering that never goes away: the pressure to ship versus the desire to build something well.
+
+I've watched teams optimize so hard for velocity that they create drag. The kind of drag that doesn't show up in sprint metrics but manifests as burned-out engineers, mysterious bugs, and the slow death of a codebase's integrity.
+
+## The false dichotomy
+
+Fast and good aren't opposites. They're a spectrum, and where you land on it is a choice you make every day.
+
+I've shipped features in hours that held up for years. I've also spent weeks on "proper" architecture that we threw away three months later because the market shifted. The difference wasn't time—it was _intention_.
+
+> "The code you write today is a love letter to the engineer who has to maintain it six months from now. That engineer might be you."
+
+## What code quality actually means
+
+It's not about following every pattern in the Gang of Four book. It's about:
+
+- **Clarity**: Can someone read this and understand the intent without a walkthrough?
+- **Confidence**: Can you change it without fear of breaking something unrelated?
+- **Context**: Does the structure match the domain, or are you forcing a shape that doesn't fit?
+
+## The cost of cutting corners
+
+Technical debt isn't a moral failing—it's a tool. Like any tool, it works when used intentionally and destroys when used carelessly.
+
+The problem is most debt isn't taken on consciously. It's the accumulation of a thousand tiny compromises: "I'll refactor this later," "We don't have time for tests," "It works, ship it."
+
+Later never comes. The debt compounds. And eventually, the interest payments consume your entire capacity.
+
+## My non-negotiables
+
+After years of shipping software in different contexts—from startups to enterprise to open source—here's what I won't compromise on:
+
+1. **Tests for critical paths**: Not 100% coverage, but the paths that matter
+2. **Type safety**: The compiler is your first reviewer; use it
+3. **Consistent formatting**: Cognitive load is real; eliminate the noise
+4. **Documentation for boundaries**: APIs, data models, deployment procedures
+
+Everything else is negotiable based on context.
+
+## The long game
+
+Software craft isn't about perfection. It's about respect—for the problem, for the user, for the people who come after you.
+
+In a world that rewards speed above all else, taking the time to care is a quiet rebellion. And it's one I'm happy to participate in.

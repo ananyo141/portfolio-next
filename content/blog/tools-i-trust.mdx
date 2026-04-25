@@ -1,0 +1,73 @@
+---
+title: "Tools I Trust: A Curated Toolkit for 2024"
+date: "2024-06-10"
+excerpt: "After a decade of trying everything, these are the tools that earned permanent residency in my development environment."
+tags: ["tools", "workflow"]
+readTime: "6 min"
+---
+
+I've tried enough tools to fill a small data center. Most of them didn't stick. The ones that did earned their place through repeated daily use, not novelty.
+
+This isn't a comprehensive list of what's popular. It's a curated set of tools I actually use, with honest notes on where they shine and where they fall short.
+
+## Editor: Neovim
+
+Yes, really. After VS Code, IntelliJ, Sublime, and Emacs, I landed on Neovim and haven't looked back.
+
+**Why it stuck:**
+
+- Modal editing rewired how I think about text manipulation
+- Startup time is effectively zero
+- Configuration is code—my editor is version-controlled and reproducible
+
+**Where it falls short:**
+
+- Debugging experience isn't as polished as JetBrains
+- Junior team members can't pair program without a learning curve
+- PDF viewing is... not great
+
+## Terminal: Ghostty + tmux
+
+Ghostty is a new terminal emulator that's fast, GPU-accelerated, and has excellent ligature support. Paired with tmux for session management, it's the center of my workflow.
+
+## Language: TypeScript (with strict mode)
+
+I've written production code in Python, Ruby, Go, Rust, and Elixir. TypeScript is the best balance of expressiveness and safety for the domains I work in most.
+
+Strict mode is non-negotiable. `any` is a code smell, not a convenience.
+
+## Database: PostgreSQL
+
+For structured data, PostgreSQL is the default correct answer. It's boring in the best way—reliable, well-documented, and capable of more than most people realize.
+
+Recent favorites:
+
+- `pg_stat_statements` for query performance analysis
+- JSONB for semi-structured data without reaching for Mongo
+- Logical replication for zero-downtime migrations
+
+## Infrastructure: Terraform + Kubernetes
+
+I know, I know—Kubernetes is overkill for most teams. But when you need it, you _need_ it. The key is knowing when you're not that team yet.
+
+Terraform is less defensible as the only option, but it's the devil I know. Pulumi is interesting for teams with stronger programming cultures.
+
+## What's on probation
+
+These are in my stack but under evaluation:
+
+- **Zed**: Fast, but the plugin ecosystem isn't there yet
+- **Bun**: Impressive speed, but Node compatibility isn't perfect
+- **Nix**: Powerful, but the learning curve is a cliff
+
+## What I removed
+
+- **Docker Desktop**: Replaced with OrbStack—faster, lighter, actually works on macOS
+- **Postman**: Replaced with `curl` + shell scripts + occasionally Bruno
+- **Jira**: Replaced with GitHub Issues + a markdown file for long-term planning
+
+## The principle
+
+The best tool is the one you don't have to think about. When your tools fade into the background, your attention goes where it belongs: on the problem you're solving.
+
+I'm always curious what other engineers use. If you have a tool that changed how you work, [let me know](mailto:hello@example.com).
