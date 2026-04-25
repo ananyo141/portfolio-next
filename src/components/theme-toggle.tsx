@@ -1,10 +1,21 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useTheme } from "./theme-provider";
 
 export default function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const isDark = theme === "dark";
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch by rendering placeholder until mounted
+  if (!mounted) {
+    return <div className="h-9 w-9" aria-hidden="true" />;
+  }
 
   return (
     <button
