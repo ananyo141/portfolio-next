@@ -77,9 +77,9 @@ export default function Nav() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-sm font-medium transition-colors ${
+                className={`relative text-sm font-medium transition-colors ${
                   activeSection === item.href.slice(1)
-                    ? "text-accent"
+                    ? "text-accent after:bg-accent after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full"
                     : "text-text-primary hover:text-accent"
                 }`}
               >

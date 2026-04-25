@@ -30,8 +30,8 @@ const readTime = calculateReadingTime(post.body || []);
                       </span>
                     </h3>
                     <div className="text-text-muted mt-2 flex items-center gap-3 font-mono text-xs">
-                      <span>{formatDate(post.publishedAt)}</span>
-                      <span>·</span>
+                      <span className="text-accent">{formatDate(post.publishedAt)}</span>
+                      <span className="text-border-subtle">·</span>
                       <span>{readTime} min read</span>
                     </div>
                     <p className="text-text-muted mt-2 line-clamp-2 text-sm leading-relaxed">

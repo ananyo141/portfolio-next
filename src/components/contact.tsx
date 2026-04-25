@@ -4,7 +4,7 @@ import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Contact() {
   return (
-    <section id="contact" className="px-6 py-20 md:px-8 md:py-32">
+    <section id="contact" className="bg-bg-warm px-6 py-20 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>

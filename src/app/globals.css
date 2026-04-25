@@ -3,9 +3,15 @@
 
 @theme {
   --color-bg-primary: #f5f5f0;
+  --color-bg-warm: #faf6f0;
+  --color-bg-cool: #f0f4f8;
+  --color-surface: #ffffff;
   --color-text-primary: #111111;
   --color-text-muted: #6b7280;
   --color-accent: #7c3aed;
+  --color-accent-light: #ede9fe;
+  --color-accent-warm: #d97706;
+  --color-accent-warm-light: #fef3c7;
   --color-border-subtle: #e5e5e0;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;

@@ -15,15 +15,29 @@ export default function Skills() {
             {skillCategories.map((category) => (
               <StaggerItem key={category.category}>
                 <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:gap-12">
-                  <h3
-                    className={`min-w-[200px] font-serif text-xl font-bold md:text-2xl ${
-                      category.highlight ? "text-accent" : "text-text-primary"
-                    }`}
-                  >
-                    {category.category}
-                  </h3>
+                  <div className="flex items-center gap-3 min-w-[200px]">
+                    <div
+                      className={`h-2 w-2 rounded-full ${
+                        category.highlight ? "bg-accent" : "bg-accent-warm"
+                      }`}
+                    />
+                    <h3
+                      className={`font-serif text-xl font-bold md:text-2xl ${
+                        category.highlight ? "text-accent" : "text-text-primary"
+                      }`}
+                    >
+                      {category.category}
+                    </h3>
+                  </div>
                   <p className="text-text-muted text-base leading-relaxed">
-                    {category.items.join(" · ")}
+                    {category.items.map((item, i) => (
+                      <span key={item}>
+                        <span className="text-text-primary font-medium">{item}</span>
+                        {i < category.items.length - 1 && (
+                          <span className="text-border-subtle mx-2">·</span>
+                        )}
+                      </span>
+                    ))}
                   </p>
                 </div>
               </StaggerItem>

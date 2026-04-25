@@ -17,17 +17,29 @@ export default function Experience() {
             {experiences.map((exp, index) => (
               <StaggerItem key={exp.company}>
                 <div
-                  className={`py-8 ${
+                  className={`relative py-8 pl-6 ${
                     index !== experiences.length - 1 ? "border-border-subtle border-b" : ""
                   }`}
                 >
+                  {/* Timeline dot */}
+                  <div className="absolute top-10 left-0 flex flex-col items-center">
+                    <div
+                      className={`h-3 w-3 rounded-full ${
+                        exp.current ? "bg-accent" : "bg-border-subtle"
+                      }`}
+                    />
+                    {index !== experiences.length - 1 && (
+                      <div className="mt-1 h-full min-h-[60px] w-px bg-border-subtle" />
+                    )}
+                  </div>
+
                   <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
                     <div className="flex items-center gap-3">
                       <h3 className="text-text-primary font-serif text-xl font-bold md:text-2xl">
                         {exp.company}
                       </h3>
                       {exp.current && (
-                        <span className="bg-accent rounded-full px-2.5 py-0.5 font-mono text-xs font-medium text-white">
+                        <span className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs font-semibold">
                           Currently
                         </span>
                       )}
@@ -42,7 +54,10 @@ export default function Experience() {
                   </p>
                   <div className="mt-3 flex flex-wrap gap-2">
                     {exp.tags.map((tag) => (
-                      <span key={tag} className="text-text-muted font-mono text-xs">
+                      <span
+                        key={tag}
+                        className="bg-bg-cool text-text-muted rounded-full px-2.5 py-0.5 font-mono text-xs"
+                      >
                         {tag}
                       </span>
                     ))}

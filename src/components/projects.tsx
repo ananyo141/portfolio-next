@@ -61,7 +61,7 @@ export default function Projects() {
               <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
                 Selected Work
               </h2>
-              <span className="text-text-muted hidden font-mono text-sm md:block">
+              <span className="text-accent hidden font-mono text-sm md:block">
                 01
               </span>
             </div>
@@ -94,7 +94,7 @@ export default function Projects() {
                       {featured.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-text-muted font-mono text-xs tracking-wider uppercase"
+                          className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
                         >
                           {tag}
                         </span>
@@ -112,7 +112,7 @@ export default function Projects() {
                       {featured.tech.map((t) => (
                         <span
                           key={t}
-                          className="border-border-subtle text-text-primary rounded-full border px-3 py-1 font-mono text-xs"
+                          className="bg-bg-cool text-text-primary rounded-full px-3 py-1 font-mono text-xs"
                         >
                           {t}
                         </span>
@@ -155,7 +155,7 @@ export default function Projects() {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-text-muted font-mono text-xs tracking-wider uppercase"
+                        className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
                       >
                         {tag}
                       </span>
@@ -171,7 +171,7 @@ export default function Projects() {
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="border-border-subtle text-text-primary rounded-full border px-3 py-1 font-mono text-xs"
+                        className="bg-bg-cool text-text-primary rounded-full px-3 py-1 font-mono text-xs"
                       >
                         {t}
                       </span>
