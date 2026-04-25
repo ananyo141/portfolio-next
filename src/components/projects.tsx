@@ -1,7 +1,52 @@
+import Image from "next/image";
 import Link from "next/link";
 import projects from "@data/projects.json";
-import type { Project } from "@data/types";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
+
+function ProjectLinks({
+  github,
+  live,
+  youtube,
+}: {
+  github?: string;
+  live?: string;
+  youtube?: string;
+}) {
+  return (
+    <div className="flex gap-4">
+      {github && (
+        <Link
+          href={github}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-text-primary hover:text-accent text-sm transition-colors"
+        >
+          GitHub →
+        </Link>
+      )}
+      {live && (
+        <Link
+          href={live}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-text-primary hover:text-accent text-sm transition-colors"
+        >
+          Live →
+        </Link>
+      )}
+      {youtube && (
+        <Link
+          href={youtube}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-text-primary hover:text-accent text-sm transition-colors"
+        >
+          Video →
+        </Link>
+      )}
+    </div>
+  );
+}
 
 export default function Projects() {
   const featured = projects.find((p) => p.featured);
@@ -16,7 +61,9 @@ export default function Projects() {
               <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
                 Selected Work
               </h2>
-              <span className="text-text-muted hidden font-mono text-sm md:block">01</span>
+              <span className="text-text-muted hidden font-mono text-sm md:block">
+                01
+              </span>
             </div>
           </StaggerItem>
 
@@ -25,9 +72,21 @@ export default function Projects() {
             <StaggerItem className="mb-16">
               <div className="group">
                 <div className="bg-border-subtle relative mb-6 aspect-[2/1] w-full overflow-hidden rounded-lg">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="text-text-muted font-mono text-sm">Project Screenshot</span>
-                  </div>
+                  {featured.image ? (
+                    <Image
+                      src={featured.image}
+                      alt={featured.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 1200px) 100vw, 1200px"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className="text-text-muted font-mono text-sm">
+                        Project Screenshot
+                      </span>
+                    </div>
+                  )}
                 </div>
                 <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                   <div className="max-w-2xl">
@@ -59,28 +118,11 @@ export default function Projects() {
                         </span>
                       ))}
                     </div>
-                    <div className="flex gap-4">
-                      {featured.github && (
-                        <Link
-                          href={featured.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-primary hover:text-accent text-sm transition-colors"
-                        >
-                          GitHub →
-                        </Link>
-                      )}
-                      {featured.live && (
-                        <Link
-                          href={featured.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-text-primary hover:text-accent text-sm transition-colors"
-                        >
-                          Live →
-                        </Link>
-                      )}
-                    </div>
+                    <ProjectLinks
+                      github={featured.github}
+                      live={featured.live}
+                      youtube={featured.youtube}
+                    />
                   </div>
                 </div>
               </div>
@@ -93,9 +135,21 @@ export default function Projects() {
               <StaggerItem key={project.id}>
                 <div className="group">
                   <div className="bg-border-subtle relative mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-text-muted font-mono text-sm">Screenshot</span>
-                    </div>
+                    {project.image ? (
+                      <Image
+                        src={project.image}
+                        alt={project.title}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-text-muted font-mono text-sm">
+                          Screenshot
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <div className="mb-2 flex gap-3">
                     {project.tags.map((tag) => (
@@ -123,27 +177,12 @@ export default function Projects() {
                       </span>
                     ))}
                   </div>
-                  <div className="mt-4 flex gap-4">
-                    {project.github && (
-                      <Link
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-text-primary hover:text-accent text-sm transition-colors"
-                      >
-                        GitHub →
-                      </Link>
-                    )}
-                    {project.live && (
-                      <Link
-                        href={project.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-text-primary hover:text-accent text-sm transition-colors"
-                      >
-                        Live →
-                      </Link>
-                    )}
+                  <div className="mt-4">
+                    <ProjectLinks
+                      github={project.github}
+                      live={project.live}
+                      youtube={project.youtube}
+                    />
                   </div>
                 </div>
               </StaggerItem>

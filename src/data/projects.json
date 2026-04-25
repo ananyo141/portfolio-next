@@ -6,7 +6,8 @@
     "tags": ["AI/ML", "Developer Tools"],
     "tech": ["LangChain", "CodeLlama", "FastAPI", "Next.js"],
     "github": "https://github.com/code-grader/backend",
-    "live": "https://youtu.be/CbBZT48CM-U",
+    "youtube": "https://youtu.be/CbBZT48CM-U",
+    "image": "/projects/code_grader.png",
     "featured": true
   },
   {
@@ -17,6 +18,9 @@
     "tech": ["Next.js", "Golang", "Rust", "Redis", "RabbitMQ"],
     "github": "https://github.com/ananyo141/video-sharing-platform",
     "live": "https://vimero.vercel.app/",
+    "demo": "https://vimero.vercel.app/",
+    "youtube": "https://youtu.be/DHSdUD67kjY",
+    "image": "/projects/vimero_demo.png",
     "featured": false
   },
   {
@@ -27,6 +31,9 @@
     "tech": ["Next.js", "Django REST", "TypeScript", "Python"],
     "github": "https://github.com/ananyo141/analytics-api",
     "live": "https://analytics-dashboard-frontend.vercel.app/",
+    "demo": "https://analytics-dashboard-frontend.vercel.app/",
+    "youtube": "https://www.youtube.com/watch?v=4kpaeNSYbLI",
+    "image": "/projects/analytics_api_project.png",
     "featured": false
   },
   {
@@ -37,6 +44,9 @@
     "tech": ["Django REST", "Django Channels", "Redis", "PostgreSQL"],
     "github": "https://github.com/Snappio/snappio_backend",
     "live": "https://api-snappio.onrender.com/docs/swagger/",
+    "demo": "https://api-snappio.onrender.com/docs/swagger/",
+    "youtube": "https://www.youtube.com/watch?v=judvqLhOCjs",
+    "image": "/projects/snappio_project.png",
     "featured": false
   },
   {
@@ -47,6 +57,80 @@
     "tech": ["React", "Node.js", "Express", "MongoDB", "Redux"],
     "github": "https://github.com/ananyo141/ComputerShop",
     "live": "https://computershop-frontend.vercel.app/",
+    "demo": "https://computershop-frontend.vercel.app/",
+    "youtube": "https://www.youtube.com/watch?v=1uHAwhE77C0",
+    "image": "/projects/computershop_project.png",
+    "featured": false
+  },
+  {
+    "id": "smartshala",
+    "title": "SmartShala (SIH 2022)",
+    "description": "SmartShala is a mobile application that aims to automate the grading process using AI/ML to scan answer sheets and upload the results to teacher portal.",
+    "tags": ["Mobile", "AI/ML"],
+    "tech": ["Flutter", "Dart"],
+    "github": "https://github.com/ananyo141/smartshala_frontend",
+    "youtube": "https://youtu.be/0cB1Lrw7DwQ",
+    "image": "/projects/smartshala_project.jpg",
+    "featured": false
+  },
+  {
+    "id": "calories-api",
+    "title": "Calories Tracker API",
+    "description": "A REST API for tracking calories and macronutrients of food items via Natural Language Processing.",
+    "tags": ["API", "NLP"],
+    "tech": ["Django REST", "Nutritionix API"],
+    "github": "https://github.com/ananyo141/calories-api",
+    "live": "https://api-calories-drf.vercel.app",
+    "demo": "https://api-calories-drf.vercel.app",
+    "image": "/projects/calories_project.png",
+    "featured": false
+  },
+  {
+    "id": "cipherschools",
+    "title": "Cipherschools Profile Page",
+    "description": "A clone of Cipherschools profile page with a backend for storing user data.",
+    "tags": ["Full Stack", "Clone"],
+    "tech": ["React", "Redux", "Express", "Node.js", "MongoDB", "TypeScript"],
+    "github": "https://github.com/ananyo141/cipherschools-profile-page",
+    "live": "https://cipherschools-profile.vercel.app/",
+    "demo": "https://cipherschools-profile.vercel.app/",
+    "image": "/projects/cipherschools_project.png",
+    "featured": false
+  },
+  {
+    "id": "digital-whiteboard",
+    "title": "Digital Whiteboard",
+    "description": "A digital whiteboard for drawing and writing.",
+    "tags": ["Frontend", "Canvas"],
+    "tech": ["React", "Fabric.js", "CSS", "TypeScript"],
+    "github": "https://github.com/ananyo141/fabric-whiteboard",
+    "live": "https://fabric-whiteboard.onrender.com/",
+    "demo": "https://fabric-whiteboard.onrender.com/",
+    "image": "/projects/fabric_project.png",
+    "featured": false
+  },
+  {
+    "id": "peermessaging",
+    "title": "PeerMessaging",
+    "description": "A completely decentralized peer to peer messaging and video-calling application.",
+    "tags": ["P2P", "Real-time"],
+    "tech": ["Next.js", "PeerJS", "Redux", "TypeScript"],
+    "github": "https://github.com/ananyo141/PeerMessaging",
+    "live": "https://peermessage.vercel.app/",
+    "demo": "https://peermessage.vercel.app/",
+    "image": "/projects/peermessage_project.png",
+    "featured": false
+  },
+  {
+    "id": "jwt-posts",
+    "title": "JWT Posts API",
+    "description": "A REST API for creating and fetching posts using JWT authentication.",
+    "tags": ["API", "Auth"],
+    "tech": ["Node.js", "Express", "MongoDB", "Redis"],
+    "github": "https://github.com/ananyo141/jwt-posts-api/",
+    "live": "https://api-jwtposts.onrender.com/api/v1/users/",
+    "demo": "https://api-jwtposts.onrender.com/api/v1/users/",
+    "image": "/projects/jwtposts_project.png",
     "featured": false
   }
 ]

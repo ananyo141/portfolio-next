@@ -6,6 +6,9 @@ export interface Project {
   tech: string[];
   github?: string;
   live?: string;
+  demo?: string;
+  youtube?: string;
+  image?: string;
   featured: boolean;
 }
 
