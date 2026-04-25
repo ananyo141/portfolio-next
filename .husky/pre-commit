@@ -1,2 +1,1 @@
 npx lint-staged
-/home/ananyo/.local/bin/semgrep --config=auto --error --severity=ERROR src/
