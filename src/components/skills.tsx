@@ -15,10 +15,10 @@ export default function Skills() {
             {skillCategories.map((category) => (
               <StaggerItem key={category.category}>
                 <div className="flex flex-col gap-3 md:flex-row md:items-baseline md:gap-12">
-                  <div className="flex items-center gap-3 min-w-[200px]">
+                  <div className="flex min-w-[200px] items-center gap-3">
                     <div
                       className={`h-2 w-2 rounded-full ${
-                        category.highlight ? "bg-accent" : "bg-accent-warm"
+                        category.highlight ? "bg-accent-warm" : "bg-accent"
                       }`}
                     />
                     <h3

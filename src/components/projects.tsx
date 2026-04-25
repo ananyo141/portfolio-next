@@ -61,9 +61,7 @@ export default function Projects() {
               <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
                 Selected Work
               </h2>
-              <span className="text-accent hidden font-mono text-sm md:block">
-                01
-              </span>
+              <span className="text-accent hidden font-mono text-sm md:block">01</span>
             </div>
           </StaggerItem>
 
@@ -103,7 +101,7 @@ export default function Projects() {
                       {featured.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
+                          className="bg-accent-warm-light text-accent-warm rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
                         >
                           {tag}
                         </span>
@@ -156,31 +154,29 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className="block cursor-pointer"
                   >
-                  <div className="bg-surface border-border-subtle mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg border p-2 shadow-sm">
-                    <div className="relative h-full w-full overflow-hidden rounded">
-                      {project.image ? (
-                        <Image
-                          src={project.image}
-                          alt={project.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-text-muted font-mono text-sm">
-                            Screenshot
-                          </span>
-                        </div>
-                      )}
+                    <div className="bg-surface border-border-subtle mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg border p-2 shadow-sm">
+                      <div className="relative h-full w-full overflow-hidden rounded">
+                        {project.image ? (
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover"
+                            sizes="(max-width: 768px) 100vw, 50vw"
+                          />
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-text-muted font-mono text-sm">Screenshot</span>
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
                   </a>
                   <div className="mb-2 flex gap-3">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
+                        className="bg-accent-warm-light text-accent-warm rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
                       >
                         {tag}
                       </span>

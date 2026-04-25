@@ -29,7 +29,7 @@ export default function Experience() {
                       }`}
                     />
                     {index !== experiences.length - 1 && (
-                      <div className="mt-1 h-full min-h-[60px] w-px bg-border-subtle" />
+                      <div className="bg-border-subtle mt-1 h-full min-h-[60px] w-px" />
                     )}
                   </div>
 
@@ -39,7 +39,7 @@ export default function Experience() {
                         {exp.company}
                       </h3>
                       {exp.current && (
-                        <span className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs font-semibold">
+                        <span className="bg-accent-warm-light text-accent-warm rounded-full px-2.5 py-0.5 font-mono text-xs font-semibold">
                           Currently
                         </span>
                       )}

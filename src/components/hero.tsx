@@ -47,10 +47,10 @@ export default function Hero() {
           className="text-text-primary mb-8 max-w-4xl font-serif text-5xl leading-[1.1] font-bold tracking-tight md:text-7xl lg:text-8xl"
         >
           Building systems that{" "}
-          <span className="relative inline-block">
+          <span className="text-accent-warm relative inline-block">
             <span className="relative z-10">outlast the hype</span>
             <span
-              className="absolute -bottom-1 left-[-2%] -z-0 h-[0.4em] w-[104%] rounded-sm bg-[#7c3aed]/25 md:-bottom-2"
+              className="bg-accent-warm/20 absolute -bottom-1 left-[-2%] -z-0 h-[0.4em] w-[104%] rounded-sm md:-bottom-2"
               style={{ transform: "rotate(-1.5deg)" }}
               aria-hidden="true"
             />
