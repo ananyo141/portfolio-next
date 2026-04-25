@@ -45,10 +45,12 @@ export default function Hero() {
         transition={{ delay: 1.2, duration: 1 }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <motion.div
+        <motion.button
+          onClick={() => document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })}
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="text-text-muted"
+          className="text-text-muted hover:text-accent cursor-pointer transition-colors"
+          aria-label="Scroll to projects"
         >
           <svg
             width="24"
@@ -62,7 +64,7 @@ export default function Hero() {
           >
             <path d="M12 5v14M19 12l-7 7-7-7" />
           </svg>
-        </motion.div>
+        </motion.button>
       </motion.div>
     </section>
   );

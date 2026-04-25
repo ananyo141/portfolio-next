@@ -23,7 +23,7 @@ export default function Skills() {
                     />
                     <h3
                       className={`font-serif text-xl font-bold md:text-2xl ${
-                        category.highlight ? "text-accent" : "text-text-primary"
+                        category.highlight ? "text-text-primary" : "text-text-primary"
                       }`}
                     >
                       {category.category}
