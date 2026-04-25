@@ -64,7 +64,7 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
           className="text-text-muted max-w-xl text-lg leading-relaxed"
         >
-          <p className="mb-2">
+          <div className="mb-2">
             Senior software engineer focused on{" "}
             {mounted && (
               <span className="text-accent inline-block min-w-[180px] font-mono text-sm">
@@ -85,7 +85,7 @@ export default function Hero() {
                 />
               </span>
             )}
-          </p>
+          </div>
           <p>and the long game of building things that last.</p>
         </motion.div>
       </div>

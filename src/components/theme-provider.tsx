@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useCallback } from "react";
+import { createContext, useContext, useCallback, useState, useEffect } from "react";
 
 type Theme = "light" | "dark";
 
@@ -14,29 +14,35 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleTheme: () => {},
 });
 
+function getInitialTheme(): Theme {
+  if (typeof window === "undefined") return "light";
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>("light");
+
+  useEffect(() => {
+    setTheme(getInitialTheme());
+  }, []);
+
   const toggleTheme = useCallback(() => {
     const html = document.documentElement;
     const isDark = html.classList.contains("dark");
+    const nextTheme = isDark ? "light" : "dark";
+
     if (isDark) {
       html.classList.remove("dark");
-      localStorage.setItem("theme", "light");
     } else {
       html.classList.add("dark");
-      localStorage.setItem("theme", "dark");
     }
+    localStorage.setItem("theme", nextTheme);
+    setTheme(nextTheme);
     // Dispatch storage event so other tabs update
     window.dispatchEvent(new StorageEvent("storage", { key: "theme" }));
   }, []);
 
-  const isDark =
-    typeof window !== "undefined" && document.documentElement.classList.contains("dark");
-
-  return (
-    <ThemeContext.Provider value={{ theme: isDark ? "dark" : "light", toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>;
 }
 
 export function useTheme() {
