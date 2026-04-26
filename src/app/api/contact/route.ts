@@ -41,7 +41,7 @@ export async function POST(req: NextRequest) {
       email,
       message,
       subject: "Woohoo! Thanks for Reaching Out!",
-      html: render(
+      html: await render(
         ContactFeedbackMail({
           username: name,
           userPhone: phone ? phone : "No phone provided",
