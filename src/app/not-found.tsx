@@ -11,7 +11,7 @@ export const metadata = {
 
 const Page404 = () => {
   return (
-    <div className="flex bg-blue-950 flex-col items-center py-8 justify-center ">
+    <div className="flex flex-col items-center justify-center bg-blue-950 py-8">
       <Image className="block pt-32" src={notFoundImg} alt="404" />
       <Image className="block" src={brokenSocket} alt="broken link" />
     </div>
