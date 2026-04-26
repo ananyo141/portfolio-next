@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getPosts } from "@src/network/cmsHandlers";
 import { calculateReadingTime, formatDate, getExcerptFromPortableText } from "@lib/utils";
+import { Calendar, Clock } from "@assets/icons";
 import { StaggerContainer, StaggerItem } from "@components/motion-wrapper";
 
 export default async function BlogList() {
@@ -20,9 +21,15 @@ export default async function BlogList() {
                   {post.title}
                 </h2>
                 <div className="text-text-muted mt-2 flex items-center gap-3 font-mono text-xs">
-                  <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-                  <span>·</span>
-                  <span className="text-accent-warm">{readTime} min read</span>
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="opacity-60" size={12} />
+                    <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+                  </span>
+                  <span className="opacity-40">·</span>
+                  <span className="text-accent-warm flex items-center gap-1.5">
+                    <Clock size={12} />
+                    {readTime} min read
+                  </span>
                 </div>
                 <p className="text-text-muted mt-3 max-w-2xl text-base leading-relaxed">
                   {excerpt}

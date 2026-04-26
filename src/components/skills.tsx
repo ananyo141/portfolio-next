@@ -1,6 +1,14 @@
 import skillCategories from "@data/skills.json";
 import type { SkillCategory } from "@data/types";
+import { CodeBrackets, GridFour, Server, Sparkles } from "@assets/icons";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
+
+const categoryIcons: Record<string, React.ReactNode> = {
+  Languages: <CodeBrackets size={16} />,
+  Frameworks: <GridFour size={16} />,
+  Infrastructure: <Server size={16} />,
+  "Currently Exploring": <Sparkles size={16} />,
+};
 
 export default function Skills() {
   return (
@@ -26,12 +34,14 @@ export default function Skills() {
                 >
                   <div className="flex min-w-[200px] items-center gap-3">
                     <div
-                      className={`h-2.5 w-2.5 rounded-full ring-2 ring-offset-2 ring-offset-[var(--color-bg-primary)] transition-all duration-300 ${
+                      className={`flex h-8 w-8 items-center justify-center rounded-lg transition-all duration-300 ${
                         category.highlight
-                          ? "bg-accent-warm ring-accent-warm/30"
-                          : "bg-accent ring-accent/20 group-hover:ring-accent/40"
+                          ? "bg-accent-warm/15 text-accent-warm"
+                          : "bg-accent/10 text-accent"
                       }`}
-                    />
+                    >
+                      {categoryIcons[category.category]}
+                    </div>
                     <h3
                       className={`font-serif text-xl font-bold transition-colors duration-300 md:text-2xl ${
                         category.highlight ? "text-accent-warm" : "text-text-primary"

@@ -8,6 +8,7 @@ import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { urlForImage } from "@/sanity/lib/image";
 import { formatDate, calculateReadingTime } from "@lib/utils";
+import { Calendar, Clock } from "@assets/icons";
 
 interface BlogPostProps {
   post: any;
@@ -96,9 +97,15 @@ export default function BlogPost({ post }: BlogPostProps) {
       <header>
         <h1 className="text-accent-warm font-serif text-3xl font-bold md:text-5xl">{post.title}</h1>
         <div className="text-text-muted mt-4 flex items-center gap-3 font-mono text-xs">
-          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-          <span>·</span>
-          <span>{readTime} min read</span>
+          <span className="flex items-center gap-1.5">
+            <Calendar className="opacity-60" size={12} />
+            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+          </span>
+          <span className="opacity-40">·</span>
+          <span className="flex items-center gap-1.5">
+            <Clock className="opacity-60" size={12} />
+            {readTime} min read
+          </span>
         </div>
         {post.tags?.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
