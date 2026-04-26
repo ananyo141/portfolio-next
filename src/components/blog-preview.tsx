@@ -27,17 +27,13 @@ export default async function BlogPreview() {
               return (
                 <StaggerItem key={post._id || post.slug?.current}>
                   <Link href={`/blog/${post.slug?.current}`} className="group block cursor-pointer">
-                    <h3 className="text-text-primary group-hover:text-accent font-serif text-xl font-bold transition-colors md:text-2xl">
-                      <span className="from-accent to-accent bg-gradient-to-r bg-[length:0%_2px] bg-left-bottom bg-no-repeat transition-all duration-300 group-hover:bg-[length:100%_2px]">
-                        {post.title}
-                      </span>
+                    <h3 className="text-text-primary group-hover:text-accent-warm font-serif text-xl font-bold transition-colors md:text-2xl">
+                      {post.title}
                     </h3>
                     <div className="text-text-muted mt-2 flex items-center gap-3 font-mono text-xs">
                       <span>{formatDate(post.publishedAt)}</span>
                       <span className="text-border-subtle">·</span>
-                      <span className="bg-accent-warm rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-white uppercase">
-                        {readTime} min read
-                      </span>
+                      <span className="text-accent-warm">{readTime} min read</span>
                     </div>
                     <p className="text-text-muted mt-2 line-clamp-2 text-sm leading-relaxed">
                       {excerpt}

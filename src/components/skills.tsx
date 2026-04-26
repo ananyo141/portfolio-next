@@ -34,9 +34,7 @@ export default function Skills() {
                     />
                     <h3
                       className={`font-serif text-xl font-bold transition-colors duration-300 md:text-2xl ${
-                        category.highlight
-                          ? "text-accent-warm"
-                          : "text-text-primary group-hover:text-accent"
+                        category.highlight ? "text-accent-warm" : "text-text-primary"
                       }`}
                     >
                       {category.category}

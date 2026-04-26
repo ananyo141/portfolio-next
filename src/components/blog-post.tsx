@@ -46,6 +46,11 @@ const PortableTextComponents = {
     ),
   },
   block: {
+    h1: ({ children }: { children?: React.ReactNode }) => (
+      <h2 className="text-text-primary mt-10 mb-4 font-serif text-2xl font-bold md:text-3xl">
+        {children}
+      </h2>
+    ),
     h2: ({ children }: { children?: React.ReactNode }) => (
       <h2 className="text-text-primary mt-10 mb-4 font-serif text-2xl font-bold md:text-3xl">
         {children}
@@ -89,9 +94,7 @@ export default function BlogPost({ post }: BlogPostProps) {
   return (
     <article className="mx-auto max-w-3xl">
       <header>
-        <h1 className="text-text-primary font-serif text-3xl font-bold md:text-5xl">
-          {post.title}
-        </h1>
+        <h1 className="text-accent-warm font-serif text-3xl font-bold md:text-5xl">{post.title}</h1>
         <div className="text-text-muted mt-4 flex items-center gap-3 font-mono text-xs">
           <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
           <span>·</span>
@@ -118,7 +121,7 @@ export default function BlogPost({ post }: BlogPostProps) {
       <div className="border-border-subtle mt-16 border-t pt-8">
         <Link
           href="/blog"
-          className="text-text-primary hover:text-accent cursor-pointer font-mono text-sm underline underline-offset-4 transition-colors"
+          className="text-text-primary hover:text-accent-warm cursor-pointer font-mono text-sm underline underline-offset-4 transition-colors"
         >
           ← Back to writing
         </Link>

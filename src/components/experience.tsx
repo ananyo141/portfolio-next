@@ -44,7 +44,7 @@ export default function Experience() {
                         {exp.company}
                       </h3>
                       {exp.current && (
-                        <span className="bg-accent-warm rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-white uppercase">
+                        <span className="text-accent-warm border-accent-warm rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider">
                           Currently
                         </span>
                       )}
