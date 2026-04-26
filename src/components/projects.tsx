@@ -19,9 +19,12 @@ function ProjectLinks({
           href={github}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-text-primary hover:text-accent cursor-pointer text-sm transition-colors"
+          className="group/link bg-accent-warm hover:bg-accent-warm/90 inline-flex cursor-pointer items-center gap-1 rounded-full px-3 py-1 font-mono text-xs font-medium text-white transition-all"
         >
-          GitHub →
+          GitHub
+          <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
+            →
+          </span>
         </Link>
       )}
       {live && (
@@ -29,9 +32,12 @@ function ProjectLinks({
           href={live}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-text-primary hover:text-accent cursor-pointer text-sm transition-colors"
+          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-sm transition-colors"
         >
-          Live →
+          Live
+          <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
+            →
+          </span>
         </Link>
       )}
       {youtube && (
@@ -39,9 +45,12 @@ function ProjectLinks({
           href={youtube}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-text-primary hover:text-accent cursor-pointer text-sm transition-colors"
+          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-sm transition-colors"
         >
-          Video →
+          Video
+          <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
+            →
+          </span>
         </Link>
       )}
     </div>
@@ -61,7 +70,7 @@ export default function Projects() {
               <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
                 Selected Work
               </h2>
-              <span className="text-accent hidden font-mono text-sm md:block">01</span>
+              <span className="text-accent-warm hidden font-mono text-sm md:block">01</span>
             </div>
           </StaggerItem>
 
@@ -75,13 +84,15 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="block cursor-pointer"
                 >
-                  <div className="bg-surface border-border-subtle mb-6 aspect-[2/1] w-full overflow-hidden rounded-lg border p-2 shadow-sm">
+                  <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-6 aspect-[2/1] w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl">
                     <div className="relative h-full w-full overflow-hidden rounded">
                       {featured.image ? (
                         <Image
                           src={featured.image}
                           alt={featured.title}
                           fill
+                          loading="eager"
+                          priority
                           className="object-cover"
                           sizes="(max-width: 1200px) 100vw, 1200px"
                         />
@@ -113,7 +124,7 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="inline-block cursor-pointer"
                     >
-                      <h3 className="text-text-primary group-hover:text-accent mb-3 font-serif text-3xl font-bold transition-colors md:text-4xl">
+                      <h3 className="text-text-primary mb-3 font-serif text-3xl font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)] md:text-4xl">
                         {featured.title}
                       </h3>
                     </a>
@@ -154,7 +165,7 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className="block cursor-pointer"
                   >
-                    <div className="bg-surface border-border-subtle mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg border p-2 shadow-sm">
+                    <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl">
                       <div className="relative h-full w-full overflow-hidden rounded">
                         {project.image ? (
                           <Image
@@ -188,7 +199,7 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className="inline-block cursor-pointer"
                   >
-                    <h3 className="text-text-primary group-hover:text-accent mb-2 font-serif text-2xl font-bold transition-colors">
+                    <h3 className="text-text-primary mb-2 font-serif text-2xl font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]">
                       {project.title}
                     </h3>
                   </a>

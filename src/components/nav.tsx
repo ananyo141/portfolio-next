@@ -78,7 +78,7 @@ export default function Nav() {
           {/* Monogram */}
           <Link
             href="/"
-            className="bg-accent flex h-8 w-8 items-center justify-center rounded-full font-mono text-sm font-bold text-white transition-transform hover:scale-110"
+            className="bg-accent ring-accent/20 hover:ring-accent-warm/40 flex h-9 w-9 items-center justify-center rounded-full font-mono text-sm font-bold text-white ring-2 transition-all duration-300 hover:scale-110"
           >
             A
           </Link>

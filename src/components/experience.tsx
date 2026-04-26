@@ -8,28 +8,33 @@ export default function Experience() {
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <h2 className="text-text-primary font-serif text-3xl font-bold md:text-5xl">
-              Experience
-            </h2>
+            <div className="mb-16 flex items-end justify-between">
+              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
+                Experience
+              </h2>
+              <span className="text-accent-warm hidden font-mono text-sm md:block">02</span>
+            </div>
           </StaggerItem>
 
           <div className="mt-12">
             {experiences.map((exp, index) => (
               <StaggerItem key={exp.company}>
                 <div
-                  className={`relative py-8 pl-6 ${
+                  className={`relative py-8 pl-8 ${
                     index !== experiences.length - 1 ? "border-border-subtle border-b" : ""
                   }`}
                 >
-                  {/* Timeline dot */}
-                  <div className="absolute top-10 left-0 flex flex-col items-center">
+                  {/* Timeline dot + line */}
+                  <div className="absolute top-9 left-0 flex flex-col items-center">
                     <div
-                      className={`h-3 w-3 rounded-full ${
-                        exp.current ? "bg-accent" : "bg-border-subtle"
-                      }`}
+                      className={`h-3 w-3 rounded-full ring-2 ring-offset-2 ring-offset-[var(--color-bg-primary)] ${
+                        exp.current
+                          ? "bg-accent-warm ring-accent-warm/40"
+                          : "bg-border-subtle ring-border-subtle/30"
+                      } transition-all duration-300`}
                     />
                     {index !== experiences.length - 1 && (
-                      <div className="bg-border-subtle mt-1 h-full min-h-[60px] w-px" />
+                      <div className="bg-border-subtle mt-2 h-full min-h-[80px] w-px transition-colors duration-300" />
                     )}
                   </div>
 
@@ -39,7 +44,7 @@ export default function Experience() {
                         {exp.company}
                       </h3>
                       {exp.current && (
-                        <span className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs font-semibold">
+                        <span className="bg-accent-warm rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-white uppercase">
                           Currently
                         </span>
                       )}
@@ -56,7 +61,7 @@ export default function Experience() {
                     {exp.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-bg-cool text-text-muted rounded-full px-2.5 py-0.5 font-mono text-xs"
+                        className="bg-bg-cool text-text-primary hover:bg-accent-light hover:text-accent cursor-default rounded-full px-3 py-1 font-mono text-xs transition-colors"
                       >
                         {tag}
                       </span>

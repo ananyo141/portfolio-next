@@ -40,7 +40,8 @@ html {
 
 /* Smooth dark/light mode transition for all color properties */
 * {
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property:
+    color, background-color, border-color, text-decoration-color, fill, stroke, box-shadow, opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
@@ -82,38 +83,38 @@ body {
 /* Hero gradient mesh background */
 .hero-gradient-mesh {
   background:
-    radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(217, 119, 6, 0.06) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(124, 58, 237, 0.06) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(217, 119, 6, 0.05) 0px, transparent 50%);
+    radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.14) 0px, transparent 55%),
+    radial-gradient(at 80% 0%, rgba(217, 119, 6, 0.1) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+    radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(217, 119, 6, 0.08) 0px, transparent 50%);
   animation: meshMove 20s ease-in-out infinite alternate;
 }
 
 @keyframes meshMove {
   0% {
     background:
-      radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, rgba(217, 119, 6, 0.06) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, rgba(124, 58, 237, 0.06) 0px, transparent 50%),
-      radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(217, 119, 6, 0.05) 0px, transparent 50%);
+      radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.14) 0px, transparent 55%),
+      radial-gradient(at 80% 0%, rgba(217, 119, 6, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+      radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, rgba(217, 119, 6, 0.08) 0px, transparent 50%);
   }
   50% {
     background:
-      radial-gradient(at 60% 30%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-      radial-gradient(at 20% 10%, rgba(217, 119, 6, 0.05) 0px, transparent 50%),
-      radial-gradient(at 80% 60%, rgba(124, 58, 237, 0.07) 0px, transparent 50%),
-      radial-gradient(at 30% 80%, rgba(124, 58, 237, 0.09) 0px, transparent 50%),
-      radial-gradient(at 70% 90%, rgba(217, 119, 6, 0.04) 0px, transparent 50%);
+      radial-gradient(at 60% 30%, rgba(124, 58, 237, 0.16) 0px, transparent 55%),
+      radial-gradient(at 20% 10%, rgba(217, 119, 6, 0.09) 0px, transparent 50%),
+      radial-gradient(at 80% 60%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
+      radial-gradient(at 30% 80%, rgba(124, 58, 237, 0.14) 0px, transparent 50%),
+      radial-gradient(at 70% 90%, rgba(217, 119, 6, 0.07) 0px, transparent 50%);
   }
   100% {
     background:
-      radial-gradient(at 30% 40%, rgba(124, 58, 237, 0.09) 0px, transparent 50%),
-      radial-gradient(at 60% 10%, rgba(217, 119, 6, 0.07) 0px, transparent 50%),
-      radial-gradient(at 90% 40%, rgba(124, 58, 237, 0.08) 0px, transparent 50%),
-      radial-gradient(at 10% 70%, rgba(124, 58, 237, 0.06) 0px, transparent 50%),
-      radial-gradient(at 50% 90%, rgba(217, 119, 6, 0.06) 0px, transparent 50%);
+      radial-gradient(at 30% 40%, rgba(124, 58, 237, 0.15) 0px, transparent 55%),
+      radial-gradient(at 60% 10%, rgba(217, 119, 6, 0.11) 0px, transparent 50%),
+      radial-gradient(at 90% 40%, rgba(124, 58, 237, 0.13) 0px, transparent 50%),
+      radial-gradient(at 10% 70%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
+      radial-gradient(at 50% 90%, rgba(217, 119, 6, 0.09) 0px, transparent 50%);
   }
 }
 

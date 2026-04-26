@@ -12,14 +12,17 @@ export default async function BlogPreview() {
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <h2 className="text-text-primary font-serif text-3xl font-bold md:text-5xl">
-              Latest Writing
-            </h2>
+            <div className="mb-16 flex items-end justify-between">
+              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
+                Latest Writing
+              </h2>
+              <span className="text-accent-warm hidden font-mono text-sm md:block">03</span>
+            </div>
           </StaggerItem>
 
           <div className="mt-12 flex flex-col gap-8">
             {latest.map((post: any) => {
-const readTime = calculateReadingTime(post.body || []);
+              const readTime = calculateReadingTime(post.body || []);
               const excerpt = post.excerpt || getExcerptFromPortableText(post.body || []);
               return (
                 <StaggerItem key={post._id || post.slug?.current}>
@@ -30,9 +33,11 @@ const readTime = calculateReadingTime(post.body || []);
                       </span>
                     </h3>
                     <div className="text-text-muted mt-2 flex items-center gap-3 font-mono text-xs">
-                      <span className="text-accent">{formatDate(post.publishedAt)}</span>
+                      <span>{formatDate(post.publishedAt)}</span>
                       <span className="text-border-subtle">·</span>
-                      <span>{readTime} min read</span>
+                      <span className="bg-accent-warm rounded-full px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-white uppercase">
+                        {readTime} min read
+                      </span>
                     </div>
                     <p className="text-text-muted mt-2 line-clamp-2 text-sm leading-relaxed">
                       {excerpt}
@@ -46,9 +51,12 @@ const readTime = calculateReadingTime(post.body || []);
           <StaggerItem className="mt-10">
             <Link
               href="/blog"
-              className="text-text-primary hover:text-accent cursor-pointer font-mono text-sm underline underline-offset-4 transition-colors"
+              className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 font-mono text-sm underline underline-offset-4 transition-all"
             >
-              View all writing →
+              View all writing
+              <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
+                →
+              </span>
             </Link>
           </StaggerItem>
         </StaggerContainer>

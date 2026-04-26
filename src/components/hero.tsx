@@ -37,7 +37,7 @@ export default function Hero() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           className="text-accent mb-6 font-mono text-sm tracking-widest uppercase"
         >
-          Ananyobrata Pal — Software Engineer
+          Ananyobrata Pal — <span className="text-accent-warm">Software Engineer</span>
         </motion.p>
 
         <motion.h1
@@ -50,8 +50,7 @@ export default function Hero() {
           <span className="text-accent-warm relative inline-block">
             <span className="relative z-10">outlast the hype</span>
             <span
-              className="bg-accent-warm/20 absolute -bottom-1 left-[-2%] -z-0 h-[0.4em] w-[104%] rounded-sm md:-bottom-2"
-              style={{ transform: "rotate(-1.5deg)" }}
+              className="bg-accent-warm absolute -bottom-1 left-0 -z-0 h-[0.6em] w-full -rotate-1 rounded-sm opacity-20"
               aria-hidden="true"
             />
           </span>{" "}
@@ -95,15 +94,18 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2, duration: 1 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 flex-col items-center gap-2"
       >
+        <span className="text-text-muted font-mono text-[10px] tracking-widest uppercase opacity-60">
+          Scroll
+        </span>
         <motion.button
           onClick={() =>
             document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })
           }
           animate={{ y: [0, 8, 0] }}
           transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-          className="text-text-muted hover:text-accent cursor-pointer transition-colors"
+          className="text-text-muted hover:text-accent-warm cursor-pointer transition-colors"
           aria-label="Scroll to projects"
         >
           <svg
