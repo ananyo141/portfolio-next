@@ -16,7 +16,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[75dvh] flex-col justify-center overflow-hidden px-5 pt-24 pb-12 sm:min-h-[calc(100dvh-4rem)] sm:justify-end sm:px-6 sm:pt-20 sm:pb-12 md:px-8 md:pt-24"
+      className="relative flex min-h-[75dvh] flex-col justify-center overflow-hidden px-5 pt-24 pb-12 sm:min-h-[calc(100dvh-4rem)] sm:justify-end sm:px-6 sm:pt-32 sm:pb-16 md:px-8"
     >
       {/* Animated gradient mesh background */}
       <div className="pointer-events-none absolute inset-0 opacity-40">
@@ -47,7 +47,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-text-primary mb-4 max-w-4xl font-serif text-3xl leading-[1.15] font-bold tracking-tight sm:mb-6 sm:text-4xl md:text-5xl lg:text-5xl xl:text-7xl"
+            className="text-text-primary mb-4 max-w-4xl font-serif text-3xl leading-[1.1] font-bold tracking-tight sm:mb-6 sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl"
           >
             Building systems that{" "}
             <span className="text-accent-warm relative inline-block">
@@ -69,7 +69,7 @@ export default function Hero() {
             <div className="mb-2 text-sm sm:text-base">
               Senior software engineer focused on{" "}
               {mounted && (
-                <span className="text-accent inline-block min-w-[120px] font-mono text-xs sm:min-w-[140px]">
+                <span className="text-accent inline-block min-w-[120px] font-mono text-xs sm:min-w-[180px] sm:text-sm">
                   <Typewriter
                     options={{
                       strings: [

@@ -73,7 +73,7 @@ export default function Nav() {
         className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
           scrolled
             ? "bg-bg-primary/90 shadow-sm backdrop-blur-md"
-            : "bg-bg-primary/80 backdrop-blur-sm md:bg-transparent md:shadow-none md:backdrop-blur-none"
+            : "bg-bg-primary/80 backdrop-blur-sm lg:bg-transparent lg:shadow-none lg:backdrop-blur-none"
         }`}
       >
         <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-6 md:px-8 md:py-4">
