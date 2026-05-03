@@ -48,30 +48,30 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-bg-warm px-6 py-20 md:px-8 md:py-32">
+    <section id="contact" className="bg-bg-warm px-5 py-16 sm:px-6 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-4 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl leading-tight font-bold tracking-tight md:text-6xl">
+            <div className="mb-4 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-0">
+              <h2 className="text-text-primary font-serif text-2xl leading-tight font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                 {"Let's think out loud together."}
               </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">05</span>
+              <span className="text-accent-warm hidden font-mono text-sm sm:block">05</span>
             </div>
           </StaggerItem>
 
-          <StaggerItem className="mt-8">
+          <StaggerItem className="mt-6">
             <a
               href={`mailto:${contact.email}`}
-              className="text-text-primary hover:decoration-accent-warm inline-block cursor-pointer font-serif text-2xl underline decoration-transparent underline-offset-8 transition-all md:text-3xl"
+              className="text-text-primary hover:decoration-accent-warm inline-block cursor-pointer font-serif text-base underline decoration-transparent underline-offset-8 transition-all sm:text-lg md:text-2xl lg:text-3xl"
             >
               {contact.email}
             </a>
           </StaggerItem>
 
-          <StaggerItem className="mt-12">
+          <StaggerItem className="mt-8">
             <form onSubmit={handleSubmit} className="max-w-2xl">
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="relative w-full">
                   <User
                     className="text-text-muted absolute top-1/2 left-3.5 -translate-y-1/2 opacity-50"
@@ -84,7 +84,7 @@ export default function Contact() {
                     placeholder="Name"
                     value={form.name}
                     onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
+                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-2 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
                   />
                 </div>
                 <div className="relative w-full">
@@ -99,10 +99,10 @@ export default function Contact() {
                     placeholder="Email"
                     value={form.email}
                     onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
+                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-2 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
                   />
                 </div>
-                <div className="relative w-full md:col-span-2">
+                <div className="relative w-full sm:col-span-2">
                   <Phone
                     className="text-text-muted absolute top-1/2 left-3.5 -translate-y-1/2 opacity-50"
                     size={16}
@@ -113,29 +113,29 @@ export default function Contact() {
                     placeholder="Phone (optional)"
                     value={form.phone}
                     onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
+                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-2 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
                   />
                 </div>
-                <div className="relative w-full md:col-span-2">
+                <div className="relative w-full sm:col-span-2">
                   <MessageSquare
-                    className="text-text-muted absolute top-3.5 left-3.5 opacity-50"
+                    className="text-text-muted absolute top-3 left-3.5 opacity-50 sm:top-3.5"
                     size={16}
                   />
                   <textarea
                     name="message"
                     required
                     placeholder="Your message..."
-                    rows={5}
+                    rows={3}
                     value={form.message}
                     onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full resize-none rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
+                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full resize-none rounded-lg border py-2 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
                   />
                 </div>
               </div>
               <button
                 type="submit"
                 disabled={loading}
-                className="group bg-accent hover:bg-accent-warm hover:shadow-accent-warm/20 relative mt-6 cursor-pointer overflow-hidden rounded-lg px-8 py-3 font-mono text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
+                className="group bg-accent hover:bg-accent-warm hover:shadow-accent-warm/20 relative mt-4 cursor-pointer overflow-hidden rounded-lg px-5 py-2 font-mono text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0 sm:mt-6 sm:px-6 sm:py-2.5 md:px-8 md:py-3"
               >
                 <span className="relative z-10">{loading ? "Sending..." : "Send Message →"}</span>
                 <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
@@ -143,8 +143,8 @@ export default function Contact() {
             </form>
           </StaggerItem>
 
-          <StaggerItem className="mt-10">
-            <div className="flex gap-6">
+          <StaggerItem className="mt-8">
+            <div className="flex gap-5">
               <a
                 href={contact.social.github}
                 target="_blank"

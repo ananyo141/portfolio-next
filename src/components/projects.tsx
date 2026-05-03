@@ -13,13 +13,13 @@ function ProjectLinks({
   youtube?: string;
 }) {
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-4">
       {github && (
         <Link
           href={github}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/link bg-accent-warm hover:bg-accent-warm/90 inline-flex cursor-pointer items-center gap-1 rounded-full px-3 py-1 font-mono text-xs font-medium text-white transition-all"
+          className="group/link bg-accent-warm hover:bg-accent-warm/90 inline-flex cursor-pointer items-center gap-1 rounded-full px-2.5 py-0.5 font-mono text-[10px] font-medium text-white transition-all sm:px-3 sm:py-1 sm:text-xs"
         >
           GitHub
           <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
@@ -32,7 +32,7 @@ function ProjectLinks({
           href={live}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-sm transition-colors"
+          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-xs transition-colors sm:text-sm"
         >
           Live
           <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
@@ -45,7 +45,7 @@ function ProjectLinks({
           href={youtube}
           target="_blank"
           rel="noopener noreferrer"
-          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-sm transition-colors"
+          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-xs transition-colors sm:text-sm"
         >
           Video
           <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
@@ -62,21 +62,21 @@ export default function Projects() {
   const regular = projects.filter((p) => !p.featured);
 
   return (
-    <section id="projects" className="px-6 py-20 md:px-8 md:py-32">
+    <section id="projects" className="px-5 py-16 sm:px-6 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-16 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
+            <div className="mb-8 flex flex-col gap-2 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-0">
+              <h2 className="text-text-primary font-serif text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                 Selected Work
               </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">01</span>
+              <span className="text-accent-warm hidden font-mono text-sm sm:block">01</span>
             </div>
           </StaggerItem>
 
           {/* Featured project */}
           {featured && (
-            <StaggerItem className="mb-16">
+            <StaggerItem className="mb-12">
               <div className="group">
                 <a
                   href={featured.github || featured.live || "#"}
@@ -84,7 +84,7 @@ export default function Projects() {
                   rel="noopener noreferrer"
                   className="block cursor-pointer"
                 >
-                  <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-6 aspect-[2/1] w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl">
+                  <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-6 aspect-video w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl md:aspect-[2/1]">
                     <div className="relative h-full w-full overflow-hidden rounded">
                       {featured.image ? (
                         <Image
@@ -94,7 +94,7 @@ export default function Projects() {
                           loading="eager"
                           priority
                           className="object-cover"
-                          sizes="(max-width: 1200px) 100vw, 1200px"
+                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1200px"
                         />
                       ) : (
                         <div className="absolute inset-0 flex items-center justify-center">
@@ -106,13 +106,13 @@ export default function Projects() {
                     </div>
                   </div>
                 </a>
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="flex flex-col gap-4">
                   <div className="max-w-2xl">
-                    <div className="mb-3 flex gap-3">
+                    <div className="mb-3 flex flex-wrap gap-2">
                       {featured.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
+                          className="bg-accent-light text-accent rounded-full px-2 py-0.5 font-mono text-[10px] tracking-wider uppercase sm:px-2.5 sm:text-xs"
                         >
                           {tag}
                         </span>
@@ -124,20 +124,20 @@ export default function Projects() {
                       rel="noopener noreferrer"
                       className="inline-block cursor-pointer"
                     >
-                      <h3 className="text-text-primary mb-3 font-serif text-3xl font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)] md:text-4xl">
+                      <h3 className="text-text-primary mb-2 font-serif text-lg font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)] sm:mb-3 sm:text-xl md:text-2xl lg:text-3xl">
                         {featured.title}
                       </h3>
                     </a>
-                    <p className="text-text-muted text-lg leading-relaxed">
+                    <p className="text-text-muted text-sm leading-relaxed sm:text-base">
                       {featured.description}
                     </p>
                   </div>
-                  <div className="flex flex-col gap-3 md:items-end">
+                  <div className="flex flex-col gap-3">
                     <div className="flex flex-wrap gap-2">
                       {featured.tech.map((t) => (
                         <span
                           key={t}
-                          className="bg-bg-cool text-text-primary rounded-full px-3 py-1 font-mono text-xs"
+                          className="bg-bg-cool text-text-primary rounded-full px-2 py-0.5 font-mono text-[10px] sm:px-3 sm:py-1 sm:text-xs"
                         >
                           {t}
                         </span>
@@ -155,7 +155,7 @@ export default function Projects() {
           )}
 
           {/* Regular projects grid */}
-          <div className="grid gap-8 md:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2">
             {regular.map((project) => (
               <StaggerItem key={project.id}>
                 <div className="group">
@@ -165,7 +165,7 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className="block cursor-pointer"
                   >
-                    <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl">
+                    <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-4 aspect-video w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl sm:aspect-[3/2]">
                       <div className="relative h-full w-full overflow-hidden rounded">
                         {project.image ? (
                           <Image
@@ -183,11 +183,11 @@ export default function Projects() {
                       </div>
                     </div>
                   </a>
-                  <div className="mb-2 flex gap-3">
+                  <div className="mb-2 flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
+                        className="bg-accent-light text-accent rounded-full px-2 py-0.5 font-mono text-[10px] tracking-wider uppercase sm:px-2.5 sm:text-xs"
                       >
                         {tag}
                       </span>
@@ -199,18 +199,18 @@ export default function Projects() {
                     rel="noopener noreferrer"
                     className="inline-block cursor-pointer"
                   >
-                    <h3 className="text-text-primary mb-2 font-serif text-2xl font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]">
+                    <h3 className="text-text-primary mb-1 font-serif text-base font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)] sm:mb-2 sm:text-lg md:text-xl">
                       {project.title}
                     </h3>
                   </a>
-                  <p className="text-text-muted mb-4 text-base leading-relaxed">
+                  <p className="text-text-muted mb-4 text-sm leading-relaxed sm:text-base">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="bg-bg-cool text-text-primary rounded-full px-3 py-1 font-mono text-xs"
+                        className="bg-bg-cool text-text-primary rounded-full px-2 py-0.5 font-mono text-[10px] sm:px-3 sm:py-1 sm:text-xs"
                       >
                         {t}
                       </span>
