@@ -12,29 +12,29 @@ const categoryIcons: Record<string, React.ReactNode> = {
 
 export default function Skills() {
   return (
-    <section id="skills" className="px-6 py-20 md:px-8 md:py-32">
+    <section id="skills" className="px-5 py-16 sm:px-6 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-16 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
+            <div className="mb-8 flex flex-col gap-2 sm:mb-12 sm:flex-row sm:items-end sm:justify-between sm:gap-0">
+              <h2 className="text-text-primary font-serif text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl">
                 Skills
               </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">04</span>
+              <span className="text-accent-warm hidden font-mono text-sm sm:block">04</span>
             </div>
           </StaggerItem>
 
-          <div className="mt-12 flex flex-col">
+          <div className="mt-8 flex flex-col">
             {skillCategories.map((category, index) => (
               <StaggerItem key={category.category}>
                 <div
-                  className={`group flex flex-col gap-3 py-6 md:flex-row md:items-baseline md:gap-12 ${
+                  className={`group flex flex-col gap-3 py-5 sm:py-6 ${
                     index !== skillCategories.length - 1 ? "border-border-subtle border-b" : ""
                   }`}
                 >
-                  <div className="flex min-w-[200px] items-center gap-3">
+                  <div className="flex min-w-0 items-center gap-2 sm:gap-3">
                     <div
-                      className={`flex h-8 w-8 items-center justify-center rounded-lg transition-all duration-300 ${
+                      className={`flex h-6 w-6 items-center justify-center rounded-lg transition-all duration-300 sm:h-7 sm:w-7 md:h-8 md:w-8 ${
                         category.highlight
                           ? "bg-accent-warm/15 text-accent-warm"
                           : "bg-accent/10 text-accent"
@@ -43,25 +43,25 @@ export default function Skills() {
                       {categoryIcons[category.category]}
                     </div>
                     <h3
-                      className={`font-serif text-xl font-bold transition-colors duration-300 md:text-2xl ${
+                      className={`font-serif text-sm font-bold sm:text-base md:text-lg lg:text-xl ${
                         category.highlight ? "text-accent-warm" : "text-text-primary"
                       }`}
                     >
                       {category.category}
                     </h3>
                   </div>
-                  <p className="text-text-muted text-base leading-relaxed">
+                  <div className="text-text-muted flex flex-wrap items-center gap-x-1.5 gap-y-1 text-sm leading-relaxed sm:gap-x-2 sm:gap-y-1.5 sm:text-base">
                     {category.items.map((item, i) => (
-                      <span key={item}>
+                      <span key={item} className="flex items-center">
                         <span className="text-text-primary hover:text-accent-warm cursor-default font-medium transition-colors duration-200">
                           {item}
                         </span>
                         {i < category.items.length - 1 && (
-                          <span className="text-border-subtle mx-2">·</span>
+                          <span className="text-border-subtle ml-1.5 sm:ml-2">·</span>
                         )}
                       </span>
                     ))}
-                  </p>
+                  </div>
                 </div>
               </StaggerItem>
             ))}

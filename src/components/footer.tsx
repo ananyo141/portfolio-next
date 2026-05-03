@@ -6,8 +6,8 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-accent-warm/40 border-t-2 px-6 py-12 md:px-8">
-      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 md:flex-row">
+    <footer className="border-accent-warm/40 border-t-2 px-5 py-10 sm:px-6 md:px-8 md:py-12">
+      <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 md:flex-row">
         <div className="flex flex-col items-center gap-2 md:items-start">
           <p className="text-text-muted font-mono text-xs">
             © {year} {site.name}
@@ -17,7 +17,7 @@ export default function Footer() {
           </p>
         </div>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-5">
           <a
             href={contact.social.github}
             target="_blank"

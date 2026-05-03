@@ -71,10 +71,12 @@ export default function Nav() {
 
       <nav
         className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
-          scrolled ? "bg-bg-primary/90 shadow-sm backdrop-blur-md" : "bg-transparent"
+          scrolled
+            ? "bg-bg-primary/90 shadow-sm backdrop-blur-md"
+            : "bg-bg-primary/80 backdrop-blur-sm md:bg-transparent md:shadow-none md:backdrop-blur-none"
         }`}
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-3 sm:px-6 md:px-8 md:py-4">
           {/* Monogram */}
           <Link
             href="/"
@@ -148,7 +150,7 @@ export default function Nav() {
               key={item.href}
               href={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="text-text-primary hover:text-accent cursor-pointer font-serif text-4xl transition-colors"
+              className="text-text-primary hover:text-accent cursor-pointer font-serif text-2xl transition-colors sm:text-3xl"
             >
               {item.label}
             </a>

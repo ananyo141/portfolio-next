@@ -36,6 +36,11 @@ html.dark {
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 /* Smooth dark/light mode transition for all color properties */
