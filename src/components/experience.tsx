@@ -1,71 +1,63 @@
 import experiences from "@data/experience.json";
-import type { Experience } from "@data/types";
+import Eyebrow from "@components/eyebrow";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 export default function Experience() {
   return (
-    <section id="work" className="px-6 py-20 md:px-8 md:py-32">
+    <section id="work" className="bg-bg-deep px-6 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-16 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
-                Experience
-              </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">02</span>
+            <div className="mb-14 grid items-end gap-10 md:grid-cols-[1.3fr_1fr]">
+              <div>
+                <Eyebrow>Experience</Eyebrow>
+                <h2 className="text-text-primary mt-5 font-serif text-4xl leading-[1.02] font-[440] tracking-[-0.015em] md:text-5xl">
+                  Where I&apos;ve <em className="text-text-muted italic">built</em>.
+                </h2>
+              </div>
+              <p className="text-text-muted text-[15px] leading-relaxed">
+                Backend and full-stack roles across distributed teams — from legacy migrations to
+                scalable platforms.
+              </p>
             </div>
           </StaggerItem>
 
-          <div className="mt-12">
+          <div>
             {experiences.map((exp, index) => (
               <StaggerItem key={exp.company}>
                 <div
-                  className={`relative py-8 pl-8 ${
+                  className={`grid gap-4 py-8 md:grid-cols-[200px_1fr] ${
                     index !== experiences.length - 1 ? "border-border-subtle border-b" : ""
                   }`}
                 >
-                  {/* Timeline dot + line */}
-                  <div className="absolute top-9 left-0 flex flex-col items-center">
-                    <div
-                      className={`h-3 w-3 rounded-full ring-2 ring-offset-2 ring-offset-[var(--color-bg-primary)] ${
-                        exp.current
-                          ? "bg-accent-warm ring-accent-warm/40"
-                          : "bg-border-subtle ring-border-subtle/30"
-                      } transition-all duration-300`}
-                    />
-                    {index !== experiences.length - 1 && (
-                      <div className="bg-border-subtle mt-2 h-full min-h-[80px] w-px transition-colors duration-300" />
+                  <div>
+                    <p className="text-text-muted font-mono text-xs tracking-[0.08em]">
+                      {exp.period}
+                    </p>
+                    {exp.current && (
+                      <span className="text-accent border-accent/50 mt-2 inline-block rounded-full border px-2.5 py-0.5 font-mono text-[10px] tracking-wider">
+                        Current
+                      </span>
                     )}
                   </div>
-
-                  <div className="flex flex-col gap-2 md:flex-row md:items-baseline md:justify-between">
-                    <div className="flex items-center gap-3">
-                      <h3 className="text-text-primary font-serif text-xl font-bold md:text-2xl">
-                        {exp.company}
-                      </h3>
-                      {exp.current && (
-                        <span className="text-accent-warm border-accent-warm rounded-full border px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider">
-                          Currently
+                  <div>
+                    <h3 className="text-text-primary font-serif text-2xl font-[440]">
+                      {exp.role}
+                      <span className="text-text-muted"> · {exp.company}</span>
+                    </h3>
+                    <p className="text-text-muted mt-3 max-w-3xl text-[15px] leading-relaxed">
+                      {exp.description}
+                    </p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {exp.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="border-border-subtle text-text-muted rounded-md border px-2.5 py-1 font-mono text-[10.5px]"
+                        >
+                          {tag}
                         </span>
-                      )}
+                      ))}
                     </div>
-                    <div className="text-right md:text-right">
-                      <p className="text-text-primary text-sm font-medium">{exp.role}</p>
-                      <p className="text-text-muted font-mono text-xs">{exp.period}</p>
-                    </div>
-                  </div>
-                  <p className="text-text-muted mt-4 max-w-3xl text-base leading-relaxed">
-                    {exp.description}
-                  </p>
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {exp.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-bg-cool text-text-primary hover:bg-accent-light hover:text-accent cursor-default rounded-full px-3 py-1 font-mono text-xs transition-colors"
-                      >
-                        {tag}
-                      </span>
-                    ))}
                   </div>
                 </div>
               </StaggerItem>
