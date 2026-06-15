@@ -73,11 +73,6 @@ body {
   color: white;
 }
 
-/* Typewriter cursor */
-.Typewriter__cursor {
-  color: var(--color-accent) !important;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

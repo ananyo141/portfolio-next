@@ -55,7 +55,10 @@ export default function Nav() {
 
     const el = document.querySelector(href);
     if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth";
+      el.scrollIntoView({ behavior });
     }
   };
 
