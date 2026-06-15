@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter, JetBrains_Mono } from "next/font/google";
+import { Bodoni_Moda, Geist, Geist_Mono, Caveat } from "next/font/google";
 import { ToastContainer } from "react-toastify";
 
 import "./globals.css";
@@ -10,21 +10,28 @@ import { ThemeProvider } from "@components/theme-provider";
 import { ThemeScript } from "@components/theme-script";
 import site from "@data/site.json";
 
-const playfair = Playfair_Display({
+const bodoni = Bodoni_Moda({
   subsets: ["latin"],
-  variable: "--font-playfair",
+  variable: "--font-bodoni",
   display: "swap",
 });
 
-const inter = Inter({
+const geist = Geist({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-geist",
   display: "swap",
 });
 
-const jetbrains = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ["latin"],
-  variable: "--font-jetbrains",
+  variable: "--font-geist-mono",
+  display: "swap",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-caveat",
   display: "swap",
 });
 
@@ -47,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${playfair.variable} ${inter.variable} ${jetbrains.variable}`}
+      className={`${bodoni.variable} ${geist.variable} ${geistMono.variable} ${caveat.variable}`}
     >
       <head>
         <ThemeScript />

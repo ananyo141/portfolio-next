@@ -21,10 +21,10 @@
   --color-bg-warm: #f1ebe0;
   --color-bg-cool: #efe9dd;
 
-  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Bodoni Moda", ui-serif, Georgia, serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
-  --font-hand: "Caveat", ui-serif, cursive;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-bodoni), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-hand: var(--font-caveat), ui-serif, cursive;
 }
 
 /* dark — warm espresso, dark framed cards */
