@@ -78,9 +78,9 @@ export default function Nav() {
           {/* Monogram */}
           <Link
             href="/"
-            className="bg-accent ring-accent/20 hover:ring-accent-warm/40 flex h-9 w-9 items-center justify-center rounded-full font-mono text-sm font-bold text-white ring-2 transition-all duration-300 hover:scale-110"
+            className="text-text-primary flex items-center gap-2 font-serif text-xl font-semibold tracking-tight"
           >
-            A
+            <span className="text-accent">✦</span> Ananyobrata Pal
           </Link>
 
           {/* Desktop nav */}
@@ -90,10 +90,10 @@ export default function Nav() {
                 key={item.href}
                 href={item.href}
                 onClick={(e) => handleNavClick(e, item.href)}
-                className={`relative cursor-pointer text-sm font-medium transition-colors ${
+                className={`relative cursor-pointer font-mono text-[11px] tracking-[0.14em] uppercase transition-colors ${
                   activeSection === item.href.slice(1)
-                    ? "text-accent after:bg-accent after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-full"
-                    : "text-text-primary hover:text-accent"
+                    ? "text-accent after:bg-accent after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full"
+                    : "text-text-muted hover:text-text-primary"
                 }`}
               >
                 {item.label}
