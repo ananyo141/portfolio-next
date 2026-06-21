@@ -11,7 +11,7 @@
   --color-accent: #e8481f;
   --color-accent-2: #c8521f;
   --color-accent-soft: #f3d9cc;
-  --color-numeral: #e8ddcc;
+  --color-numeral: #c6a57b;
   --color-border-subtle: rgba(22, 20, 18, 0.14);
 
   /* legacy aliases (old components referenced these names) */
@@ -37,7 +37,7 @@ html.dark {
   --color-accent: #df4a1f;
   --color-accent-2: #ff8a64;
   --color-accent-soft: rgba(223, 74, 31, 0.16);
-  --color-numeral: #3a2a1b;
+  --color-numeral: #5b3c28;
   --color-border-subtle: rgba(245, 228, 205, 0.16);
 
   --color-accent-warm: #df4a1f;
