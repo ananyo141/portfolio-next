@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
 import Eyebrow from "@components/eyebrow";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -59,14 +60,12 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: EASE }}
           className="mt-10 flex flex-wrap items-center gap-4"
         >
-          <button
-            onClick={() =>
-              document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })
-            }
+          <Link
+            href="/projects"
             className="bg-accent cursor-pointer rounded-lg px-5 py-3 font-mono text-xs tracking-[0.1em] text-white uppercase shadow-[0_8px_30px_rgba(232,72,31,0.3)] transition-transform hover:-translate-y-0.5"
           >
-            View selected work →
-          </button>
+            Read case studies →
+          </Link>
           <button
             onClick={() =>
               document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })
@@ -74,6 +73,14 @@ export default function Hero() {
             className="border-border-subtle text-text-primary hover:border-accent cursor-pointer rounded-lg border px-5 py-3 font-mono text-xs tracking-[0.06em] transition-colors"
           >
             Get in touch
+          </button>
+          <button
+            onClick={() =>
+              document.querySelector("#projects")?.scrollIntoView({ behavior: "smooth" })
+            }
+            className="text-text-muted hover:text-accent cursor-pointer font-mono text-xs tracking-[0.06em] transition-colors"
+          >
+            Selected work
           </button>
           <span className="text-text-muted flex items-center gap-2 font-mono text-[11px] tracking-[0.1em] uppercase">
             <span className="h-[7px] w-[7px] rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]" />

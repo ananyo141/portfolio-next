@@ -8,6 +8,21 @@
     "github": "https://github.com/code-grader/backend",
     "youtube": "https://youtu.be/CbBZT48CM-U",
     "image": "/projects/code_grader.png",
+    "role": "Backend and developer tooling",
+    "constraint": "Evaluate submitted code asynchronously while keeping feedback understandable for learners.",
+    "highlight": "LLM-backed grading service focused on correctness, complexity, and style feedback.",
+    "evidence": [
+      "FastAPI backend for submission evaluation",
+      "LangChain orchestration around CodeLlama",
+      "Feedback categories for complexity, style, and correctness"
+    ],
+    "caseStudy": true,
+    "archived": false,
+    "result": "A backend repository and walkthrough demonstrate the grading flow end to end.",
+    "tradeoffs": [
+      "Used LLM feedback to make review output more explanatory than static checks alone",
+      "Kept grading concerns in a backend service instead of coupling them to the interface"
+    ],
     "featured": true
   },
   {
@@ -21,6 +36,21 @@
     "demo": "https://vimero.vercel.app/",
     "youtube": "https://youtu.be/DHSdUD67kjY",
     "image": "/projects/vimero_demo.png",
+    "role": "System design and full-stack engineering",
+    "constraint": "Keep video processing asynchronous and retryable while the interface stays responsive.",
+    "highlight": "Service-oriented video platform with queue-backed processing and realtime state.",
+    "evidence": [
+      "RabbitMQ-backed workload separation",
+      "Redis-assisted realtime status updates",
+      "Separate services for upload, processing, and delivery"
+    ],
+    "caseStudy": true,
+    "archived": false,
+    "result": "A deployed demo and walkthrough show the upload, processing, and viewing flow.",
+    "tradeoffs": [
+      "Split services to make scaling boundaries visible",
+      "Used queueing to keep expensive media work out of request paths"
+    ],
     "featured": false
   },
   {
@@ -34,6 +64,21 @@
     "demo": "https://analytics-dashboard-frontend.vercel.app/",
     "youtube": "https://www.youtube.com/watch?v=4kpaeNSYbLI",
     "image": "/projects/analytics_api_project.png",
+    "role": "Backend API and dashboard engineering",
+    "constraint": "Present activity data through a dashboard without making aggregation logic leak into the UI.",
+    "highlight": "Django REST API and Next.js dashboard organized around analytics aggregation.",
+    "evidence": [
+      "Django REST backend for analytics endpoints",
+      "Dashboard frontend for activity and engagement views",
+      "Aggregation-focused data access patterns"
+    ],
+    "caseStudy": true,
+    "archived": false,
+    "result": "A deployed dashboard, repository, and walkthrough demonstrate the analytics workflow.",
+    "tradeoffs": [
+      "Kept aggregation responsibilities server-side to simplify dashboard components",
+      "Used a REST API boundary to separate data shaping from presentation"
+    ],
     "featured": false
   },
   {
@@ -47,6 +92,21 @@
     "demo": "https://api-snappio.onrender.com/docs/swagger/",
     "youtube": "https://www.youtube.com/watch?v=judvqLhOCjs",
     "image": "/projects/snappio_project.png",
+    "role": "Backend and realtime API engineering",
+    "constraint": "Support chat-style realtime updates while preserving durable relational data.",
+    "highlight": "Django Channels backend combining WebSocket messaging, Redis, and PostgreSQL persistence.",
+    "evidence": [
+      "WebSocket messaging through Django Channels",
+      "Redis-backed realtime infrastructure",
+      "PostgreSQL persistence behind REST endpoints"
+    ],
+    "caseStudy": true,
+    "archived": false,
+    "result": "A Swagger deployment, backend repository, and walkthrough document the API surface.",
+    "tradeoffs": [
+      "Used Channels to keep realtime communication in the Django ecosystem",
+      "Paired WebSockets with relational persistence instead of treating chat as transient-only state"
+    ],
     "featured": false
   },
   {
@@ -60,6 +120,7 @@
     "demo": "https://computershop-frontend.vercel.app/",
     "youtube": "https://www.youtube.com/watch?v=1uHAwhE77C0",
     "image": "/projects/computershop_project.png",
+    "archived": true,
     "featured": false
   },
   {
@@ -71,6 +132,7 @@
     "github": "https://github.com/ananyo141/smartshala_frontend",
     "youtube": "https://youtu.be/0cB1Lrw7DwQ",
     "image": "/projects/smartshala_project.jpg",
+    "archived": true,
     "featured": false
   },
   {
@@ -83,6 +145,7 @@
     "live": "https://api-calories-drf.vercel.app",
     "demo": "https://api-calories-drf.vercel.app",
     "image": "/projects/calories_project.png",
+    "archived": true,
     "featured": false
   },
   {
@@ -95,6 +158,7 @@
     "live": "https://cipherschools-profile.vercel.app/",
     "demo": "https://cipherschools-profile.vercel.app/",
     "image": "/projects/cipherschools_project.png",
+    "archived": true,
     "featured": false
   },
   {
@@ -107,6 +171,7 @@
     "live": "https://fabric-whiteboard.onrender.com/",
     "demo": "https://fabric-whiteboard.onrender.com/",
     "image": "/projects/fabric_project.png",
+    "archived": true,
     "featured": false
   },
   {
@@ -119,6 +184,20 @@
     "live": "https://peermessage.vercel.app/",
     "demo": "https://peermessage.vercel.app/",
     "image": "/projects/peermessage_project.png",
+    "role": "Frontend and realtime application engineering",
+    "constraint": "Make direct peer-to-peer communication usable in the browser without routing message content through an application backend.",
+    "highlight": "PeerJS-based messaging and video calling experience built around direct browser connections.",
+    "evidence": [
+      "PeerJS connection flow for peer-to-peer communication",
+      "Messaging and video-calling interface",
+      "Redux-managed client application state"
+    ],
+    "archived": false,
+    "result": "A deployed demo and repository show the peer messaging and calling experience.",
+    "tradeoffs": [
+      "Relied on browser peer connections to avoid a message relay backend",
+      "Kept state client-side, accepting browser connectivity constraints as part of the design"
+    ],
     "featured": false
   },
   {
@@ -131,6 +210,7 @@
     "live": "https://api-jwtposts.onrender.com/api/v1/users/",
     "demo": "https://api-jwtposts.onrender.com/api/v1/users/",
     "image": "/projects/jwtposts_project.png",
+    "archived": true,
     "featured": false
   }
 ]

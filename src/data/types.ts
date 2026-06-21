@@ -9,6 +9,14 @@ export interface Project {
   demo?: string;
   youtube?: string;
   image?: string;
+  role?: string;
+  constraint?: string;
+  highlight?: string;
+  evidence?: string[];
+  caseStudy?: boolean;
+  archived?: boolean;
+  result?: string;
+  tradeoffs?: string[];
   featured: boolean;
 }
 

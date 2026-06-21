@@ -4,6 +4,8 @@ import { calculateReadingTime, formatDate, getExcerptFromPortableText } from "@l
 import Eyebrow from "@components/eyebrow";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
+const topics = ["System Design", "Backend", "Developer Tools", "Debugging", "Operations"];
+
 export default async function BlogPreview() {
   const posts = await getPosts();
   const latest = posts?.slice(0, 3) || [];
@@ -17,12 +19,25 @@ export default async function BlogPreview() {
               <div>
                 <Eyebrow>Writing</Eyebrow>
                 <h2 className="text-text-primary mt-5 font-serif text-4xl leading-[1.02] font-[440] tracking-[-0.015em] md:text-5xl">
-                  Notes on the <em className="text-text-muted italic">craft</em>.
+                  Notes from the <em className="text-text-muted italic">systems edge</em>.
                 </h2>
               </div>
-              <p className="text-text-muted text-[15px] leading-relaxed">
-                Occasional writing on systems, tooling, and lessons from shipping.
-              </p>
+              <div>
+                <p className="text-text-muted text-[15px] leading-relaxed">
+                  Field notes on backend seams, operational pressure, debugging loops, and the
+                  developer tools that make systems easier to reason about.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2" aria-label="Writing topics">
+                  {topics.map((topic) => (
+                    <span
+                      key={topic}
+                      className="border-border-subtle text-text-muted rounded-md border px-2.5 py-1 font-mono text-[10.5px]"
+                    >
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </StaggerItem>
 

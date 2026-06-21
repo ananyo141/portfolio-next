@@ -8,6 +8,7 @@ import Nav from "@components/nav";
 import Footer from "@components/footer";
 import { ThemeProvider } from "@components/theme-provider";
 import { ThemeScript } from "@components/theme-script";
+import contact from "@data/contact.json";
 import site from "@data/site.json";
 
 const bodoni = Bodoni_Moda({
@@ -49,6 +50,22 @@ export const metadata: Metadata = {
   },
 };
 
+const siteUrl = site.domain.replace(/\/$/, "");
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: site.name,
+  url: siteUrl,
+  email: contact.email,
+  sameAs: [contact.social.github, contact.social.linkedin, contact.social.twitter],
+  jobTitle: "Software Engineer",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Kolkata, India",
+  },
+};
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html
@@ -60,6 +77,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeScript />
       </head>
       <body className="font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+          }}
+        />
         <ThemeProvider>
           <Nav />
           <main id="main-content">{children}</main>
