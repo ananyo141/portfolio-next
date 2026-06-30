@@ -2,36 +2,49 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-bg-primary: #f5f5f0;
-  --color-bg-warm: #faf6f0;
-  --color-bg-cool: #f0f4f8;
-  --color-surface: #ffffff;
-  --color-text-primary: #111111;
-  --color-text-muted: #6b7280;
-  --color-accent: #7c3aed;
-  --color-accent-light: #ede9fe;
-  --color-accent-warm: #d97706;
-  --color-accent-warm-light: #fef3c7;
-  --color-border-subtle: #e5e5e0;
+  /* light — cream (default / primary) */
+  --color-bg-primary: #f6f2ea;
+  --color-bg-deep: #efe9dd;
+  --color-surface: #fffdf8;
+  --color-text-primary: #171412;
+  --color-text-muted: #6c645a;
+  --color-accent: #e8481f;
+  --color-accent-2: #c8521f;
+  --color-accent-soft: #f3d9cc;
+  --color-numeral: #c6a57b;
+  --color-border-subtle: rgba(22, 20, 18, 0.14);
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  /* legacy aliases (old components referenced these names) */
+  --color-accent-warm: #e8481f;
+  --color-accent-light: #f3d9cc;
+  --color-accent-warm-light: #f3d9cc;
+  --color-bg-warm: #f1ebe0;
+  --color-bg-cool: #efe9dd;
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-bodoni), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-hand: var(--font-caveat), ui-serif, cursive;
 }
 
-/* Dark mode overrides */
+/* dark — warm espresso, dark framed cards */
 html.dark {
-  --color-bg-primary: #111111;
-  --color-bg-warm: #1a1a1a;
-  --color-bg-cool: #1e293b;
-  --color-surface: #1a1a1a;
-  --color-text-primary: #f5f5f0;
-  --color-text-muted: #9ca3af;
-  --color-accent: #a78bfa;
-  --color-accent-light: #4c1d95;
-  --color-accent-warm: #f59e0b;
-  --color-accent-warm-light: #78350f;
-  --color-border-subtle: #333333;
+  --color-bg-primary: #1b140d;
+  --color-bg-deep: #120c07;
+  --color-surface: #140e08;
+  --color-text-primary: #f3ece0;
+  --color-text-muted: #a99a86;
+  --color-accent: #df4a1f;
+  --color-accent-2: #ff8a64;
+  --color-accent-soft: rgba(223, 74, 31, 0.16);
+  --color-numeral: #5b3c28;
+  --color-border-subtle: rgba(245, 228, 205, 0.16);
+
+  --color-accent-warm: #df4a1f;
+  --color-accent-light: rgba(223, 74, 31, 0.16);
+  --color-accent-warm-light: rgba(223, 74, 31, 0.16);
+  --color-bg-warm: #1f180f;
+  --color-bg-cool: #221a11;
 }
 
 html {
@@ -60,11 +73,6 @@ body {
   color: white;
 }
 
-/* Typewriter cursor */
-.Typewriter__cursor {
-  color: var(--color-accent) !important;
-}
-
 /* Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
@@ -80,42 +88,29 @@ body {
   background: var(--color-text-muted);
 }
 
-/* Hero gradient mesh background */
-.hero-gradient-mesh {
+/* Hero warm radial wash */
+.hero-wash {
   background:
-    radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.14) 0px, transparent 55%),
-    radial-gradient(at 80% 0%, rgba(217, 119, 6, 0.1) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-    radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
-    radial-gradient(at 0% 100%, rgba(217, 119, 6, 0.08) 0px, transparent 50%);
-  animation: meshMove 20s ease-in-out infinite alternate;
+    radial-gradient(70% 60% at 22% 4%, var(--color-accent-soft) 0%, transparent 55%),
+    radial-gradient(
+      50% 60% at 88% 24%,
+      color-mix(in srgb, var(--color-accent) 8%, transparent) 0%,
+      transparent 55%
+    );
+}
+html.dark .hero-wash {
+  background:
+    radial-gradient(80% 70% at 25% 0%, #3a2a1b 0%, transparent 55%),
+    radial-gradient(60% 60% at 90% 20%, rgba(223, 74, 31, 0.12), transparent 55%);
 }
 
-@keyframes meshMove {
-  0% {
-    background:
-      radial-gradient(at 40% 20%, rgba(124, 58, 237, 0.14) 0px, transparent 55%),
-      radial-gradient(at 80% 0%, rgba(217, 119, 6, 0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-      radial-gradient(at 80% 50%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, rgba(217, 119, 6, 0.08) 0px, transparent 50%);
-  }
-  50% {
-    background:
-      radial-gradient(at 60% 30%, rgba(124, 58, 237, 0.16) 0px, transparent 55%),
-      radial-gradient(at 20% 10%, rgba(217, 119, 6, 0.09) 0px, transparent 50%),
-      radial-gradient(at 80% 60%, rgba(124, 58, 237, 0.12) 0px, transparent 50%),
-      radial-gradient(at 30% 80%, rgba(124, 58, 237, 0.14) 0px, transparent 50%),
-      radial-gradient(at 70% 90%, rgba(217, 119, 6, 0.07) 0px, transparent 50%);
-  }
-  100% {
-    background:
-      radial-gradient(at 30% 40%, rgba(124, 58, 237, 0.15) 0px, transparent 55%),
-      radial-gradient(at 60% 10%, rgba(217, 119, 6, 0.11) 0px, transparent 50%),
-      radial-gradient(at 90% 40%, rgba(124, 58, 237, 0.13) 0px, transparent 50%),
-      radial-gradient(at 10% 70%, rgba(124, 58, 237, 0.1) 0px, transparent 50%),
-      radial-gradient(at 50% 90%, rgba(217, 119, 6, 0.09) 0px, transparent 50%);
-  }
+/* Ghosted serif numerals */
+.numeral {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  line-height: 0.8;
+  letter-spacing: -0.03em;
+  color: var(--color-numeral);
 }
 
 /* Reduced motion */

@@ -1,48 +1,67 @@
 import Link from "next/link";
 import { getPosts } from "@src/network/cmsHandlers";
 import { calculateReadingTime, formatDate, getExcerptFromPortableText } from "@lib/utils";
-import { Calendar, Clock } from "@assets/icons";
+import Eyebrow from "@components/eyebrow";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
+
+const topics = ["System Design", "Backend", "Developer Tools", "Debugging", "Operations"];
 
 export default async function BlogPreview() {
   const posts = await getPosts();
   const latest = posts?.slice(0, 3) || [];
 
   return (
-    <section id="writing" className="px-6 py-20 md:px-8 md:py-32">
+    <section id="writing" className="bg-bg-primary px-6 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-16 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
-                Latest Writing
-              </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">03</span>
+            <div className="mb-14 grid items-end gap-10 md:grid-cols-[1.3fr_1fr]">
+              <div>
+                <Eyebrow>Writing</Eyebrow>
+                <h2 className="text-text-primary mt-5 font-serif text-4xl leading-[1.02] font-[440] tracking-[-0.015em] md:text-5xl">
+                  Notes from the <em className="text-text-muted italic">systems edge</em>.
+                </h2>
+              </div>
+              <div>
+                <p className="text-text-muted text-[15px] leading-relaxed">
+                  Field notes on backend seams, operational pressure, debugging loops, and the
+                  developer tools that make systems easier to reason about.
+                </p>
+                <div className="mt-5 flex flex-wrap gap-2" aria-label="Writing topics">
+                  {topics.map((topic) => (
+                    <span
+                      key={topic}
+                      className="border-border-subtle text-text-muted rounded-md border px-2.5 py-1 font-mono text-[10.5px]"
+                    >
+                      {topic}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </div>
           </StaggerItem>
 
-          <div className="mt-12 flex flex-col gap-8">
-            {latest.map((post: any) => {
+          <div className="flex flex-col">
+            {latest.map((post: any, index: number) => {
               const readTime = calculateReadingTime(post.body || []);
               const excerpt = post.excerpt || getExcerptFromPortableText(post.body || []);
               return (
                 <StaggerItem key={post._id || post.slug?.current}>
-                  <Link href={`/blog/${post.slug?.current}`} className="group block cursor-pointer">
-                    <h3 className="text-text-primary group-hover:text-accent-warm font-serif text-xl font-bold transition-colors md:text-2xl">
+                  <Link
+                    href={`/blog/${post.slug?.current}`}
+                    className={`group block cursor-pointer py-7 ${
+                      index !== latest.length - 1 ? "border-border-subtle border-b" : ""
+                    }`}
+                  >
+                    <div className="text-text-muted flex items-center gap-3 font-mono text-[11px] tracking-[0.08em] uppercase">
+                      <span>{formatDate(post.publishedAt)}</span>
+                      <span className="text-border-subtle">·</span>
+                      <span className="text-accent">{readTime} min read</span>
+                    </div>
+                    <h3 className="text-text-primary group-hover:text-accent mt-3 font-serif text-2xl font-[440] transition-colors md:text-3xl">
                       {post.title}
                     </h3>
-                    <div className="text-text-muted mt-2 flex items-center gap-3 font-mono text-xs">
-                      <span className="flex items-center gap-1.5">
-                        <Calendar className="opacity-60" size={12} />
-                        {formatDate(post.publishedAt)}
-                      </span>
-                      <span className="text-border-subtle">·</span>
-                      <span className="text-accent-warm flex items-center gap-1.5">
-                        <Clock size={12} />
-                        {readTime} min read
-                      </span>
-                    </div>
-                    <p className="text-text-muted mt-2 line-clamp-2 text-sm leading-relaxed">
+                    <p className="text-text-muted mt-2 line-clamp-2 max-w-3xl text-[15px] leading-relaxed">
                       {excerpt}
                     </p>
                   </Link>
@@ -54,12 +73,10 @@ export default async function BlogPreview() {
           <StaggerItem className="mt-10">
             <Link
               href="/blog"
-              className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 font-mono text-sm underline underline-offset-4 transition-all"
+              className="group/link text-text-primary hover:text-accent inline-flex cursor-pointer items-center gap-1 font-mono text-xs tracking-[0.08em] uppercase transition-colors"
             >
               View all writing
-              <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
-                →
-              </span>
+              <span className="transition-transform group-hover/link:translate-x-0.5">→</span>
             </Link>
           </StaggerItem>
         </StaggerContainer>

@@ -8,7 +8,6 @@ import { nightOwl } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 import { urlForImage } from "@/sanity/lib/image";
 import { formatDate, calculateReadingTime } from "@lib/utils";
-import { Calendar, Clock } from "@assets/icons";
 
 interface BlogPostProps {
   post: any;
@@ -48,17 +47,17 @@ const PortableTextComponents = {
   },
   block: {
     h1: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-text-primary mt-10 mb-4 font-serif text-2xl font-bold md:text-3xl">
+      <h2 className="text-text-primary mt-10 mb-4 font-serif text-2xl font-[440] md:text-3xl">
         {children}
       </h2>
     ),
     h2: ({ children }: { children?: React.ReactNode }) => (
-      <h2 className="text-text-primary mt-10 mb-4 font-serif text-2xl font-bold md:text-3xl">
+      <h2 className="text-text-primary mt-10 mb-4 font-serif text-2xl font-[440] md:text-3xl">
         {children}
       </h2>
     ),
     h3: ({ children }: { children?: React.ReactNode }) => (
-      <h3 className="text-text-primary mt-8 mb-3 font-serif text-xl font-bold md:text-2xl">
+      <h3 className="text-text-primary mt-8 mb-3 font-serif text-xl font-[440] md:text-2xl">
         {children}
       </h3>
     ),
@@ -95,24 +94,20 @@ export default function BlogPost({ post }: BlogPostProps) {
   return (
     <article className="mx-auto max-w-3xl">
       <header>
-        <h1 className="text-accent-warm font-serif text-3xl font-bold md:text-5xl">{post.title}</h1>
-        <div className="text-text-muted mt-4 flex items-center gap-3 font-mono text-xs">
-          <span className="flex items-center gap-1.5">
-            <Calendar className="opacity-60" size={12} />
-            <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
-          </span>
-          <span className="opacity-40">·</span>
-          <span className="flex items-center gap-1.5">
-            <Clock className="opacity-60" size={12} />
-            {readTime} min read
-          </span>
+        <h1 className="text-text-primary font-serif text-4xl leading-[1.05] font-[440] tracking-[-0.015em] md:text-6xl">
+          {post.title}
+        </h1>
+        <div className="text-text-muted mt-5 flex items-center gap-3 font-mono text-[11px] tracking-[0.08em] uppercase">
+          <time dateTime={post.publishedAt}>{formatDate(post.publishedAt)}</time>
+          <span className="text-border-subtle">·</span>
+          <span className="text-accent">{readTime} min read</span>
         </div>
         {post.tags?.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
             {post.tags.map((tag: string) => (
               <span
                 key={tag}
-                className="border-border-subtle text-text-muted rounded-full border px-2.5 py-0.5 font-mono text-xs"
+                className="border-border-subtle text-text-muted rounded-md border px-2.5 py-1 font-mono text-[10.5px]"
               >
                 {tag}
               </span>
@@ -128,7 +123,7 @@ export default function BlogPost({ post }: BlogPostProps) {
       <div className="border-border-subtle mt-16 border-t pt-8">
         <Link
           href="/blog"
-          className="text-text-primary hover:text-accent-warm cursor-pointer font-mono text-sm underline underline-offset-4 transition-colors"
+          className="text-text-primary hover:text-accent cursor-pointer font-mono text-xs tracking-[0.08em] uppercase transition-colors"
         >
           ← Back to writing
         </Link>
