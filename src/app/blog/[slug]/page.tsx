@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getPost, getAllPostSlugs } from "@src/network/cmsHandlers";
+import { getPost, getAllPostSlugs, getPosts } from "@src/network/cmsHandlers";
 import BlogPost from "@components/blog-post";
-import site from "@data/site.json";
+import { toSummary } from "@lib/blog";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -10,7 +10,7 @@ interface Props {
 
 export async function generateStaticParams() {
   const slugs = await getAllPostSlugs();
-  return slugs.map((s: any) => ({ slug: s.slug }));
+  return slugs.map((s: { slug: string }) => ({ slug: s.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -27,15 +27,18 @@ export const revalidate = 360;
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug);
+  const [post, all] = await Promise.all([getPost(slug), getPosts()]);
 
   if (!post) {
     notFound();
   }
 
-  return (
-    <div className="min-h-screen px-6 py-32 md:px-8">
-      <BlogPost post={post} />
-    </div>
-  );
+  const list = ((all ?? []) as unknown[]).map((p, i) => toSummary(p, i));
+  const idx = list.findIndex((p) => p.slug === slug);
+  const nextSummary = list.length > 1 ? list[(idx + 1) % list.length] : null;
+  const next = nextSummary
+    ? { slug: nextSummary.slug, title: nextSummary.title, readTime: nextSummary.readTime }
+    : null;
+
+  return <BlogPost post={post} next={next} />;
 }
