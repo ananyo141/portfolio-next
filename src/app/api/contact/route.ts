@@ -28,10 +28,16 @@ export async function POST(req: NextRequest) {
     );
   }
 
-  const { name, email, phone, message } = await req.json();
+  const { name, email, phone, message, topic } = await req.json();
 
   if (!name || !email || !message) {
     return new NextResponse(JSON.stringify({ message: "Please fill in all fields" }), {
+      status: 400,
+    });
+  }
+
+  if (typeof message !== "string" || message.length > 600) {
+    return new NextResponse(JSON.stringify({ message: "Message is too long" }), {
       status: 400,
     });
   }
@@ -45,6 +51,7 @@ export async function POST(req: NextRequest) {
         ContactFeedbackMail({
           username: name,
           userPhone: phone ? phone : "No phone provided",
+          userTopic: typeof topic === "string" && topic ? topic : "Not specified",
           userMessage: message,
         })
       ),

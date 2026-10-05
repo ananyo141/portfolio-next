@@ -1,185 +1,233 @@
 "use client";
 
-import { useState } from "react";
-import { toast } from "react-toastify";
-import Eyebrow from "@components/eyebrow";
+import { useEffect, useState } from "react";
 import contact from "@data/contact.json";
-import { User, Mail, Phone, MessageSquare, Github, LinkedIn, Twitter, Rss } from "@assets/icons";
-import { StaggerContainer, StaggerItem } from "./motion-wrapper";
+
+const TOPICS = ["Backend / APIs", "System design", "Dev tooling", "Just saying hi"];
+const SOCIAL = [
+  ["GitHub", contact.social.github],
+  ["LinkedIn", contact.social.linkedin],
+  ["X / Twitter", contact.social.twitter],
+  ["RSS", contact.social.rss],
+] as const;
+
+const LABEL = "text-muted font-mono text-[11px] tracking-[0.12em] uppercase";
 
 export default function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [topic, setTopic] = useState(TOPICS[0]);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+  const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  useEffect(() => {
+    if (!copied) return;
+    const t = setTimeout(() => setCopied(false), 1800);
+    return () => clearTimeout(t);
+  }, [copied]);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(contact.email);
+    } catch {
+      // clipboard unavailable; still show feedback
+    }
+    setCopied(true);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-
+    setStatus("sending");
+    setError(null);
     try {
-      const response = await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, topic }),
       });
-
-      const data = await response.json();
-
-      if (response.status === 201) {
-        toast.success("Message sent successfully!");
-        setForm({ name: "", email: "", phone: "", message: "" });
-      } else if (response.status === 429) {
-        toast.error("Too many messages. Please try again in a few minutes.");
-      } else {
-        toast.error(data.message || "Failed to send message.");
+      if (res.status === 201) {
+        setStatus("sent");
+        return;
       }
+      const data = await res.json().catch(() => ({}));
+      setError(
+        res.status === 429
+          ? "Too many messages. Please try again in a few minutes."
+          : data.message || "Failed to send message."
+      );
+      setStatus("idle");
     } catch {
-      toast.error("Something went wrong. Please try again.");
-    } finally {
-      setLoading(false);
+      setError("Something went wrong. Please try again.");
+      setStatus("idle");
     }
   };
 
+  const count = form.message.length;
+  const firstName = form.name.trim().split(" ")[0];
+
   return (
-    <section id="contact" className="bg-bg-primary px-6 py-24 md:px-8 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <StaggerContainer>
-          <StaggerItem>
-            <Eyebrow>Contact</Eyebrow>
-            <h2 className="text-text-primary mt-5 max-w-[16ch] font-serif text-4xl leading-[1.05] font-[440] tracking-[-0.015em] md:text-6xl">
-              Let&apos;s think out loud <em className="text-text-muted italic">together</em>.
-            </h2>
-          </StaggerItem>
-
-          <StaggerItem className="mt-8">
-            <a
-              href={`mailto:${contact.email}`}
-              className="text-text-primary hover:decoration-accent-warm inline-block cursor-pointer font-serif text-2xl underline decoration-transparent underline-offset-8 transition-all md:text-3xl"
-            >
-              {contact.email}
-            </a>
-          </StaggerItem>
-
-          <StaggerItem className="mt-12">
-            <form onSubmit={handleSubmit} className="max-w-2xl">
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <div className="relative w-full">
-                  <User
-                    className="text-text-muted absolute top-1/2 left-3.5 -translate-y-1/2 opacity-50"
-                    size={16}
-                  />
-                  <input
-                    name="name"
-                    type="text"
-                    required
-                    placeholder="Name"
-                    value={form.name}
-                    onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
-                  />
-                </div>
-                <div className="relative w-full">
-                  <Mail
-                    className="text-text-muted absolute top-1/2 left-3.5 -translate-y-1/2 opacity-50"
-                    size={16}
-                  />
-                  <input
-                    name="email"
-                    type="email"
-                    required
-                    placeholder="Email"
-                    value={form.email}
-                    onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
-                  />
-                </div>
-                <div className="relative w-full md:col-span-2">
-                  <Phone
-                    className="text-text-muted absolute top-1/2 left-3.5 -translate-y-1/2 opacity-50"
-                    size={16}
-                  />
-                  <input
-                    name="phone"
-                    type="tel"
-                    placeholder="Phone (optional)"
-                    value={form.phone}
-                    onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
-                  />
-                </div>
-                <div className="relative w-full md:col-span-2">
-                  <MessageSquare
-                    className="text-text-muted absolute top-3.5 left-3.5 opacity-50"
-                    size={16}
-                  />
-                  <textarea
-                    name="message"
-                    required
-                    placeholder="Your message..."
-                    rows={5}
-                    value={form.message}
-                    onChange={handleChange}
-                    className="border-border-subtle bg-surface text-text-primary placeholder:text-text-muted focus:border-accent focus:ring-accent/20 w-full resize-none rounded-lg border py-3 pr-4 pl-10 text-base transition-all outline-none focus:ring-2"
-                  />
-                </div>
-              </div>
+    <section
+      id="contact"
+      className="inv border-line2 bg-bg2 relative mt-[clamp(80px,9vw,140px)] overflow-hidden border-t"
+    >
+      <div className="wrap flex flex-col gap-16 pt-[clamp(80px,9vw,128px)] pb-16">
+        <div className="flex flex-col gap-6">
+          <span className="eyebrow">[06] Contact</span>
+          <h2 className="h2-display text-[clamp(56px,9.4vw,152px)] leading-[0.86] tracking-[-0.055em] [text-wrap:balance]">
+            Got a system that needs to <span className="si text-accent">last?</span>
+          </h2>
+        </div>
+        <div className="flex flex-wrap items-start gap-x-20 gap-y-14">
+          <div className="flex flex-[1_1_420px] flex-col gap-8">
+            <p className="text-muted m-0 max-w-[44ch] text-lg leading-[1.6]">
+              Backend architecture, API migrations, developer tooling, or a gnarly debugging story —
+              I read everything that lands in my inbox.
+            </p>
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-4">
+              <a
+                href={`mailto:${contact.email}`}
+                className="border-accent border-b-[3px] pb-1.5 text-[clamp(28px,3.4vw,48px)] font-semibold tracking-[-0.04em] [overflow-wrap:anywhere] no-underline"
+              >
+                {contact.email}
+              </a>
               <button
-                type="submit"
-                disabled={loading}
-                className="bg-accent hover:bg-accent-2 relative mt-6 cursor-pointer rounded-lg px-8 py-3 font-mono text-xs tracking-[0.1em] text-white uppercase transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0"
+                type="button"
+                onClick={copyEmail}
+                aria-label="Copy email address"
+                className={`pill font-mono text-[12.5px] font-normal ${copied ? "border-accent" : ""}`}
               >
-                <span className="relative z-10">{loading ? "Sending..." : "Send Message →"}</span>
+                <svg
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <rect x="9" y="9" width="12" height="12" rx="2" />
+                  <path d="M5 15V5a2 2 0 0 1 2-2h10" />
+                </svg>
+                <span aria-live="polite">{copied ? "Copied" : "Copy"}</span>
               </button>
-            </form>
-          </StaggerItem>
-
-          <StaggerItem className="mt-10">
-            <div className="flex gap-6">
-              <a
-                href={contact.social.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="text-text-muted hover:text-accent-warm cursor-pointer transition-colors"
-              >
-                <Github size={24} />
-              </a>
-              <a
-                href={contact.social.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="text-text-muted hover:text-accent-warm cursor-pointer transition-colors"
-              >
-                <LinkedIn size={24} />
-              </a>
-              <a
-                href={contact.social.twitter}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Twitter / X"
-                className="text-text-muted hover:text-accent-warm cursor-pointer transition-colors"
-              >
-                <Twitter size={24} />
-              </a>
-              <a
-                href={contact.social.rss}
-                aria-label="RSS Feed"
-                className="text-text-muted hover:text-accent-warm cursor-pointer transition-colors"
-              >
-                <Rss size={24} />
-              </a>
             </div>
-          </StaggerItem>
-        </StaggerContainer>
+            <div className="flex flex-wrap gap-2.5">
+              {SOCIAL.map(([label, href]) => (
+                <a
+                  key={label}
+                  href={href}
+                  target={href.startsWith("/") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="pill"
+                >
+                  {label} <span aria-hidden="true">↗</span>
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <form
+            onSubmit={submit}
+            className="border-line2 bg-surface flex flex-[1_1_440px] flex-col gap-7 rounded-[24px] border p-[clamp(28px,3vw,40px)]"
+          >
+            {status === "sent" ? (
+              <div className="fadein flex flex-col gap-3 py-10">
+                <span className="si text-accent text-[44px] leading-none">Message queued.</span>
+                <p className="text-muted m-0 text-base leading-[1.6]">
+                  Thanks{firstName ? `, ${firstName}` : ""} — I&apos;ll get back to you soon.
+                  Delivery is retried, naturally.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setStatus("idle");
+                    setForm((f) => ({ ...f, message: "" }));
+                  }}
+                  className="pill mt-3 self-start"
+                >
+                  Send another
+                </button>
+              </div>
+            ) : (
+              <div className="flex flex-col gap-7">
+                <div className="grid grid-cols-[repeat(auto-fit,minmax(min(180px,100%),1fr))] gap-7">
+                  <label className="flex flex-col gap-1">
+                    <span className={LABEL}>Name</span>
+                    <input
+                      className="field"
+                      type="text"
+                      name="name"
+                      autoComplete="name"
+                      placeholder="Your name"
+                      required
+                      value={form.name}
+                      onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1">
+                    <span className={LABEL}>Email</span>
+                    <input
+                      className="field"
+                      type="email"
+                      name="email"
+                      autoComplete="email"
+                      placeholder="you@company.com"
+                      required
+                      value={form.email}
+                      onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    />
+                  </label>
+                </div>
+                <label className="flex flex-col gap-1">
+                  <span className={`${LABEL} flex justify-between gap-3`}>
+                    <span>What are you building?</span>
+                    <span className={count > 540 ? "text-accent-ink" : ""}>{count} / 600</span>
+                  </span>
+                  <textarea
+                    className="field resize-y leading-[1.5]"
+                    name="message"
+                    rows={4}
+                    maxLength={600}
+                    placeholder="A few lines about the problem"
+                    required
+                    value={form.message}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  />
+                </label>
+                <div className="flex flex-wrap gap-2" role="group" aria-label="Topic">
+                  {TOPICS.map((t) => (
+                    <button
+                      key={t}
+                      type="button"
+                      aria-pressed={topic === t}
+                      onClick={() => setTopic(t)}
+                      className={`chip h-10 px-3.5 text-[13.5px] ${
+                        topic === t ? "border-accent bg-accent text-on-accent" : ""
+                      }`}
+                    >
+                      {t}
+                    </button>
+                  ))}
+                </div>
+                {error && (
+                  <p role="alert" className="text-accent-ink m-0 text-sm">
+                    {error}
+                  </p>
+                )}
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="pill pill-solid h-[52px] self-start border-0 px-7 text-[15px] disabled:opacity-60"
+                >
+                  {status === "sending" ? "Sending…" : "Send message"}{" "}
+                  <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            )}
+          </form>
+        </div>
       </div>
     </section>
   );
