@@ -1,86 +1,42 @@
 import Link from "next/link";
-import { getPosts } from "@src/network/cmsHandlers";
-import { calculateReadingTime, formatDate, getExcerptFromPortableText } from "@lib/utils";
-import Eyebrow from "@components/eyebrow";
-import { StaggerContainer, StaggerItem } from "./motion-wrapper";
+import type { PostSummary } from "@lib/blog";
 
-const topics = ["System Design", "Backend", "Developer Tools", "Debugging", "Operations"];
-
-export default async function BlogPreview() {
-  const posts = await getPosts();
-  const latest = posts?.slice(0, 3) || [];
-
+export default function BlogPreview({ posts }: { posts: PostSummary[] }) {
   return (
-    <section id="writing" className="bg-bg-primary px-6 py-24 md:px-8 md:py-32">
-      <div className="mx-auto max-w-6xl">
-        <StaggerContainer>
-          <StaggerItem>
-            <div className="mb-14 grid items-start gap-10 md:grid-cols-[1.3fr_1fr]">
-              <div>
-                <Eyebrow>Writing</Eyebrow>
-                <h2 className="text-text-primary mt-5 font-serif text-4xl leading-[1.02] font-[440] tracking-[-0.015em] md:text-5xl">
-                  Notes from the <em className="text-text-muted italic">systems edge</em>.
-                </h2>
-              </div>
-              <div className="md:pt-[2.28125rem]">
-                <p className="text-text-muted text-[15px] leading-relaxed">
-                  Field notes on backend seams, operational pressure, debugging loops, and the
-                  developer tools that make systems easier to reason about.
-                </p>
-                <div className="mt-5 flex flex-wrap gap-2" aria-label="Writing topics">
-                  {topics.map((topic) => (
-                    <span
-                      key={topic}
-                      className="border-border-subtle text-text-muted rounded-md border px-2.5 py-1 font-mono text-[10.5px]"
-                    >
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </StaggerItem>
-
-          <div className="flex flex-col">
-            {latest.map((post: any, index: number) => {
-              const readTime = calculateReadingTime(post.body || []);
-              const excerpt = post.excerpt || getExcerptFromPortableText(post.body || []);
-              return (
-                <StaggerItem key={post._id || post.slug?.current}>
-                  <Link
-                    href={`/blog/${post.slug?.current}`}
-                    className={`group block cursor-pointer py-7 ${
-                      index !== latest.length - 1 ? "border-border-subtle border-b" : ""
-                    }`}
-                  >
-                    <div className="text-text-muted flex items-center gap-3 font-mono text-[11px] tracking-[0.08em] uppercase">
-                      <span>{formatDate(post.publishedAt)}</span>
-                      <span className="text-border-subtle">·</span>
-                      <span className="text-accent">{readTime} min read</span>
-                    </div>
-                    <h3 className="text-text-primary group-hover:text-accent mt-3 font-serif text-2xl font-[440] transition-colors md:text-3xl">
-                      {post.title}
-                    </h3>
-                    <p className="text-text-muted mt-2 line-clamp-2 max-w-3xl text-[15px] leading-relaxed">
-                      {excerpt}
-                    </p>
-                  </Link>
-                </StaggerItem>
-              );
-            })}
-          </div>
-
-          <StaggerItem className="mt-10">
-            <Link
-              href="/blog"
-              className="group/link text-text-primary hover:text-accent inline-flex cursor-pointer items-center gap-1 font-mono text-xs tracking-[0.08em] uppercase transition-colors"
-            >
-              View all writing
-              <span className="transition-transform group-hover/link:translate-x-0.5">→</span>
-            </Link>
-          </StaggerItem>
-        </StaggerContainer>
+    <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-10">
+      <div className="flex flex-col gap-5">
+        <span className="eyebrow">[04] Writing</span>
+        <h2 className="h2-display text-[clamp(44px,5.2vw,80px)]">
+          Notes from the <span className="si text-muted">systems edge.</span>
+        </h2>
       </div>
-    </section>
+      <div className="border-line2 flex flex-col border-t">
+        {posts.slice(0, 3).map((p) => (
+          <Link
+            key={p.slug}
+            href={`/blog/${p.slug}`}
+            className="row-link border-line text-ink flex items-start justify-between gap-6 border-b py-7 no-underline"
+          >
+            <span className="flex flex-col gap-2.5">
+              <span className="text-muted font-mono text-[11px] tracking-[0.1em] uppercase">
+                {p.dateLabel} · <span className="text-accent-ink">{p.readTime} min read</span>
+              </span>
+              <span className="text-[clamp(22px,2.2vw,30px)] leading-[1.12] font-semibold tracking-[-0.035em]">
+                {p.title}
+              </span>
+              <span className="text-muted max-w-[64ch] text-[15px] leading-[1.55]">
+                {p.excerpt}
+              </span>
+            </span>
+            <span className="arrow text-[28px]" aria-hidden="true">
+              ↗
+            </span>
+          </Link>
+        ))}
+      </div>
+      <Link href="/blog" className="self-start text-[14.5px] font-semibold">
+        All writing →
+      </Link>
+    </div>
   );
 }

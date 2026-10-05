@@ -9,6 +9,7 @@ import Contact from "@components/contact";
 import site from "@data/site.json";
 import { getPosts } from "@src/network/cmsHandlers";
 import { formatDateShort } from "@lib/utils";
+import { toSummary } from "@lib/blog";
 
 export const metadata = {
   title: site.name,
@@ -18,8 +19,9 @@ export const metadata = {
 export const revalidate = 360;
 
 export default async function Home() {
-  const posts = ((await getPosts()) ?? []) as { title: string; publishedAt: string }[];
-  const shellPosts = posts.map((p) => ({
+  const posts = ((await getPosts()) ?? []) as unknown[];
+  const summaries = posts.map((p, i) => toSummary(p, i));
+  const shellPosts = summaries.map((p) => ({
     title: p.title,
     date: formatDateShort(p.publishedAt, "month"),
   }));
@@ -31,8 +33,13 @@ export default async function Home() {
       <Shell posts={shellPosts} />
       <Projects />
       <Experience />
-      <BlogPreview />
-      <Skills />
+      <section
+        id="writing"
+        className="wrap flex flex-wrap gap-x-20 gap-y-[72px] pt-[clamp(80px,9vw,140px)] pb-10"
+      >
+        <BlogPreview posts={summaries} />
+        <Skills />
+      </section>
       <Contact />
     </div>
   );
