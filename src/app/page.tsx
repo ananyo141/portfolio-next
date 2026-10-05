@@ -1,4 +1,5 @@
 import Hero from "@components/hero";
+import Marquee from "@components/marquee";
 import Projects from "@components/projects";
 import Experience from "@components/experience";
 import BlogPreview from "@components/blog-preview";
@@ -15,6 +16,7 @@ export default function Home() {
   return (
     <div className="bg-bg-primary">
       <Hero />
+      <Marquee />
       <Projects />
       <Experience />
       <BlogPreview />
