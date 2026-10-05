@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "react-toastify";
+import Eyebrow from "@components/eyebrow";
 import contact from "@data/contact.json";
 import { User, Mail, Phone, MessageSquare, Github, LinkedIn, Twitter, Rss } from "@assets/icons";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
@@ -48,16 +49,14 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="bg-bg-warm px-6 py-20 md:px-8 md:py-32">
+    <section id="contact" className="bg-bg-primary px-6 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-4 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl leading-tight font-bold tracking-tight md:text-6xl">
-                {"Let's think out loud together."}
-              </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">05</span>
-            </div>
+            <Eyebrow>Contact</Eyebrow>
+            <h2 className="text-text-primary mt-5 max-w-[16ch] font-serif text-4xl leading-[1.05] font-[440] tracking-[-0.015em] md:text-6xl">
+              Let&apos;s think out loud <em className="text-text-muted italic">together</em>.
+            </h2>
           </StaggerItem>
 
           <StaggerItem className="mt-8">
@@ -135,10 +134,9 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={loading}
-                className="group bg-accent hover:bg-accent-warm hover:shadow-accent-warm/20 relative mt-6 cursor-pointer overflow-hidden rounded-lg px-8 py-3 font-mono text-sm font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-50 disabled:hover:translate-y-0"
+                className="bg-accent hover:bg-accent-2 relative mt-6 cursor-pointer rounded-lg px-8 py-3 font-mono text-xs tracking-[0.1em] text-white uppercase transition-all duration-300 hover:-translate-y-0.5 disabled:opacity-50 disabled:hover:translate-y-0"
               >
                 <span className="relative z-10">{loading ? "Sending..." : "Send Message →"}</span>
-                <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-transform duration-700 ease-in-out group-hover:translate-x-full" />
               </button>
             </form>
           </StaggerItem>

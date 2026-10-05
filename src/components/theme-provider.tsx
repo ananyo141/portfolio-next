@@ -23,11 +23,6 @@ function getStoredTheme(): Theme | null {
   return null;
 }
 
-function getSystemTheme(): Theme {
-  if (typeof window === "undefined") return "light";
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
 function applyTheme(theme: Theme) {
   const html = document.documentElement;
   if (theme === "dark") {
@@ -42,23 +37,9 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const stored = getStoredTheme();
-    const initial = stored ?? getSystemTheme();
+    const initial = stored ?? "light";
     applyTheme(initial);
     setTheme(initial);
-  }, []);
-
-  useEffect(() => {
-    const mql = window.matchMedia("(prefers-color-scheme: dark)");
-    const handleChange = (e: MediaQueryListEvent) => {
-      // Only auto-switch if user hasn't set a manual preference
-      if (getStoredTheme() === null) {
-        const next = e.matches ? "dark" : "light";
-        applyTheme(next);
-        setTheme(next);
-      }
-    };
-    mql.addEventListener("change", handleChange);
-    return () => mql.removeEventListener("change", handleChange);
   }, []);
 
   const toggleTheme = useCallback(() => {

@@ -1,232 +1,176 @@
-import Image from "next/image";
 import Link from "next/link";
 import projects from "@data/projects.json";
+import type { Project } from "@data/types";
+import Eyebrow from "@components/eyebrow";
 import { StaggerContainer, StaggerItem } from "./motion-wrapper";
 
 function ProjectLinks({
-  github,
-  live,
-  youtube,
+  project,
+  compact = false,
 }: {
-  github?: string;
-  live?: string;
-  youtube?: string;
+  project: Pick<Project, "id" | "caseStudy" | "github" | "live" | "youtube">;
+  compact?: boolean;
 }) {
+  const items: [string | undefined, string, boolean][] = [
+    [project.caseStudy ? `/projects/${project.id}` : undefined, "Case study", false],
+    [project.live, "Live", true],
+    [project.github, "Code", true],
+    [project.youtube, "Video", true],
+  ];
   return (
-    <div className="flex gap-4">
-      {github && (
-        <Link
-          href={github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/link bg-accent-warm hover:bg-accent-warm/90 inline-flex cursor-pointer items-center gap-1 rounded-full px-3 py-1 font-mono text-xs font-medium text-white transition-all"
-        >
-          GitHub
-          <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
-            →
-          </span>
-        </Link>
-      )}
-      {live && (
-        <Link
-          href={live}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-sm transition-colors"
-        >
-          Live
-          <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
-            →
-          </span>
-        </Link>
-      )}
-      {youtube && (
-        <Link
-          href={youtube}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group/link text-text-primary hover:text-accent-warm inline-flex cursor-pointer items-center gap-1 text-sm transition-colors"
-        >
-          Video
-          <span className="transition-transform duration-200 group-hover/link:translate-x-0.5">
-            →
-          </span>
-        </Link>
+    <div className={`${compact ? "mt-3" : "mt-6"} flex flex-wrap gap-4`}>
+      {items.map(([href, label, external]) =>
+        href ? (
+          <Link
+            key={label}
+            href={href}
+            target={external ? "_blank" : undefined}
+            rel={external ? "noopener noreferrer" : undefined}
+            className="group/link text-text-muted hover:text-accent inline-flex cursor-pointer items-center gap-1 font-mono text-xs transition-colors"
+          >
+            {label}
+            <span className="transition-transform group-hover/link:translate-x-0.5">→</span>
+          </Link>
+        ) : null
       )}
     </div>
   );
 }
 
 export default function Projects() {
-  const featured = projects.find((p) => p.featured);
-  const regular = projects.filter((p) => !p.featured);
+  const selectedProjects = (projects as Project[]).filter((project) => !project.archived);
+  const archivedProjects = (projects as Project[]).filter((project) => project.archived);
 
   return (
-    <section id="projects" className="px-6 py-20 md:px-8 md:py-32">
+    <section id="projects" className="bg-bg-primary px-6 py-24 md:px-8 md:py-32">
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-16 flex items-end justify-between">
-              <h2 className="text-text-primary font-serif text-5xl font-bold tracking-tight md:text-6xl">
-                Selected Work
-              </h2>
-              <span className="text-accent-warm hidden font-mono text-sm md:block">01</span>
+            <div className="mb-14 grid items-end gap-10 md:grid-cols-[1.3fr_1fr]">
+              <div>
+                <Eyebrow>Selected Work</Eyebrow>
+                <h2 className="text-text-primary mt-5 font-serif text-4xl leading-[1.02] font-[440] tracking-[-0.015em] md:text-5xl">
+                  Things I&apos;ve <em className="text-text-muted italic">shipped</em>.
+                </h2>
+              </div>
+              <p className="text-text-muted text-[15px] leading-relaxed">
+                A few projects that show how I think about scale, correctness, and the craft of
+                building things that last.
+              </p>
             </div>
           </StaggerItem>
 
-          {/* Featured project */}
-          {featured && (
-            <StaggerItem className="mb-16">
-              <div className="group">
-                <a
-                  href={featured.github || featured.live || "#"}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block cursor-pointer"
-                >
-                  <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-6 aspect-[2/1] w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl">
-                    <div className="relative h-full w-full overflow-hidden rounded">
-                      {featured.image ? (
-                        <Image
-                          src={featured.image}
-                          alt={featured.title}
-                          fill
-                          loading="eager"
-                          priority
-                          className="object-cover"
-                          sizes="(max-width: 1200px) 100vw, 1200px"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-text-muted font-mono text-sm">
-                            Project Screenshot
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </a>
-                <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                  <div className="max-w-2xl">
-                    <div className="mb-3 flex gap-3">
-                      {featured.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <a
-                      href={featured.github || featured.live || "#"}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block cursor-pointer"
-                    >
-                      <h3 className="text-text-primary mb-3 font-serif text-3xl font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)] md:text-4xl">
-                        {featured.title}
-                      </h3>
-                    </a>
-                    <p className="text-text-muted text-lg leading-relaxed">
-                      {featured.description}
-                    </p>
-                  </div>
-                  <div className="flex flex-col gap-3 md:items-end">
-                    <div className="flex flex-wrap gap-2">
-                      {featured.tech.map((t) => (
-                        <span
-                          key={t}
-                          className="bg-bg-cool text-text-primary rounded-full px-3 py-1 font-mono text-xs"
-                        >
-                          {t}
-                        </span>
-                      ))}
-                    </div>
-                    <ProjectLinks
-                      github={featured.github}
-                      live={featured.live}
-                      youtube={featured.youtube}
-                    />
-                  </div>
-                </div>
-              </div>
-            </StaggerItem>
-          )}
-
-          {/* Regular projects grid */}
-          <div className="grid gap-8 md:grid-cols-2">
-            {regular.map((project) => (
+          <div className="grid gap-5 lg:grid-cols-2">
+            {selectedProjects.map((project, i) => (
               <StaggerItem key={project.id}>
-                <div className="group">
-                  <a
-                    href={project.github || project.live || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block cursor-pointer"
-                  >
-                    <div className="bg-surface border-border-subtle group-hover:border-accent/30 group-hover:shadow-accent/10 mb-4 aspect-[3/2] w-full overflow-hidden rounded-lg border p-2 shadow-sm transition-all duration-500 group-hover:shadow-xl">
-                      <div className="relative h-full w-full overflow-hidden rounded">
-                        {project.image ? (
-                          <Image
-                            src={project.image}
-                            alt={project.title}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 768px) 100vw, 50vw"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="text-text-muted font-mono text-sm">Screenshot</span>
-                          </div>
-                        )}
-                      </div>
+                <article className="bg-surface border-border-subtle hover:border-accent/60 group flex h-full flex-col rounded-2xl border p-7 shadow-[0_18px_40px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1.5 md:p-8 dark:shadow-[0_24px_50px_rgba(0,0,0,0.5)]">
+                  <div className="flex items-start justify-between gap-5">
+                    <div>
+                      {project.role && (
+                        <p className="text-accent font-mono text-[10.5px] tracking-[0.16em] uppercase">
+                          {project.role}
+                        </p>
+                      )}
+                      <h3 className="text-text-primary mt-4 font-serif text-2xl font-[440] tracking-[-0.01em]">
+                        {project.title}
+                      </h3>
                     </div>
-                  </a>
-                  <div className="mb-2 flex gap-3">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="bg-accent-light text-accent rounded-full px-2.5 py-0.5 font-mono text-xs tracking-wider uppercase"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                    <span className="numeral text-[72px] leading-none">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                  <a
-                    href={project.github || project.live || "#"}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block cursor-pointer"
-                  >
-                    <h3 className="text-text-primary mb-2 font-serif text-2xl font-bold transition-all duration-300 group-hover:drop-shadow-[0_2px_6px_rgba(0,0,0,0.15)]">
-                      {project.title}
-                    </h3>
-                  </a>
-                  <p className="text-text-muted mb-4 text-base leading-relaxed">
+
+                  <p className="text-text-muted mt-4 text-[14px] leading-relaxed">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((t) => (
+
+                  {project.highlight && (
+                    <p className="border-border-subtle text-text-primary mt-5 border-l pl-4 font-serif text-xl leading-snug font-[440]">
+                      {project.highlight}
+                    </p>
+                  )}
+
+                  {project.evidence?.length ? (
+                    <ul className="mt-5 space-y-2">
+                      {project.evidence.slice(0, 3).map((item) => (
+                        <li
+                          key={item}
+                          className="text-text-muted flex gap-3 text-[13.5px] leading-relaxed"
+                        >
+                          <span className="bg-accent mt-2 h-1.5 w-1.5 shrink-0 rounded-full" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : null}
+
+                  <div className="mt-6 flex flex-wrap gap-2">
+                    {project.tech.slice(0, 4).map((t, ti) => (
                       <span
                         key={t}
-                        className="bg-bg-cool text-text-primary rounded-full px-3 py-1 font-mono text-xs"
+                        className={`rounded-md border px-2.5 py-1 font-mono text-[10.5px] ${
+                          ti === 0
+                            ? "border-accent/50 text-accent"
+                            : "border-border-subtle text-text-muted"
+                        }`}
                       >
                         {t}
                       </span>
                     ))}
                   </div>
-                  <div className="mt-4">
-                    <ProjectLinks
-                      github={project.github}
-                      live={project.live}
-                      youtube={project.youtube}
-                    />
-                  </div>
-                </div>
+                  <ProjectLinks project={project} />
+                </article>
               </StaggerItem>
             ))}
           </div>
+
+          {archivedProjects.length > 0 && (
+            <StaggerItem className="mt-16">
+              <div className="border-border-subtle border-t pt-8">
+                <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+                  <div>
+                    <p className="text-text-muted font-mono text-[11px] tracking-[0.18em] uppercase">
+                      Archive
+                    </p>
+                    <h3 className="text-text-primary mt-2 font-serif text-2xl font-[440]">
+                      Earlier builds and experiments.
+                    </h3>
+                  </div>
+                  <p className="text-text-muted max-w-xl text-[13.5px] leading-relaxed">
+                    Smaller projects kept compact so the proof-heavy work stays in focus.
+                  </p>
+                </div>
+
+                <div className="grid gap-3 md:grid-cols-2">
+                  {archivedProjects.map((project) => (
+                    <article
+                      key={project.id}
+                      className="border-border-subtle bg-surface/60 rounded-xl border p-5"
+                    >
+                      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <h4 className="text-text-primary font-sans text-base font-medium">
+                            {project.title}
+                          </h4>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            {project.tech.slice(0, 3).map((tech) => (
+                              <span
+                                key={tech}
+                                className="border-border-subtle text-text-muted rounded-md border px-2 py-0.5 font-mono text-[10px]"
+                              >
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        <ProjectLinks project={project} compact />
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+            </StaggerItem>
+          )}
         </StaggerContainer>
       </div>
     </section>
