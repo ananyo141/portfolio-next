@@ -47,3 +47,25 @@ export function toSummary(post: any, index: number): PostSummary {
     n: String(index + 1).padStart(2, "0"),
   };
 }
+
+export function filterPosts(posts: PostSummary[], topic: string, q: string): PostSummary[] {
+  const needle = q.trim().toLowerCase();
+  return posts.filter((p) => {
+    const okT = topic === "All" || p.topic === topic;
+    const okQ = !needle || `${p.title} ${p.excerpt} ${p.topic}`.toLowerCase().includes(needle);
+    return okT && okQ;
+  });
+}
+
+export function resultSummary(total: number, shown: number, topic: string, q: string): string {
+  const needle = q.trim();
+  if (shown === total && topic === "All" && !needle) return "All essays · newest first";
+  return `${shown} of ${total} essays${topic !== "All" ? ` in ${topic}` : ""}${
+    needle ? ` matching “${needle}”` : ""
+  }`;
+}
+
+export function emptyHint(topic: string, q: string): string {
+  const needle = q.trim();
+  return `${topic !== "All" ? ` on ${topic}` : ""}${needle ? ` for “${needle}”` : ""}`;
+}

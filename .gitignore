@@ -50,3 +50,7 @@ docs/superpowers/
 
 # design handoff bundle — local only
 portfolio-handoff/
+
+# local-only unit tests (per user)
+src/**/__tests__/
+vitest.config.ts
