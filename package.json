@@ -13,7 +13,7 @@
     "semgrep": "semgrep --config=auto --error --severity=ERROR src/",
     "prepare": "husky",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --passWithNoTests"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [

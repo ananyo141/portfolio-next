@@ -4,12 +4,12 @@ import { useMemo, useState } from "react";
 import experiences from "@data/experience.json";
 import type { Experience as Span } from "@data/types";
 import {
-  TRACE_YEARS,
   formatDuration,
   formatPeriod,
   nowLinePosition,
   spanGeometry,
   spanMonths,
+  traceYears,
 } from "@lib/trace";
 
 const spans = [...(experiences as Span[])].sort((a, b) => a.start.localeCompare(b.start));
@@ -18,9 +18,11 @@ const DEFAULT = spans.find((s) => s.end === null)?.id ?? spans[spans.length - 1]
 
 const MONO = "font-mono text-[11px] tracking-[0.1em] uppercase";
 
-export default function Experience() {
+export default function Experience({ now: nowIso }: { now: string }) {
   const [selected, setSelected] = useState(DEFAULT);
-  const now = useMemo(() => new Date(), []);
+  const now = useMemo(() => new Date(nowIso), [nowIso]);
+  const years = traceYears(now);
+  const gridStep = `${100 / years.length}%`;
   const nowPos = nowLinePosition(now) * 100;
   const cur = spans.find((s) => s.id === selected) ?? spans[0];
   const curMonths = spanMonths(cur.start, cur.end, now);
@@ -70,8 +72,8 @@ export default function Experience() {
         <div className="flex flex-wrap gap-x-8 px-7 pt-3.5 pb-1.5">
           <div className="hidden max-w-[300px] flex-[1_1_260px] md:block" />
           <div className="text-muted relative h-[22px] min-w-0 flex-[999_1_420px] font-mono text-[11px]">
-            {TRACE_YEARS.map((y, i) => (
-              <span key={y} className="absolute" style={{ left: `${i * 25}%` }}>
+            {years.map((y, i) => (
+              <span key={y} className="absolute" style={{ left: `${(i / years.length) * 100}%` }}>
                 {y}
               </span>
             ))}
@@ -102,8 +104,7 @@ export default function Experience() {
                 <span
                   className="relative h-10 min-w-0 flex-[999_1_420px]"
                   style={{
-                    background:
-                      "linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 25% 100%",
+                    background: `linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / ${gridStep} 100%`,
                   }}
                 >
                   <span

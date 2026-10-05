@@ -1,6 +1,19 @@
 export const TRACE_START_YEAR = 2023;
-export const TRACE_MONTHS = 48; // Jan 2023 → Dec 2026
-export const TRACE_YEARS = [2023, 2024, 2025, 2026];
+const TRACE_MIN_END_YEAR = 2026;
+
+/** Last year on the axis: at least 2026, growing with the calendar so "now" never leaves the track. */
+export function traceEndYear(now: Date): number {
+  return Math.max(TRACE_MIN_END_YEAR, now.getFullYear());
+}
+
+export function traceYears(now: Date): number[] {
+  const end = traceEndYear(now);
+  return Array.from({ length: end - TRACE_START_YEAR + 1 }, (_, i) => TRACE_START_YEAR + i);
+}
+
+export function traceMonths(now: Date): number {
+  return traceYears(now).length * 12;
+}
 
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -13,21 +26,22 @@ export function currentMonthIndex(now: Date): number {
   return (now.getFullYear() - TRACE_START_YEAR) * 12 + now.getMonth();
 }
 
-export function nowLinePosition(now: Date): number {
-  return (currentMonthIndex(now) + 0.5) / TRACE_MONTHS;
-}
-
 const clamp01 = (v: number) => Math.min(1, Math.max(0, v));
+
+export function nowLinePosition(now: Date): number {
+  return clamp01((currentMonthIndex(now) + 0.5) / traceMonths(now));
+}
 
 export function spanGeometry(
   start: string,
   end: string | null,
   now: Date
 ): { left: number; width: number } {
-  const left = clamp01(monthIndex(start) / TRACE_MONTHS);
-  const rightRaw = end ? (monthIndex(end) + 1) / TRACE_MONTHS : nowLinePosition(now);
+  const months = traceMonths(now);
+  const left = clamp01(monthIndex(start) / months);
+  const rightRaw = end ? (monthIndex(end) + 1) / months : nowLinePosition(now);
   const right = clamp01(rightRaw);
-  return { left, width: Math.max(1 / TRACE_MONTHS, right - left) };
+  return { left, width: Math.max(1 / months, right - left) };
 }
 
 export function spanMonths(start: string, end: string | null, now: Date): number {

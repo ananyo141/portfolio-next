@@ -19,6 +19,7 @@ export const metadata = {
 export const revalidate = 360;
 
 export default async function Home() {
+  const now = new Date().toISOString();
   const posts = ((await getPosts()) ?? []) as unknown[];
   const summaries = posts.map((p, i) => toSummary(p, i));
   const shellPosts = summaries.map((p) => ({
@@ -32,7 +33,7 @@ export default async function Home() {
       <Marquee />
       <Shell posts={shellPosts} />
       <Projects />
-      <Experience />
+      <Experience now={now} />
       <section
         id="writing"
         className="wrap flex flex-wrap gap-x-20 gap-y-[72px] pt-[clamp(80px,9vw,140px)] pb-10"

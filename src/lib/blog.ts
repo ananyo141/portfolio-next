@@ -9,10 +9,10 @@ export const TOPICS = [
 ] as const;
 
 export function topicFor(post: {
-  categories?: { title?: string }[] | null;
+  categories?: ({ title?: string } | null)[] | null;
   tags?: string[] | null;
 }): string {
-  const names = [...(post.categories ?? []).map((c) => c.title ?? ""), ...(post.tags ?? [])].map(
+  const names = [...(post.categories ?? []).map((c) => c?.title ?? ""), ...(post.tags ?? [])].map(
     (s) => s.toLowerCase()
   );
   const hit = TOPICS.find((t) => names.includes(t.toLowerCase()));
