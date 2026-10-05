@@ -20,10 +20,12 @@
     "archived": false,
     "result": "A backend repository and walkthrough demonstrate the grading flow end to end.",
     "tradeoffs": [
-      "Used LLM feedback to make review output more explanatory than static checks alone",
-      "Kept grading concerns in a backend service instead of coupling them to the interface"
+      "LLM feedback over static checks alone, for more explanatory reviews",
+      "Grading lives in a backend service, decoupled from the interface"
     ],
-    "featured": true
+    "featured": true,
+    "categories": ["Backend", "AI/ML"],
+    "blurb": "LLM-backed grading service that scores submitted code on correctness, complexity and style — and explains why."
   },
   {
     "id": "vimero",
@@ -51,7 +53,11 @@
       "Split services to make scaling boundaries visible",
       "Used queueing to keep expensive media work out of request paths"
     ],
-    "featured": false
+    "featured": false,
+    "categories": ["Backend", "Full stack"],
+    "blurb": "Service-oriented video platform. Queue-backed transcoding keeps expensive media work out of the request path while the UI stays responsive.",
+    "stackLabel": "Go · Rust · RabbitMQ",
+    "liveLabel": "Live demo"
   },
   {
     "id": "analytics-api",
@@ -79,13 +85,17 @@
       "Kept aggregation responsibilities server-side to simplify dashboard components",
       "Used a REST API boundary to separate data shaping from presentation"
     ],
-    "featured": false
+    "featured": false,
+    "categories": ["Backend", "Full stack"],
+    "blurb": "Activity and engagement dashboard. Aggregation stays server-side behind a REST boundary, so components only render — never reshape — data.",
+    "stackLabel": "Django REST · Next.js",
+    "liveLabel": "Live demo"
   },
   {
     "id": "snappio",
     "title": "Snappio Backend",
     "description": "Backend for a social media and chat application. Real-time messaging via WebSockets with PostgreSQL persistence.",
-    "tags": ["Backend", "Real-time"],
+    "tags": ["Real-time", "Backend"],
     "tech": ["Django REST", "Django Channels", "Redis", "PostgreSQL"],
     "github": "https://github.com/Snappio/snappio_backend",
     "live": "https://api-snappio.onrender.com/docs/swagger/",
@@ -107,7 +117,11 @@
       "Used Channels to keep realtime communication in the Django ecosystem",
       "Paired WebSockets with relational persistence instead of treating chat as transient-only state"
     ],
-    "featured": false
+    "featured": false,
+    "categories": ["Backend", "Real-time"],
+    "blurb": "Social and chat backend pairing WebSocket messaging with durable relational persistence — chat that isn't treated as throwaway state.",
+    "stackLabel": "Channels · Redis · Postgres",
+    "liveLabel": "API docs"
   },
   {
     "id": "computer-shop",
@@ -121,7 +135,10 @@
     "youtube": "https://www.youtube.com/watch?v=1uHAwhE77C0",
     "image": "/projects/computershop_project.png",
     "archived": true,
-    "featured": false
+    "featured": false,
+    "categories": ["Full stack", "Frontend"],
+    "blurb": "Full-stack e-commerce with cart, checkout and order management, tuned for performance and SEO.",
+    "stackLabel": "React · Node.js · Express · MongoDB · Redux"
   },
   {
     "id": "smartshala",
@@ -133,7 +150,10 @@
     "youtube": "https://youtu.be/0cB1Lrw7DwQ",
     "image": "/projects/smartshala_project.jpg",
     "archived": true,
-    "featured": false
+    "featured": false,
+    "categories": ["AI/ML", "Frontend"],
+    "blurb": "Mobile app that scans answer sheets with AI/ML and uploads grades to a teacher portal.",
+    "stackLabel": "Flutter · Dart"
   },
   {
     "id": "calories-api",
@@ -146,11 +166,14 @@
     "demo": "https://api-calories-drf.vercel.app",
     "image": "/projects/calories_project.png",
     "archived": true,
-    "featured": false
+    "featured": false,
+    "categories": ["Backend", "AI/ML"],
+    "blurb": "REST API tracking calories and macronutrients from natural-language food descriptions.",
+    "stackLabel": "Django REST · Nutritionix API"
   },
   {
     "id": "cipherschools",
-    "title": "Cipherschools Profile Page",
+    "title": "Cipherschools Profile",
     "description": "A clone of Cipherschools profile page with a backend for storing user data.",
     "tags": ["Full Stack", "Clone"],
     "tech": ["React", "Redux", "Express", "Node.js", "MongoDB", "TypeScript"],
@@ -159,7 +182,10 @@
     "demo": "https://cipherschools-profile.vercel.app/",
     "image": "/projects/cipherschools_project.png",
     "archived": true,
-    "featured": false
+    "featured": false,
+    "categories": ["Full stack", "Frontend"],
+    "blurb": "Profile page clone with a backend for storing user data.",
+    "stackLabel": "React · Redux · Express · MongoDB · TypeScript"
   },
   {
     "id": "digital-whiteboard",
@@ -172,7 +198,10 @@
     "demo": "https://fabric-whiteboard.onrender.com/",
     "image": "/projects/fabric_project.png",
     "archived": true,
-    "featured": false
+    "featured": false,
+    "categories": ["Frontend"],
+    "blurb": "A canvas for drawing and writing in the browser.",
+    "stackLabel": "React · Fabric.js · TypeScript"
   },
   {
     "id": "peermessaging",
@@ -198,7 +227,11 @@
       "Relied on browser peer connections to avoid a message relay backend",
       "Kept state client-side, accepting browser connectivity constraints as part of the design"
     ],
-    "featured": false
+    "featured": false,
+    "categories": ["Real-time", "Frontend"],
+    "blurb": "Messaging and video calls over direct browser connections — no relay backend ever sees the message content.",
+    "stackLabel": "PeerJS · Next.js · Redux",
+    "liveLabel": "Live demo"
   },
   {
     "id": "jwt-posts",
@@ -211,6 +244,9 @@
     "demo": "https://api-jwtposts.onrender.com/api/v1/users/",
     "image": "/projects/jwtposts_project.png",
     "archived": true,
-    "featured": false
+    "featured": false,
+    "categories": ["Backend"],
+    "blurb": "REST API for creating and fetching posts behind JWT authentication.",
+    "stackLabel": "Node.js · Express · MongoDB · Redis"
   }
 ]

@@ -18,6 +18,10 @@ export interface Project {
   result?: string;
   tradeoffs?: string[];
   featured: boolean;
+  categories?: string[];
+  blurb?: string;
+  stackLabel?: string;
+  liveLabel?: string;
 }
 
 export interface Experience {
