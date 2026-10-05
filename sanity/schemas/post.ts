@@ -64,6 +64,13 @@ export default defineType({
       description: "Short summary for previews (auto-generated if empty)",
     }),
     defineField({
+      name: "pullQuote",
+      title: "Pull quote",
+      type: "text",
+      rows: 2,
+      description: "One sentence shown on the featured card (falls back to excerpt)",
+    }),
+    defineField({
       name: "tags",
       title: "Tags",
       type: "array",

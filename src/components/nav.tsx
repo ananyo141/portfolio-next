@@ -1,163 +1,110 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { navItems } from "@data/nav-items";
+import { usePathname } from "next/navigation";
+import { homeSections, type SectionId } from "@data/nav-items";
 import ThemeToggle from "@components/theme-toggle";
 
 export default function Nav() {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState("");
   const pathname = usePathname();
-  const router = useRouter();
   const isHome = pathname === "/";
+  const isBlog = pathname.startsWith("/blog");
+  const [active, setActive] = useState<SectionId | "">("");
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 100);
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const doc = document.documentElement;
+        const max = Math.max(1, doc.scrollHeight - window.innerHeight);
+        const p = Math.min(1, Math.max(0, window.scrollY / max));
+        if (barRef.current) barRef.current.style.width = `${(p * 100).toFixed(1)}%`;
+        if (!isHome) return;
+        let current: SectionId | "" = "";
+        for (const s of homeSections) {
+          const el = document.getElementById(s.id);
+          if (el && el.getBoundingClientRect().top < window.innerHeight * 0.35) current = s.id;
+        }
+        setActive((prev) => (prev === current ? prev : current));
+      });
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome, pathname]);
 
-  useEffect(() => {
-    if (!isHome) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-50% 0px -50% 0px" }
-    );
-
-    navItems.forEach((item) => {
-      const el = document.querySelector(item.href);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, [isHome]);
-
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
-    setMobileOpen(false);
-
-    if (!isHome) {
-      router.push("/" + href);
-      return;
-    }
-
-    const el = document.querySelector(href);
-    if (el) {
-      const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-        ? "auto"
-        : "smooth";
-      el.scrollIntoView({ behavior });
-    }
-  };
+  const links: { label: string; href: string; on: boolean }[] = isHome
+    ? homeSections.map((s) => ({ label: s.label, href: `#${s.id}`, on: active === s.id }))
+    : [
+        { label: "Home", href: "/", on: false },
+        { label: "Work", href: "/#work", on: false },
+        { label: "Experience", href: "/#experience", on: false },
+        { label: "Writing", href: "/blog", on: isBlog },
+      ];
 
   return (
-    <>
-      {/* Skip link */}
+    <header className="border-line bg-nav sticky top-0 z-20 border-b backdrop-blur-[14px]">
       <a
         href="#main-content"
-        className="focus:bg-accent sr-only cursor-pointer focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2 focus:text-white"
+        className="focus:bg-accent focus:text-on-accent sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:px-4 focus:py-2"
       >
         Skip to content
       </a>
-
       <nav
-        className={`fixed top-0 right-0 left-0 z-40 transition-all duration-300 ${
-          scrolled ? "bg-bg-primary/90 shadow-sm backdrop-blur-md" : "bg-transparent"
-        }`}
+        aria-label="Primary"
+        className="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-3.5"
       >
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 md:px-8">
-          {/* Monogram */}
-          <Link
-            href="/"
-            className="text-text-primary flex items-center gap-2 font-serif text-xl font-semibold tracking-tight"
-          >
-            <span className="text-accent">✦</span> Ananyobrata Pal
-          </Link>
+        <Link href="/" className="flex items-center gap-3 no-underline">
+          <span className="bg-accent text-on-accent flex h-10 w-10 items-center justify-center rounded-[10px] text-[17px] font-extrabold tracking-[-0.04em]">
+            ap
+          </span>
+          <span className="flex flex-col gap-0.5">
+            <span className="text-[15px] font-semibold tracking-[-0.01em]">Ananyobrata Pal</span>
+            <span className="text-muted font-mono text-[10.5px] tracking-[0.12em] uppercase">
+              Software Engineer
+            </span>
+          </span>
+        </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden items-center gap-8 md:flex">
-            {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`relative cursor-pointer font-mono text-[11px] tracking-[0.14em] uppercase transition-colors ${
-                  activeSection === item.href.slice(1)
-                    ? "text-accent after:bg-accent after:absolute after:-bottom-1.5 after:left-0 after:h-px after:w-full"
-                    : "text-text-muted hover:text-text-primary"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-            <div className="border-border-subtle border-l pl-6">
-              <ThemeToggle />
-            </div>
-          </div>
-
-          {/* Mobile: theme toggle + hamburger */}
-          <div className="flex items-center gap-3 md:hidden">
-            <ThemeToggle />
-            <button
-              onClick={() => setMobileOpen(!mobileOpen)}
-              className="relative flex h-8 w-8 cursor-pointer flex-col items-center justify-center gap-1.5"
-              aria-label="Toggle menu"
-              aria-expanded={mobileOpen}
-            >
-              <span
-                className={`bg-text-primary block h-0.5 w-6 transition-transform duration-300 ${
-                  mobileOpen ? "translate-y-2 rotate-45" : ""
-                }`}
-              />
-              <span
-                className={`bg-text-primary block h-0.5 w-6 transition-opacity duration-300 ${
-                  mobileOpen ? "opacity-0" : ""
-                }`}
-              />
-              <span
-                className={`bg-text-primary block h-0.5 w-6 transition-transform duration-300 ${
-                  mobileOpen ? "-translate-y-2 -rotate-45" : ""
-                }`}
-              />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile overlay */}
-      {mobileOpen && (
-        <div className="bg-bg-primary fixed inset-0 z-50 flex flex-col items-center justify-center gap-8 md:hidden">
-          <button
-            onClick={() => setMobileOpen(false)}
-            className="absolute top-4 right-6 cursor-pointer font-mono text-2xl"
-            aria-label="Close menu"
-          >
-            ✕
-          </button>
-          {navItems.map((item) => (
+        <div className="order-3 flex w-full flex-wrap items-center gap-x-6 gap-y-1 text-sm md:order-none md:w-auto">
+          {links.map((l) => (
             <a
-              key={item.href}
-              href={item.href}
-              onClick={(e) => handleNavClick(e, item.href)}
-              className="text-text-primary hover:text-accent cursor-pointer font-serif text-4xl transition-colors"
+              key={l.href}
+              href={l.href}
+              aria-current={l.on ? "true" : undefined}
+              className={`hover:text-ink flex min-h-11 items-center gap-[7px] no-underline transition-colors ${
+                l.on ? "text-ink" : "text-muted"
+              }`}
             >
-              {item.label}
+              <span
+                aria-hidden="true"
+                className={`bg-accent h-1.5 w-1.5 rounded-full transition-opacity ${
+                  l.on ? "opacity-100" : "opacity-0"
+                }`}
+              />
+              {l.label}
             </a>
           ))}
         </div>
-      )}
-    </>
+
+        <div className="flex items-center gap-2.5">
+          <ThemeToggle />
+          <a href={isHome ? "#contact" : "/#contact"} className="pill pill-solid h-11 px-5 text-sm">
+            Get in touch <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </nav>
+      <div
+        ref={barRef}
+        aria-hidden="true"
+        className="bg-accent absolute bottom-[-1px] left-0 h-0.5 transition-[width] duration-100 ease-linear"
+        style={{ width: "0%" }}
+      />
+    </header>
   );
 }

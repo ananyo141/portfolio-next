@@ -18,13 +18,22 @@ export interface Project {
   result?: string;
   tradeoffs?: string[];
   featured: boolean;
+  categories?: string[];
+  blurb?: string;
+  stackLabel?: string;
+  liveLabel?: string;
 }
 
 export interface Experience {
+  id: string;
   company: string;
   role: string;
-  period: string;
-  current?: boolean;
+  /** YYYY-MM */
+  start: string;
+  /** YYYY-MM, or null while ongoing */
+  end: string | null;
+  label: string;
+  team: string;
   description: string;
   tags: string[];
 }

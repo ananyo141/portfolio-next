@@ -1,60 +1,46 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import site from "@data/site.json";
 import contact from "@data/contact.json";
-import { Github, LinkedIn, Twitter, Email } from "@assets/icons";
+
+const links: [string, string][] = [
+  ["/projects", "Case studies"],
+  ["/uses", "Uses"],
+  ["/tools", "Tools"],
+  ["/blog", "Blog"],
+];
 
 export default function Footer() {
+  const isHome = usePathname() === "/";
   const year = new Date().getFullYear();
-  const links: [string, React.ReactNode, string][] = [
-    [contact.social.github, <Github key="gh" size={16} />, "GitHub"],
-    [contact.social.linkedin, <LinkedIn key="li" size={16} />, "LinkedIn"],
-    [contact.social.twitter, <Twitter key="tw" size={16} />, "Twitter / X"],
-    [`mailto:${contact.email}`, <Email key="em" size={16} />, "Email"],
-  ];
-  const siteLinks = [
-    ["/projects", "Case studies"],
-    ["/tools", "Tools"],
-    ["/principles", "Principles"],
-    ["/uses", "Uses"],
-    [contact.social.rss, "RSS"],
-  ];
-
   return (
-    <footer className="border-border-subtle bg-bg-deep border-t px-6 py-10 md:px-8">
-      <div className="text-text-muted mx-auto flex max-w-6xl flex-col gap-6 font-mono text-[10.5px] tracking-[0.12em] uppercase">
-        <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-          <span>
-            {site.name} · {site.title}
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
-            {siteLinks.map(([href, label]) =>
-              href.startsWith("/") ? (
-                <Link key={label} href={href} className="hover:text-accent transition-colors">
-                  {label}
-                </Link>
-              ) : (
-                <a key={label} href={href} className="hover:text-accent transition-colors">
-                  {label}
-                </a>
-              )
-            )}
-          </div>
-          <span>Built with intent · © {year}</span>
-        </div>
-        <div className="flex items-center justify-center gap-5">
-          {links.map(([href, icon, label]) => (
-            <a
-              key={label}
-              href={href}
-              target={href.startsWith("mailto:") ? undefined : "_blank"}
-              rel="noopener noreferrer"
-              aria-label={label}
-              className="hover:text-accent cursor-pointer transition-colors"
-            >
-              {icon}
-            </a>
+    <footer
+      className={`border-line bg-bg2 border-t ${isHome ? "inv" : "mt-[clamp(80px,9vw,128px)]"}`}
+    >
+      <div className="wrap text-muted flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-4 text-[13.5px]">
+        <span className="font-mono text-[11.5px] tracking-[0.08em]">
+          © {year} {site.name} — Next.js on Vercel
+        </span>
+        <div className="tap-row flex flex-wrap items-center gap-x-6">
+          {links.map(([href, label]) => (
+            <Link key={href} href={href} className="hover:text-accent-ink no-underline">
+              {label}
+            </Link>
           ))}
+          <a href={contact.social.rss} className="hover:text-accent-ink no-underline">
+            RSS
+          </a>
+          <a href="#top" className="text-ink no-underline">
+            Back to top ↑
+          </a>
         </div>
+      </div>
+      <div aria-hidden="true" className="overflow-hidden px-[clamp(12px,2vw,24px)] leading-[0.74]">
+        <span className="outline-num block translate-y-[14%] text-[clamp(80px,15.4vw,236px)] font-extrabold tracking-[-0.065em] whitespace-nowrap">
+          ananyobrata
+        </span>
       </div>
     </footer>
   );

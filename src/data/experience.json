@@ -1,24 +1,35 @@
 [
   {
+    "id": "rtcamp",
     "company": "rtCamp Solutions",
     "role": "Software Engineer",
-    "period": "July 2024 – Present",
-    "current": true,
-    "description": "Building scalable and maintainable applications within a distributed engineering team. Focus on backend systems, API design, and performance optimization. Contributing to open-source tooling and internal platform improvements.",
+    "start": "2024-07",
+    "end": null,
+    "label": "backend · api design · performance",
+    "team": "distributed",
+    "description": "Building scalable, maintainable applications within a distributed engineering team. Focus on backend systems, API design and performance optimisation, plus open-source tooling and internal platform improvements.",
     "tags": ["Python", "WordPress", "System Architecture"]
   },
   {
+    "id": "scalenow",
     "company": "ScalenowTech",
     "role": "Full Stack Developer",
-    "period": "July 2023 – June 2024",
-    "description": "Led development of the company landing site and internal tools. Improved organic reach by 80% through technical SEO, performance tuning, and structured data. Deployed on DigitalOcean with CI/CD pipelines.",
+    "start": "2023-07",
+    "end": "2024-06",
+    "label": "seo · ci/cd · tools",
+    "team": "full stack",
+    "description": "Led development of the company landing site and internal tools. Improved organic reach by 80% through technical SEO, performance tuning and structured data. Deployed on DigitalOcean with CI/CD pipelines.",
     "tags": ["Next.js", "Express", "Docker", "CI/CD", "SEO"]
   },
   {
+    "id": "varlyq",
     "company": "Varlyq Technologies",
     "role": "Backend Developer",
-    "period": "May 2023 – January 2024",
-    "description": "Migrated 200+ legacy APIs from Core PHP to Node.js with TypeScript. Established API design conventions, monitoring, and testing standards. Deployed applications on DigitalOcean and Vercel.",
+    "start": "2023-05",
+    "end": "2024-01",
+    "label": "php → ts",
+    "team": "backend",
+    "description": "Migrated 200+ legacy APIs from Core PHP to Node.js with TypeScript. Established API design conventions, monitoring and testing standards. Deployed applications on DigitalOcean and Vercel.",
     "tags": ["Express", "MongoDB", "TypeScript", "PostgreSQL"]
   }
 ]

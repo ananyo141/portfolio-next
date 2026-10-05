@@ -13,7 +13,7 @@
   },
   {
     "category": "Currently Exploring",
-    "items": ["LangChain", "LLM Orchestration", "Distributed Systems"],
+    "items": ["LangChain", "LLM orchestration", "distributed systems"],
     "highlight": true
   }
 ]

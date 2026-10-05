@@ -7,6 +7,7 @@ export async function getPosts() {
     slug,
     publishedAt,
     excerpt,
+    pullQuote,
     body,
     tags,
     categories[]-> {
@@ -27,6 +28,7 @@ export async function getPost(slug: string) {
     slug,
     publishedAt,
     excerpt,
+    pullQuote,
     _id,
     body,
     tags,

@@ -19,6 +19,7 @@ interface EmailProps {
   username: string;
   contactDate?: Date;
   userPhone?: string;
+  userTopic?: string;
   userMessage?: string;
 }
 
@@ -26,6 +27,7 @@ export const ContactFeedbackMail = ({
   username,
   contactDate: loginDate = new Date(),
   userPhone,
+  userTopic,
   userMessage,
 }: EmailProps) => {
   const formattedDate = loginDate.toLocaleTimeString("en-US", {
@@ -78,6 +80,7 @@ export const ContactFeedbackMail = ({
                   show interest in my work. Your support means the world to me!
                 </Text>
                 <Text style={paragraph}>Here&apos;s a quick summary of what you just sent me:</Text>
+                <Text style={paragraph}>Topic: {userTopic}</Text>
                 <b>Time: </b>
                 {formattedDate} IST
                 <br />

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda, Geist, Geist_Mono, Caveat } from "next/font/google";
-import { ToastContainer } from "react-toastify";
+import { Bricolage_Grotesque, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
 import Nav from "@components/nav";
 import Footer from "@components/footer";
 import { ThemeProvider } from "@components/theme-provider";
@@ -11,28 +9,25 @@ import { ThemeScript } from "@components/theme-script";
 import contact from "@data/contact.json";
 import site from "@data/site.json";
 
-const bodoni = Bodoni_Moda({
+const bricolage = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-bodoni",
+  axes: ["opsz"],
+  variable: "--font-bricolage",
   display: "swap",
 });
 
-const geist = Geist({
+const instrument = Instrument_Serif({
   subsets: ["latin"],
-  variable: "--font-geist",
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument",
   display: "swap",
 });
 
-const geistMono = Geist_Mono({
+const jetbrains = JetBrains_Mono({
   subsets: ["latin"],
-  variable: "--font-geist-mono",
-  display: "swap",
-});
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["500", "700"],
-  variable: "--font-caveat",
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
   display: "swap",
 });
 
@@ -71,7 +66,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${bodoni.variable} ${geist.variable} ${geistMono.variable} ${caveat.variable}`}
+      className={`${bricolage.variable} ${instrument.variable} ${jetbrains.variable}`}
     >
       <head>
         <ThemeScript />
@@ -87,13 +82,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Nav />
           <main id="main-content">{children}</main>
           <Footer />
-          <ToastContainer
-            position="bottom-right"
-            autoClose={4000}
-            hideProgressBar
-            closeOnClick
-            pauseOnHover
-          />
         </ThemeProvider>
       </body>
     </html>
