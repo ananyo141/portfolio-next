@@ -20,7 +20,10 @@ const MONO = "font-mono text-[11px] tracking-[0.1em] uppercase";
 
 export default function Experience({ now: nowIso }: { now: string }) {
   const [selected, setSelected] = useState(DEFAULT);
-  const now = useMemo(() => new Date(nowIso), [nowIso]);
+  const now = useMemo(() => {
+    const d = new Date(nowIso);
+    return Number.isNaN(d.getTime()) ? new Date() : d;
+  }, [nowIso]);
   const years = traceYears(now);
   const gridStep = `${100 / years.length}%`;
   const nowPos = nowLinePosition(now) * 100;
