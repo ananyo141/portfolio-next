@@ -275,7 +275,7 @@ export default async function ProjectCaseStudyPage({ params }: Props) {
     <div className="bg-bg-primary min-h-screen px-6 py-32 md:px-8">
       <article className="mx-auto max-w-6xl">
         <Link
-          href="/#projects"
+          href="/#work"
           className="text-text-muted hover:text-accent font-mono text-[11px] tracking-[0.18em] uppercase transition-colors"
         >
           ← Back to selected work
