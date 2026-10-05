@@ -34,7 +34,10 @@ export default function BlogPreview({ posts }: { posts: PostSummary[] }) {
           </Link>
         ))}
       </div>
-      <Link href="/blog" className="self-start text-[14.5px] font-semibold">
+      <Link
+        href="/blog"
+        className="inline-flex min-h-11 items-center self-start text-[14.5px] font-semibold"
+      >
         All writing →
       </Link>
     </div>

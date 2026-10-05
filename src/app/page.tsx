@@ -27,7 +27,7 @@ export default async function Home() {
   }));
 
   return (
-    <div className="bg-bg-primary">
+    <>
       <Hero />
       <Marquee />
       <Shell posts={shellPosts} />
@@ -41,6 +41,6 @@ export default async function Home() {
         <Skills />
       </section>
       <Contact />
-    </div>
+    </>
   );
 }

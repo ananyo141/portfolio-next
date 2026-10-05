@@ -24,13 +24,16 @@ export default function Marquee() {
 
   useEffect(() => {
     const el = track.current;
-    if (!el || reduced) return;
-    let ticking = false;
+    if (!el) return;
+    if (reduced) {
+      el.style.transform = "";
+      return;
+    }
+    let raf = 0;
     const onScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      requestAnimationFrame(() => {
-        ticking = false;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
         const half = el.scrollWidth / 2 || 1;
         const x = (window.scrollY * 0.6) % half;
         el.style.transform = `translate3d(${(-x).toFixed(1)}px,0,0)`;
@@ -38,7 +41,10 @@ export default function Marquee() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
   }, [reduced]);
 
   return (

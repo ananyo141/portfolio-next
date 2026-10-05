@@ -19,11 +19,11 @@ export default function Footer() {
     <footer
       className={`border-line bg-bg2 border-t ${isHome ? "inv" : "mt-[clamp(80px,9vw,128px)]"}`}
     >
-      <div className="wrap text-muted flex flex-wrap justify-between gap-x-8 gap-y-4 py-7 text-[13.5px]">
+      <div className="wrap text-muted flex flex-wrap items-center justify-between gap-x-8 gap-y-2 py-4 text-[13.5px]">
         <span className="font-mono text-[11.5px] tracking-[0.08em]">
           © {year} {site.name} — Next.js on Vercel
         </span>
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
+        <div className="tap-row flex flex-wrap items-center gap-x-6">
           {links.map(([href, label]) => (
             <Link key={href} href={href} className="hover:text-accent-ink no-underline">
               {label}

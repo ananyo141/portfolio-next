@@ -94,7 +94,7 @@ function FeaturedCard({ p }: { p: Project }) {
           </div>
         ) : null}
         <TechChips items={p.tech} />
-        <div className="mt-auto flex flex-wrap gap-x-6 gap-y-2.5 text-[14.5px] font-medium">
+        <div className="tap-row mt-auto flex flex-wrap gap-x-6 text-[14.5px] font-medium">
           <Link href={`/projects/${p.id}`} className="text-accent-ink">
             Read the case study →
           </Link>
@@ -142,7 +142,7 @@ function GridCard({ p, n }: { p: Project; n: number }) {
         </div>
         <h3 className="m-0 text-[34px] leading-none font-bold tracking-[-0.04em]">{p.title}</h3>
         <p className="text-muted m-0 text-[15.5px] leading-[1.55]">{p.blurb}</p>
-        <div className="mt-auto flex flex-wrap gap-x-[22px] gap-y-2 pt-2 text-sm font-medium">
+        <div className="tap-row mt-auto flex flex-wrap gap-x-[22px] text-sm font-medium">
           {p.caseStudy && (
             <Link href={`/projects/${p.id}`} className="text-accent-ink">
               Case study →
@@ -273,7 +273,7 @@ export default function Projects() {
                 <span className="text-muted flex-[2_1_220px] font-mono text-[11.5px]">
                   {p.stackLabel}
                 </span>
-                <span className="flex flex-none gap-[18px] text-sm font-medium">
+                <span className="tap-row flex flex-none gap-[18px] text-sm font-medium">
                   {archiveLinks(p).map((l, i) => (
                     <a
                       key={l.label}
@@ -296,7 +296,10 @@ export default function Projects() {
           </div>
         )}
       </div>
-      <Link href="/projects" className="self-end text-[14.5px] font-semibold">
+      <Link
+        href="/projects"
+        className="inline-flex min-h-11 items-center self-end text-[14.5px] font-semibold"
+      >
         All projects →
       </Link>
     </section>

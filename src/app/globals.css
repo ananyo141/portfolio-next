@@ -177,6 +177,13 @@ a {
   -webkit-text-stroke: 1.5px var(--line2);
 }
 
+/* inline text links get a 44px hit area without changing their look */
+.tap-row > a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+
 /* ---------- controls ---------- */
 .pill {
   display: inline-flex;
