@@ -15,14 +15,14 @@ export default async function BlogPreview() {
       <div className="mx-auto max-w-6xl">
         <StaggerContainer>
           <StaggerItem>
-            <div className="mb-14 grid items-end gap-10 md:grid-cols-[1.3fr_1fr]">
+            <div className="mb-14 grid items-start gap-10 md:grid-cols-[1.3fr_1fr]">
               <div>
                 <Eyebrow>Writing</Eyebrow>
                 <h2 className="text-text-primary mt-5 font-serif text-4xl leading-[1.02] font-[440] tracking-[-0.015em] md:text-5xl">
                   Notes from the <em className="text-text-muted italic">systems edge</em>.
                 </h2>
               </div>
-              <div>
+              <div className="md:pt-[2.28125rem]">
                 <p className="text-text-muted text-[15px] leading-relaxed">
                   Field notes on backend seams, operational pressure, debugging loops, and the
                   developer tools that make systems easier to reason about.
