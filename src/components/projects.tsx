@@ -7,6 +7,7 @@ import type { Project } from "@data/types";
 import {
   FILTERS,
   archiveLinks,
+  archiveSummary,
   filterCount,
   filterSummary,
   matchesFilter,
@@ -241,9 +242,7 @@ export default function Projects() {
         >
           <span className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
             <span className="font-mono text-[11px] tracking-[0.14em] uppercase">Archive</span>
-            <span className="text-muted text-[15px]">
-              {archived.length} earlier experiments — e-commerce, mobile, NLP, canvas, auth
-            </span>
+            <span className="text-muted text-[15px]">{archiveSummary(archived)}</span>
           </span>
           <span className="flex items-center gap-2.5 text-[14.5px] font-semibold">
             {archiveOpen ? "Hide archive" : "Show archive"}
