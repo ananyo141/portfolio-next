@@ -48,3 +48,11 @@ export async function getAllPostSlugs() {
   const slugs = await client.fetch(query);
   return slugs;
 }
+
+export async function getPostSitemapEntries(): Promise<{ slug: string; updatedAt: string }[]> {
+  const query = `*[_type == "post" && defined(slug.current)]{
+    "slug": slug.current,
+    "updatedAt": coalesce(_updatedAt, publishedAt)
+  }`;
+  return client.fetch(query);
+}
