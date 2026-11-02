@@ -45,7 +45,7 @@ function FeaturedCard({ p }: { p: Project }) {
         {/* the text column is usually taller than the screenshot: centre the image in the pane */}
         <div className="flex flex-1 items-center">
           <div
-            className="border-line2 w-full overflow-hidden rounded-2xl border bg-[#05060c]"
+            className="border-line2 bg-bg2 w-full overflow-hidden rounded-2xl border"
             style={{ aspectRatio: "1292 / 665" }}
           >
             {p.image && (
