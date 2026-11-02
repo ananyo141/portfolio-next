@@ -48,7 +48,7 @@ export default function Marquee() {
   }, [reduced]);
 
   return (
-    <div aria-hidden="true" className="overflow-x-clip">
+    <div aria-hidden="true" className="overflow-x-clip pt-[1.1vw]">
       <div className="border-band-bg bg-band-bg text-band-fg scale-[1.02] -rotate-[1.2deg] overflow-hidden border-y">
         <div ref={track} className="flex w-max py-[18px] will-change-transform">
           {[...ITEMS, ...ITEMS].map((t, i) => (

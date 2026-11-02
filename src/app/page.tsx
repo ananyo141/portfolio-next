@@ -31,11 +31,12 @@ export default async function Home() {
     <>
       <Hero />
       {/* pin-and-reveal: the sheet that slides over the hero starts at the band's tilted top edge
-          (rotate -1.2deg about its centre: left end sits ~1.1vw below the box top, right end ~1.1vw above it) */}
+          (rotate -1.2deg about its centre: the band is padded down 1.1vw so its right end sits at the sheet top
+          and its left end ~2.2vw below it; nothing pokes above the fold while the hero is pinned) */}
       <div
         className="bg-bg relative z-10"
         style={{
-          clipPath: "polygon(0 calc(1.1vw + 1px), 100% calc(-1.1vw + 1px), 100% 100%, 0 100%)",
+          clipPath: "polygon(0 calc(2.2vw + 1px), 100% 1px, 100% 100%, 0 100%)",
         }}
       >
         <Marquee />
