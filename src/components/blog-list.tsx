@@ -15,7 +15,7 @@ export default function BlogList({ posts }: { posts: PostSummary[] }) {
   const [featured, ...rest] = shown;
 
   return (
-    <section className="wrap flex flex-col gap-10 pt-10">
+    <section className="wrap flex flex-col gap-8 pt-7">
       <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-4">
         <div role="group" aria-label="Filter by topic" className="flex flex-wrap gap-2">
           {CHIPS.map((t) => {

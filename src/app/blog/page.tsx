@@ -21,7 +21,7 @@ export default async function BlogPage() {
     <div className="fadein">
       <section id="top" className="border-line relative overflow-hidden border-b">
         <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden="true" />
-        <div className="wrap relative flex flex-col gap-10 pt-[clamp(56px,7vw,104px)] pb-[clamp(48px,5vw,72px)]">
+        <div className="wrap relative flex flex-col gap-6 pt-[clamp(32px,4vw,56px)] pb-[clamp(28px,3vw,40px)]">
           <div className="rise text-muted flex flex-wrap gap-x-7 gap-y-2.5 font-mono text-[11.5px] tracking-[0.14em] uppercase">
             <span className="text-accent-ink">[04] Writing</span>
             <span>
@@ -30,14 +30,14 @@ export default async function BlogPage() {
             <span>System design · Backend · Tooling</span>
           </div>
           <h1
-            className="rise d1 m-0 text-[clamp(56px,8.4vw,132px)] leading-[0.88] font-bold tracking-[-0.055em] [text-wrap:balance]"
+            className="rise d1 m-0 max-w-[14ch] text-[clamp(44px,6vw,88px)] leading-[0.9] font-bold tracking-[-0.05em] [text-wrap:balance]"
             style={{ fontVariationSettings: "'opsz' 96" }}
           >
             Notes from the{" "}
             <span className="si text-accent text-[1.06em] tracking-[-0.03em]">systems edge.</span>
           </h1>
           <div className="rise d3 flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-            <p className="text-muted m-0 max-w-[52ch] text-[clamp(17px,1.4vw,20px)] leading-[1.55] [text-wrap:pretty]">
+            <p className="text-muted m-0 max-w-[52ch] text-[clamp(16px,1.2vw,18px)] leading-[1.55] [text-wrap:pretty]">
               Essays on backend boundaries, system design tradeoffs, tooling, debugging, and the
               operational details that shape reliable software.
             </p>

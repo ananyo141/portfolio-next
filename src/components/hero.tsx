@@ -310,7 +310,7 @@ export default function Hero() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/blog" className="pill pill-solid h-[52px] px-[26px] text-[15px]">
-                  Read the writing <span aria-hidden="true">→</span>
+                  Read the blogs <span aria-hidden="true">→</span>
                 </Link>
                 <a href="#shell" className="pill h-[52px] px-[22px] text-[15px]">
                   <span className="text-accent-ink font-mono text-[13px]">&gt;_</span>Try the shell
