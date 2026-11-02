@@ -27,8 +27,10 @@ function useFitHeadline(
       const h1 = h1Ref.current;
       const m = measureRef.current;
       if (!h1 || !m) return;
+      // offsetWidth ignores transforms: when the page loads at a hash (e.g. /#contact) the hero is
+      // already zoomed out, and getBoundingClientRect would report the scaled width.
       const avail = h1.clientWidth;
-      const w = m.getBoundingClientRect().width;
+      const w = m.offsetWidth;
       if (!avail || !w) return;
       let px = Math.min(156, ((100 * avail) / w) * 0.97);
       let wrap = false;
