@@ -116,7 +116,7 @@ export default function Experience({ now: nowIso }: { now: string }) {
                       left: `${g.left * 100}%`,
                       width: `${g.width * 100}%`,
                       background: on
-                        ? "var(--accent)"
+                        ? "var(--accent-solid)"
                         : live
                           ? "color-mix(in srgb, var(--accent) 22%, transparent)"
                           : "transparent",

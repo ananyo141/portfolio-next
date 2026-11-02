@@ -204,7 +204,7 @@ export default function Contact() {
                       aria-pressed={topic === t}
                       onClick={() => setTopic(t)}
                       className={`chip h-10 px-3.5 text-[13.5px] ${
-                        topic === t ? "border-accent bg-accent text-on-accent" : ""
+                        topic === t ? "border-accent-solid bg-accent-solid text-on-accent" : ""
                       }`}
                     >
                       {t}

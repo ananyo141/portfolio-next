@@ -60,7 +60,7 @@ export default function Nav() {
         className="wrap flex flex-wrap items-center justify-between gap-x-8 gap-y-3 py-3.5"
       >
         <Link href="/" className="flex items-center gap-3 no-underline">
-          <span className="bg-accent text-on-accent flex h-10 w-10 items-center justify-center rounded-[10px] text-[17px] font-extrabold tracking-[-0.04em]">
+          <span className="bg-accent-solid text-on-accent flex h-10 w-10 items-center justify-center rounded-[10px] text-[17px] font-extrabold tracking-[-0.04em]">
             ap
           </span>
           <span className="flex flex-col gap-0.5">
