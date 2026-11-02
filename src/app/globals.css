@@ -83,17 +83,6 @@ html:not(.dark) .inv {
   --color-band-fg: var(--band-fg);
   --color-band-dot: var(--band-dot);
 
-  /* compat aliases — only secondary routes (/projects, /uses, /tools, /principles, jwt-inspector)
-     still use these names. Remove when those routes are redesigned. */
-  --color-bg-primary: var(--bg);
-  --color-bg-deep: var(--bg2);
-  --color-text-primary: var(--ink);
-  --color-text-muted: var(--muted);
-  --color-border-subtle: var(--line2);
-  --color-accent-2: var(--accent-ink);
-  --color-accent-soft: var(--sel-bg);
-  --color-numeral: var(--line2);
-
   --font-sans: var(--font-bricolage), "Helvetica Neue", Helvetica, sans-serif;
   --font-serif: var(--font-instrument), Georgia, "Times New Roman", serif;
   --font-mono: var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo, monospace;

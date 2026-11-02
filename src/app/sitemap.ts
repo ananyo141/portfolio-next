@@ -7,10 +7,6 @@ const siteUrl = site.domain.replace(/\/$/, "");
 const routes = [
   "",
   "/blog",
-  "/principles",
-  "/uses",
-  "/tools",
-  "/tools/jwt-inspector",
   "/blog/embracing-microservices-a-revolution-in-modern-software-architecture",
   "/blog/working-with-docker-compose",
 ];

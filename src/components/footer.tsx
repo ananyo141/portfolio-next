@@ -5,11 +5,7 @@ import { usePathname } from "next/navigation";
 import site from "@data/site.json";
 import contact from "@data/contact.json";
 
-const links: [string, string][] = [
-  ["/uses", "Uses"],
-  ["/tools", "Tools"],
-  ["/blog", "Blog"],
-];
+const links: [string, string][] = [["/blog", "Blog"]];
 
 export default function Footer() {
   const isHome = usePathname() === "/";
