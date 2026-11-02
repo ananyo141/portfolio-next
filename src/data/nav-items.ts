@@ -1,12 +1,13 @@
+export type SectionId = "work" | "experience" | "writing" | "contact";
+
 export interface NavItem {
   label: string;
-  href: string;
+  id: SectionId;
 }
 
-export const navItems: NavItem[] = [
-  { label: "Work", href: "#projects" },
-  { label: "Experience", href: "#work" },
-  { label: "Writing", href: "#writing" },
-  { label: "Skills", href: "#skills" },
-  { label: "Contact", href: "#contact" },
+export const homeSections: NavItem[] = [
+  { label: "Work", id: "work" },
+  { label: "Experience", id: "experience" },
+  { label: "Writing", id: "writing" },
+  { label: "Contact", id: "contact" },
 ];

@@ -7,6 +7,7 @@ export async function getPosts() {
     slug,
     publishedAt,
     excerpt,
+    pullQuote,
     body,
     tags,
     categories[]-> {
@@ -27,6 +28,7 @@ export async function getPost(slug: string) {
     slug,
     publishedAt,
     excerpt,
+    pullQuote,
     _id,
     body,
     tags,
@@ -45,4 +47,12 @@ export async function getAllPostSlugs() {
   const query = `*[_type == "post" && defined(slug.current)]{ "slug": slug.current }`;
   const slugs = await client.fetch(query);
   return slugs;
+}
+
+export async function getPostSitemapEntries(): Promise<{ slug: string; updatedAt: string }[]> {
+  const query = `*[_type == "post" && defined(slug.current)]{
+    "slug": slug.current,
+    "updatedAt": coalesce(_updatedAt, publishedAt)
+  }`;
+  return client.fetch(query);
 }

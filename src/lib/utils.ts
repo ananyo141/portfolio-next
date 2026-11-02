@@ -45,3 +45,13 @@ export function formatDate(dateString: string): string {
     day: "numeric",
   });
 }
+
+export function formatDateShort(dateString: string, granularity: "day" | "month" = "day"): string {
+  const date = new Date(dateString);
+  return date.toLocaleDateString("en-US", {
+    timeZone: "Asia/Kolkata",
+    year: "numeric",
+    month: "short",
+    ...(granularity === "day" ? { day: "numeric" } : {}),
+  });
+}
