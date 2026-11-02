@@ -13,7 +13,6 @@ export interface Project {
   constraint?: string;
   highlight?: string;
   evidence?: string[];
-  caseStudy?: boolean;
   archived?: boolean;
   result?: string;
   tradeoffs?: string[];

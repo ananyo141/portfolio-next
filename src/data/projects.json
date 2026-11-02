@@ -16,7 +16,6 @@
       "LangChain orchestration around CodeLlama",
       "Feedback categories for complexity, style, and correctness"
     ],
-    "caseStudy": true,
     "archived": false,
     "result": "A backend repository and walkthrough demonstrate the grading flow end to end.",
     "tradeoffs": [
@@ -46,7 +45,6 @@
       "Redis-assisted realtime status updates",
       "Separate services for upload, processing, and delivery"
     ],
-    "caseStudy": true,
     "archived": false,
     "result": "A deployed demo and walkthrough show the upload, processing, and viewing flow.",
     "tradeoffs": [
@@ -78,7 +76,6 @@
       "Dashboard frontend for activity and engagement views",
       "Aggregation-focused data access patterns"
     ],
-    "caseStudy": true,
     "archived": false,
     "result": "A deployed dashboard, repository, and walkthrough demonstrate the analytics workflow.",
     "tradeoffs": [
@@ -110,7 +107,6 @@
       "Redis-backed realtime infrastructure",
       "PostgreSQL persistence behind REST endpoints"
     ],
-    "caseStudy": true,
     "archived": false,
     "result": "A Swagger deployment, backend repository, and walkthrough document the API surface.",
     "tradeoffs": [

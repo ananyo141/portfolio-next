@@ -6,7 +6,6 @@ import site from "@data/site.json";
 import contact from "@data/contact.json";
 
 const links: [string, string][] = [
-  ["/projects", "Case studies"],
   ["/uses", "Uses"],
   ["/tools", "Tools"],
   ["/blog", "Blog"],

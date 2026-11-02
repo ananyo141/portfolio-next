@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import projects from "@data/projects.json";
 import type { Project } from "@data/types";
 import {
@@ -41,7 +40,7 @@ function FeaturedCard({ p }: { p: Project }) {
       <div className="bg-bg2 border-line flex min-w-0 flex-[999_1_560px] flex-col gap-3.5 border-r p-[clamp(20px,3vw,40px)]">
         <div className={`${MONO_META} flex justify-between gap-3`}>
           <span>{p.id} / backend</span>
-          <span className="text-accent-ink">Featured case study</span>
+          <span className="text-accent-ink">Featured project</span>
         </div>
         {/* the text column is usually taller than the screenshot: centre the image in the pane */}
         <div className="flex flex-1 items-center">
@@ -98,12 +97,9 @@ function FeaturedCard({ p }: { p: Project }) {
         ) : null}
         <TechChips items={p.tech} />
         <div className="tap-row mt-auto flex flex-wrap gap-x-6 text-[14.5px] font-medium">
-          <Link href={`/projects/${p.id}`} className="text-accent-ink">
-            Read the case study →
-          </Link>
           {p.github && (
-            <a href={p.github} {...EXT}>
-              GitHub
+            <a href={p.github} {...EXT} className="text-accent-ink">
+              GitHub →
             </a>
           )}
           {p.youtube && (
@@ -118,7 +114,7 @@ function FeaturedCard({ p }: { p: Project }) {
 }
 
 function GridCard({ p, n }: { p: Project; n: number }) {
-  const liveFirst = !p.caseStudy && p.live;
+  const liveFirst = Boolean(p.live);
   return (
     <article className="lift fadein border-line2 bg-surface flex h-full flex-col overflow-hidden rounded-[24px] border">
       <div
@@ -146,11 +142,6 @@ function GridCard({ p, n }: { p: Project; n: number }) {
         <h3 className="m-0 text-[34px] leading-none font-bold tracking-[-0.04em]">{p.title}</h3>
         <p className="text-muted m-0 text-[15.5px] leading-[1.55]">{p.blurb}</p>
         <div className="tap-row mt-auto flex flex-wrap gap-x-[22px] text-sm font-medium">
-          {p.caseStudy && (
-            <Link href={`/projects/${p.id}`} className="text-accent-ink">
-              Case study →
-            </Link>
-          )}
           {p.live && (
             <a href={p.live} {...EXT} className={liveFirst ? "text-accent-ink" : undefined}>
               {p.liveLabel ?? "Live demo"}
@@ -228,8 +219,7 @@ export default function Projects() {
       ) : (
         <div className="fadein border-line2 flex flex-wrap items-center justify-between gap-x-8 gap-y-4 rounded-[24px] border border-dashed px-8 py-12">
           <p className="text-muted m-0 text-lg leading-[1.5]">
-            No recent case studies in <span className="text-ink">{filter}</span> — the archive has
-            some.
+            No recent projects in <span className="text-ink">{filter}</span> — the archive has some.
           </p>
           <button type="button" onClick={() => setArchiveOpen(true)} className="pill px-5">
             Open the archive ↓
@@ -299,12 +289,6 @@ export default function Projects() {
           </div>
         )}
       </div>
-      <Link
-        href="/projects"
-        className="inline-flex min-h-11 items-center self-end text-[14.5px] font-semibold"
-      >
-        All projects →
-      </Link>
     </section>
   );
 }

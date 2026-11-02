@@ -11,7 +11,7 @@ const WORDS = ["the hype.", "the rewrite.", "the pager.", "the trend.", "the fra
 const STATS: [number, string, string][] = [
   [200, "+", "Legacy APIs moved from PHP to TypeScript"],
   [80, "%", "Organic reach lift from technical SEO"],
-  [4, "", "Case studies with live walkthroughs"],
+  [4, "", "Projects with live walkthroughs"],
 ];
 
 function useFitHeadline(
@@ -309,8 +309,8 @@ export default function Hero() {
                 LLM-powered dev tools. Currently engineering at rtCamp.
               </p>
               <div className="flex flex-wrap gap-3">
-                <Link href="/projects" className="pill pill-solid h-[52px] px-[26px] text-[15px]">
-                  Read case studies <span aria-hidden="true">→</span>
+                <Link href="/blog" className="pill pill-solid h-[52px] px-[26px] text-[15px]">
+                  Read the writing <span aria-hidden="true">→</span>
                 </Link>
                 <a href="#shell" className="pill h-[52px] px-[22px] text-[15px]">
                   <span className="text-accent-ink font-mono text-[13px]">&gt;_</span>Try the shell
