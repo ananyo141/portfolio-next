@@ -32,6 +32,55 @@ export interface PostSummary {
   n: string;
 }
 
+const QUOTE_MIN = 55;
+const QUOTE_MAX = 170;
+const QUOTE_IDEAL = 110;
+// Sentences that lean on the previous one read badly out of context.
+const LEANING_OPENER =
+  /^(this|that|these|those|it|its|they|their|he|she|here|there|so|but|and|however|also|then|thus|hence|instead|otherwise|additionally|moreover|furthermore|finally|similarly|likewise|therefore|consequently|still|yet|meanwhile|overall|for (example|instance)|in (addition|short|practice|other words)|as a result|of course|on the other hand)\b/i;
+const FIRST_OR_SECOND_PERSON = /\b(i|i'm|i've|we|we're|you|you're|my|our|your)\b/i;
+
+const quoteScore = (sentence: string): number =>
+  -Math.abs(sentence.length - QUOTE_IDEAL) -
+  (LEANING_OPENER.test(sentence) ? 40 : 0) -
+  (FIRST_OR_SECOND_PERSON.test(sentence) ? 15 : 0);
+
+const isQuotable = (sentence: string): boolean =>
+  sentence.length >= QUOTE_MIN &&
+  sentence.length <= QUOTE_MAX &&
+  /^[A-Z]/.test(sentence) &&
+  !/[`{}<>;]|https?:\/\/|www\./.test(sentence);
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const bestSentence = (paragraphs: any[]): string => {
+  let best = "";
+  let bestScore = -Infinity;
+  for (const p of paragraphs) {
+    const sentences = blockText(p).match(/[^.!?]+[.!?]+(?=\s|$)/g) ?? [];
+    for (const raw of sentences) {
+      const s = raw.trim().replace(/\s+/g, " ");
+      if (!isQuotable(s)) continue;
+      const score = quoteScore(s);
+      if (score > bestScore) {
+        best = s;
+        bestScore = score;
+      }
+    }
+  }
+  return best;
+};
+
+/** Picks a stand-alone, mid-length sentence from the body to use when a post has no pullQuote.
+ *  Prefers paragraphs after the lead (the lead already serves as the excerpt). */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function autoPullQuote(body: any[]): string {
+  if (!Array.isArray(body)) return "";
+  const paragraphs = body.filter(
+    (b) => b?._type === "block" && (b.style ?? "normal") === "normal" && blockText(b).trim()
+  );
+  return bestSentence(paragraphs.slice(1)) || bestSentence(paragraphs.slice(0, 1));
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function toSummary(post: any, index: number): PostSummary {
   const excerpt = post.excerpt || getExcerptFromPortableText(post.body || []);
@@ -43,7 +92,7 @@ export function toSummary(post: any, index: number): PostSummary {
     readTime: calculateReadingTime(post.body || []),
     excerpt,
     topic: topicFor(post),
-    pullQuote: post.pullQuote || excerpt,
+    pullQuote: post.pullQuote || autoPullQuote(post.body || []) || excerpt,
     n: String(index + 1).padStart(2, "0"),
   };
 }
