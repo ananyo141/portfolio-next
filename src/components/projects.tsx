@@ -43,20 +43,23 @@ function FeaturedCard({ p }: { p: Project }) {
           <span>{p.id} / backend</span>
           <span className="text-accent-ink">Featured case study</span>
         </div>
-        <div
-          className="border-line2 overflow-hidden rounded-2xl border bg-[#05060c]"
-          style={{ aspectRatio: "1292 / 665" }}
-        >
-          {p.image && (
-            <Image
-              src={p.image}
-              alt="Code Grader interface: code editor beside complexity, readability and optimisation scores"
-              width={1292}
-              height={665}
-              sizes="(max-width: 900px) 100vw, 60vw"
-              className="zoom block h-full w-full object-cover"
-            />
-          )}
+        {/* the text column is usually taller than the screenshot: centre the image in the pane */}
+        <div className="flex flex-1 items-center">
+          <div
+            className="border-line2 w-full overflow-hidden rounded-2xl border bg-[#05060c]"
+            style={{ aspectRatio: "1292 / 665" }}
+          >
+            {p.image && (
+              <Image
+                src={p.image}
+                alt="Code Grader interface: code editor beside complexity, readability and optimisation scores"
+                width={1292}
+                height={665}
+                sizes="(max-width: 900px) 100vw, 60vw"
+                className="zoom block h-full w-full object-cover"
+              />
+            )}
+          </div>
         </div>
       </div>
       <div className="flex flex-[1_1_400px] flex-col gap-6 p-[clamp(28px,3.4vw,48px)]">
