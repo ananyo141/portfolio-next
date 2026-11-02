@@ -153,6 +153,11 @@ function GridCard({ p, n }: { p: Project; n: number }) {
               GitHub
             </a>
           )}
+          {p.youtube && (
+            <a href={p.youtube} {...EXT}>
+              Walkthrough
+            </a>
+          )}
         </div>
       </div>
     </article>
