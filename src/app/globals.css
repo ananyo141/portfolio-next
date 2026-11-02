@@ -23,6 +23,8 @@
   --sel-bg: color-mix(in srgb, var(--accent) 10%, #ffffff);
   --disc: color-mix(in srgb, var(--accent) 17%, #ffffff);
   --disc-ring: color-mix(in srgb, var(--accent) 55%, transparent);
+  /* desktop nav height; the hero fills the viewport below it */
+  --nav-h: 73px;
 }
 
 html.dark {
@@ -417,7 +419,9 @@ html:not(.dark) .inv {
     align-items: center;
     gap: 0;
     cursor: default;
-    transform: rotate(-8deg);
+    /* --sticker-* come from hover/focus; --peel* come from the hero scroll loop */
+    transform: rotate(calc(var(--sticker-rot, -8deg) + var(--peel, 0deg)))
+      scale(calc(var(--sticker-scale, 1) * var(--peel-scale, 1)));
     transition:
       transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
       gap 0.35s;
@@ -437,7 +441,8 @@ html:not(.dark) .inv {
   .sticker:hover,
   .sticker:focus-visible,
   .portrait-figure:hover .sticker {
-    transform: rotate(-4deg) scale(1.04);
+    --sticker-rot: -4deg;
+    --sticker-scale: 1.04;
   }
   .sticker:hover .sticker-text,
   .sticker:focus-visible .sticker-text,
