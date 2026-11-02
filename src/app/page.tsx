@@ -30,18 +30,27 @@ export default async function Home() {
   return (
     <>
       <Hero />
-      <Marquee />
-      <Shell posts={shellPosts} />
-      <Projects />
-      <Experience now={now} />
-      <section
-        id="writing"
-        className="wrap flex flex-wrap gap-x-20 gap-y-[72px] pt-[clamp(80px,9vw,140px)] pb-10"
+      {/* pin-and-reveal: the sheet that slides over the hero starts at the band's tilted top edge
+          (rotate -1.2deg about its centre: left end sits ~1.1vw below the box top, right end ~1.1vw above it) */}
+      <div
+        className="bg-bg relative z-10"
+        style={{
+          clipPath: "polygon(0 calc(1.1vw + 1px), 100% calc(-1.1vw + 1px), 100% 100%, 0 100%)",
+        }}
       >
-        <BlogPreview posts={summaries} />
-        <Skills />
-      </section>
-      <Contact />
+        <Marquee />
+        <Shell posts={shellPosts} />
+        <Projects />
+        <Experience now={now} />
+        <section
+          id="writing"
+          className="wrap flex flex-wrap gap-x-20 gap-y-[72px] pt-[clamp(80px,9vw,140px)] pb-10"
+        >
+          <BlogPreview posts={summaries} />
+          <Skills />
+        </section>
+        <Contact />
+      </div>
     </>
   );
 }

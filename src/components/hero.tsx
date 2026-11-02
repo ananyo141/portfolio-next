@@ -55,8 +55,16 @@ function useFitHeadline(
   return fit;
 }
 
+/**
+ * Pin-and-reveal: on desktop the hero sticks under the nav and the rest of the page slides over
+ * it while the hero zooms out (1 → 0.94). Below this width the hero is taller than the viewport,
+ * so it just flows and gets the depth parallax instead.
+ */
+const PIN_QUERY = "(min-width: 1024px)";
+
 interface ParallaxRefs {
   section: React.RefObject<HTMLElement | null>;
+  inner: React.RefObject<HTMLDivElement | null>;
   grid: React.RefObject<HTMLDivElement | null>;
   eyebrow: React.RefObject<HTMLDivElement | null>;
   figure: React.RefObject<HTMLDivElement | null>;
@@ -64,15 +72,15 @@ interface ParallaxRefs {
 }
 
 /**
- * Scroll-linked hero motion over the first viewport only:
- * grid drifts at 0.6x (same reference speed as the marquee), portrait at 0.9x with a
- * slight scale-down, eyebrow fades, the headline underline unwinds, the sticker peels.
- * Transforms/opacity only, written straight to the DOM from one rAF.
+ * Scroll-linked hero motion over the first viewport only, written straight to the DOM from one rAF.
+ * Pinned (desktop): the hero zooms out to 0.94 as the page covers it.
+ * Unpinned: grid drifts at 0.6x (same reference speed as the marquee), portrait at 0.9x.
+ * Always: eyebrow fades, the headline underline unwinds, the sticker peels.
  */
 function useHeroParallax(refs: ParallaxRefs, reduced: boolean) {
   useEffect(() => {
-    const { section, grid, eyebrow, figure, band } = refs;
-    const els = [grid.current, eyebrow.current, figure.current, band.current];
+    const { section, inner, grid, eyebrow, figure, band } = refs;
+    const els = [inner.current, grid.current, eyebrow.current, figure.current, band.current];
     const reset = () => {
       for (const el of els) {
         if (!el) continue;
@@ -101,10 +109,18 @@ function useHeroParallax(refs: ParallaxRefs, reduced: boolean) {
         const p = Math.min(1, Math.max(0, y / h));
         if (p === 1 && last === 1) return; // hero is off-screen; stop writing
         last = p;
+        const pinned = window.matchMedia(PIN_QUERY).matches;
+        if (inner.current)
+          inner.current.style.transform = pinned ? `scale(${(1 - 0.06 * p).toFixed(3)})` : "";
+        // while pinned the hero itself stays put, so the depth layers stay put too
         if (grid.current)
-          grid.current.style.transform = `translate3d(0, ${(y * 0.4).toFixed(1)}px, 0)`;
+          grid.current.style.transform = pinned
+            ? ""
+            : `translate3d(0, ${(y * 0.4).toFixed(1)}px, 0)`;
         if (figure.current) {
-          figure.current.style.transform = `translate3d(0, ${(y * 0.1).toFixed(1)}px, 0) scale(${(1 - 0.06 * p).toFixed(3)})`;
+          figure.current.style.transform = pinned
+            ? ""
+            : `translate3d(0, ${(y * 0.1).toFixed(1)}px, 0) scale(${(1 - 0.06 * p).toFixed(3)})`;
           figure.current.style.setProperty("--peel", `${(-10 * p).toFixed(2)}deg`);
           figure.current.style.setProperty("--peel-scale", (1 - 0.08 * p).toFixed(3));
         }
@@ -135,12 +151,20 @@ export default function Hero() {
   const reduced = useReducedMotion();
   const h1Ref = useRef<HTMLHeadingElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const eyebrowRef = useRef<HTMLDivElement>(null);
   const figureRef = useRef<HTMLDivElement>(null);
   const bandRef = useRef<HTMLSpanElement>(null);
   useHeroParallax(
-    { section: sectionRef, grid: gridRef, eyebrow: eyebrowRef, figure: figureRef, band: bandRef },
+    {
+      section: sectionRef,
+      inner: innerRef,
+      grid: gridRef,
+      eyebrow: eyebrowRef,
+      figure: figureRef,
+      band: bandRef,
+    },
     reduced
   );
   const measureRef = useRef<HTMLSpanElement>(null);
@@ -170,137 +194,144 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="top"
-      className="relative flex min-h-[calc(100svh-var(--nav-h))] flex-col overflow-hidden"
+      className="relative z-0 flex min-h-[calc(100svh-var(--nav-h))] flex-col overflow-hidden lg:sticky lg:top-[var(--nav-h)]"
     >
-      <div
-        ref={gridRef}
-        className="grid-bg pointer-events-none absolute inset-x-0 top-[-40%] bottom-0 will-change-transform"
-        aria-hidden="true"
-      />
-      <div className="wrap relative flex flex-1 flex-col justify-center gap-14 py-[clamp(32px,4vw,64px)]">
-        {/* headline + portrait */}
-        <div className="flex flex-wrap items-end gap-12">
-          <div className="flex min-w-0 flex-[999_1_640px] flex-col gap-7">
-            {/* eyebrow row (wrapper is the parallax target; inner div keeps the entrance) */}
-            <div ref={eyebrowRef}>
-              <div className="rise text-muted flex flex-wrap items-center gap-x-7 gap-y-2.5 font-mono text-[11.5px] tracking-[0.14em] uppercase">
-                <span className="text-ink flex items-center gap-2.5">
-                  <span className="pulse bg-accent h-2 w-2 rounded-full" />
-                  Open to interesting problems
-                </span>
-                <span>Backend · Distributed systems · Dev tooling</span>
-                <span>
-                  Kolkata <span className="text-ink">{clock?.clock ?? "--:--"} IST</span> —{" "}
-                  {clock ? clockNote(clock.hour) : "probably shipping"}
-                </span>
-              </div>
-            </div>
-            <h1
-              ref={h1Ref}
-              aria-label="Systems that outlast the hype."
-              className="rise d1 relative m-0 min-w-0 font-bold tracking-[-0.055em]"
-              style={{
-                fontSize: fit.px ? `${fit.px.toFixed(1)}px` : "clamp(48px, 7.2vw, 112px)",
-                lineHeight: 0.86,
-                fontVariationSettings: "'opsz' 96",
-              }}
-            >
-              <span
-                aria-hidden="true"
-                className="block"
-                style={{ whiteSpace: fit.wrap ? "normal" : "nowrap" }}
-              >
-                Systems that{" "}
-                <span className="si text-accent relative [isolation:isolate] inline-block text-[1.08em] tracking-[-0.03em]">
-                  outlast
-                  <span ref={bandRef} className="hl-band" aria-hidden="true" />
-                </span>
-              </span>
-              <span
-                ref={measureRef}
-                aria-hidden="true"
-                className="pointer-events-none invisible absolute top-0 left-0 whitespace-nowrap"
-                style={{ fontSize: 100 }}
-              >
-                Systems that <span className="si text-[1.08em] tracking-[-0.03em]">outlast</span>
-              </span>
-              <span aria-hidden="true" className="block min-h-[0.9em] whitespace-nowrap">
-                <span key={wordIdx} className={reduced ? "" : "swap"}>
-                  {WORDS[wordIdx]}
-                </span>
-              </span>
-            </h1>
-          </div>
-
-          <div ref={figureRef} className="max-w-[300px] flex-[1_1_260px] will-change-transform">
-            <figure className="portrait-figure rise d3 m-0 flex w-full flex-col gap-3.5">
-              <div className="relative w-full">
-                <div
-                  className="relative w-full overflow-hidden"
-                  style={{ aspectRatio: "1 / 1.12", borderRadius: "0 0 50% 50% / 0 0 44.6% 44.6%" }}
-                >
-                  <div
-                    aria-hidden="true"
-                    className="bg-disc absolute right-0 bottom-0 left-0 aspect-square rounded-full transition-colors duration-[600ms]"
-                    style={{ boxShadow: "inset 0 0 0 1.5px var(--disc-ring)" }}
-                  />
-                  <Portrait variant="hero" />
+      <div ref={innerRef} className="flex flex-1 flex-col will-change-transform">
+        <div
+          ref={gridRef}
+          className="grid-bg pointer-events-none absolute inset-x-0 top-[-40%] bottom-0 will-change-transform"
+          aria-hidden="true"
+        />
+        <div className="wrap relative flex flex-1 flex-col justify-center gap-14 py-[clamp(32px,4vw,64px)]">
+          {/* headline + portrait */}
+          <div className="flex flex-wrap items-end gap-12">
+            <div className="flex min-w-0 flex-[999_1_640px] flex-col gap-7">
+              {/* eyebrow row (wrapper is the parallax target; inner div keeps the entrance) */}
+              <div ref={eyebrowRef}>
+                <div className="rise text-muted flex flex-wrap items-center gap-x-7 gap-y-2.5 font-mono text-[11.5px] tracking-[0.14em] uppercase">
+                  <span className="text-ink flex items-center gap-2.5">
+                    <span className="pulse bg-accent h-2 w-2 rounded-full" />
+                    Open to interesting problems
+                  </span>
+                  <span>Backend · Distributed systems · Dev tooling</span>
+                  <span>
+                    Kolkata <span className="text-ink">{clock?.clock ?? "--:--"} IST</span> —{" "}
+                    {clock ? clockNote(clock.hour) : "probably shipping"}
+                  </span>
                 </div>
-                <button
-                  type="button"
-                  className="sticker si bg-ink text-bg absolute right-[-14px] bottom-[12%] min-h-11 rounded-full border-0 px-4 pt-1.5 pb-2 text-[21px] whitespace-nowrap"
-                  aria-label="Friendly neighbourhood engineer"
-                >
-                  <span aria-hidden="true" className="not-italic">
-                    🤖
-                  </span>
-                  <span className="sticker-text" aria-hidden="true">
-                    friendly neighbourhood engineer
-                  </span>
-                  <span aria-hidden="true" className="ml-1.5">
-                    ↗
-                  </span>
-                </button>
               </div>
-              <figcaption className="border-line2 text-muted flex justify-between gap-3 border-t pt-2.5 font-mono text-[10.5px] tracking-[0.12em] uppercase">
-                <span>Fig. 01</span>
-                <span>Engineer, mid-thought</span>
-              </figcaption>
-            </figure>
-          </div>
-        </div>
+              <h1
+                ref={h1Ref}
+                aria-label="Systems that outlast the hype."
+                className="rise d1 relative m-0 min-w-0 font-bold tracking-[-0.055em]"
+                style={{
+                  fontSize: fit.px ? `${fit.px.toFixed(1)}px` : "clamp(48px, 7.2vw, 112px)",
+                  lineHeight: 0.86,
+                  fontVariationSettings: "'opsz' 96",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  className="block"
+                  style={{ whiteSpace: fit.wrap ? "normal" : "nowrap" }}
+                >
+                  Systems that{" "}
+                  <span className="si text-accent relative [isolation:isolate] inline-block text-[1.08em] tracking-[-0.03em]">
+                    outlast
+                    <span ref={bandRef} className="hl-band" aria-hidden="true" />
+                  </span>
+                </span>
+                <span
+                  ref={measureRef}
+                  aria-hidden="true"
+                  className="pointer-events-none invisible absolute top-0 left-0 whitespace-nowrap"
+                  style={{ fontSize: 100 }}
+                >
+                  Systems that <span className="si text-[1.08em] tracking-[-0.03em]">outlast</span>
+                </span>
+                <span aria-hidden="true" className="block min-h-[0.9em] whitespace-nowrap">
+                  <span key={wordIdx} className={reduced ? "" : "swap"}>
+                    {WORDS[wordIdx]}
+                  </span>
+                </span>
+              </h1>
+            </div>
 
-        {/* intro + stats */}
-        <div className="flex flex-wrap items-start justify-between gap-x-16 gap-y-10">
-          <div className="rise d4 flex max-w-[560px] flex-[1_1_440px] flex-col gap-8">
-            <p className="text-muted m-0 text-[clamp(18px,1.5vw,21px)] leading-[1.5] [text-wrap:pretty]">
-              <span className="text-ink">Backend, distributed systems and developer tooling.</span>{" "}
-              I&apos;ve migrated 200+ legacy APIs, shipped a microservice video platform and built
-              LLM-powered dev tools. Currently engineering at rtCamp.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/projects" className="pill pill-solid h-[52px] px-[26px] text-[15px]">
-                Read case studies <span aria-hidden="true">→</span>
-              </Link>
-              <a href="#shell" className="pill h-[52px] px-[22px] text-[15px]">
-                <span className="text-accent-ink font-mono text-[13px]">&gt;_</span>Try the shell
-              </a>
+            <div ref={figureRef} className="max-w-[300px] flex-[1_1_260px] will-change-transform">
+              <figure className="portrait-figure rise d3 m-0 flex w-full flex-col gap-3.5">
+                <div className="relative w-full">
+                  <div
+                    className="relative w-full overflow-hidden"
+                    style={{
+                      aspectRatio: "1 / 1.12",
+                      borderRadius: "0 0 50% 50% / 0 0 44.6% 44.6%",
+                    }}
+                  >
+                    <div
+                      aria-hidden="true"
+                      className="bg-disc absolute right-0 bottom-0 left-0 aspect-square rounded-full transition-colors duration-[600ms]"
+                      style={{ boxShadow: "inset 0 0 0 1.5px var(--disc-ring)" }}
+                    />
+                    <Portrait variant="hero" />
+                  </div>
+                  <button
+                    type="button"
+                    className="sticker si bg-ink text-bg absolute right-[-14px] bottom-[12%] min-h-11 rounded-full border-0 px-4 pt-1.5 pb-2 text-[21px] whitespace-nowrap"
+                    aria-label="Friendly neighbourhood engineer"
+                  >
+                    <span aria-hidden="true" className="not-italic">
+                      🤖
+                    </span>
+                    <span className="sticker-text" aria-hidden="true">
+                      friendly neighbourhood engineer
+                    </span>
+                    <span aria-hidden="true" className="ml-1.5">
+                      ↗
+                    </span>
+                  </button>
+                </div>
+                <figcaption className="border-line2 text-muted flex justify-between gap-3 border-t pt-2.5 font-mono text-[10.5px] tracking-[0.12em] uppercase">
+                  <span>Fig. 01</span>
+                  <span>Engineer, mid-thought</span>
+                </figcaption>
+              </figure>
             </div>
           </div>
 
-          <dl className="rise d5 border-line2 m-0 grid max-w-[640px] flex-[1_1_520px] grid-cols-[repeat(auto-fit,minmax(min(170px,100%),1fr))] border-t">
-            {STATS.map(([, suffix, label], i) => (
-              <div key={label} className="flex flex-col gap-2 pt-5 pr-5 last:pr-0">
-                <dt className="text-muted order-2 font-mono text-[11px] leading-[1.5] tracking-[0.1em] uppercase">
-                  {label}
-                </dt>
-                <dd className="order-1 m-0 text-[56px] leading-none font-semibold tracking-[-0.05em]">
-                  {i === 2 ? String(stats[i]).padStart(2, "0") : stats[i]}
-                  {suffix && <span className="text-accent">{suffix}</span>}
-                </dd>
+          {/* intro + stats */}
+          <div className="flex flex-wrap items-start justify-between gap-x-16 gap-y-10">
+            <div className="rise d4 flex max-w-[560px] flex-[1_1_440px] flex-col gap-8">
+              <p className="text-muted m-0 text-[clamp(18px,1.5vw,21px)] leading-[1.5] [text-wrap:pretty]">
+                <span className="text-ink">
+                  Backend, distributed systems and developer tooling.
+                </span>{" "}
+                I&apos;ve migrated 200+ legacy APIs, shipped a microservice video platform and built
+                LLM-powered dev tools. Currently engineering at rtCamp.
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Link href="/projects" className="pill pill-solid h-[52px] px-[26px] text-[15px]">
+                  Read case studies <span aria-hidden="true">→</span>
+                </Link>
+                <a href="#shell" className="pill h-[52px] px-[22px] text-[15px]">
+                  <span className="text-accent-ink font-mono text-[13px]">&gt;_</span>Try the shell
+                </a>
               </div>
-            ))}
-          </dl>
+            </div>
+
+            <dl className="rise d5 border-line2 m-0 grid max-w-[640px] flex-[1_1_520px] grid-cols-[repeat(auto-fit,minmax(min(170px,100%),1fr))] border-t">
+              {STATS.map(([, suffix, label], i) => (
+                <div key={label} className="flex flex-col gap-2 pt-5 pr-5 last:pr-0">
+                  <dt className="text-muted order-2 font-mono text-[11px] leading-[1.5] tracking-[0.1em] uppercase">
+                    {label}
+                  </dt>
+                  <dd className="order-1 m-0 text-[56px] leading-none font-semibold tracking-[-0.05em]">
+                    {i === 2 ? String(stats[i]).padStart(2, "0") : stats[i]}
+                    {suffix && <span className="text-accent">{suffix}</span>}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </section>
