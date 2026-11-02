@@ -38,14 +38,12 @@ export default function Nav() {
     return () => window.removeEventListener("scroll", onScroll);
   }, [isHome, pathname]);
 
-  const links: { label: string; href: string; on: boolean }[] = isHome
-    ? homeSections.map((s) => ({ label: s.label, href: `#${s.id}`, on: active === s.id }))
-    : [
-        { label: "Home", href: "/", on: false },
-        { label: "Work", href: "/#work", on: false },
-        { label: "Experience", href: "/#experience", on: false },
-        { label: "Writing", href: "/blog", on: isBlog },
-      ];
+  // Same four links everywhere: section anchors on the home page, routes elsewhere.
+  const links: { label: string; href: string; on: boolean }[] = homeSections.map((s) => ({
+    label: s.label,
+    href: isHome ? `#${s.id}` : s.id === "writing" ? "/blog" : `/#${s.id}`,
+    on: isHome ? active === s.id : isBlog && s.id === "writing",
+  }));
 
   return (
     <header className="border-line bg-nav sticky top-0 z-20 border-b backdrop-blur-[14px]">
