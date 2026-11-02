@@ -182,13 +182,15 @@ export default function BlogPost({ post, next }: BlogPostProps) {
   };
 
   return (
-    <article id="top" className="wrap fadein flex flex-col gap-10 pt-[clamp(40px,5vw,72px)]">
-      <Link href="/blog" className="pill self-start">
-        <span aria-hidden="true">←</span>All writing
-      </Link>
-
-      <header className="border-line2 flex flex-col gap-7 border-b pb-9">
+    <article id="top" className="wrap fadein flex flex-col gap-8 pt-[clamp(24px,2.5vw,36px)]">
+      <header className="border-line2 flex flex-col gap-5 border-b pb-7">
         <div className={`${MONO} flex flex-wrap items-center gap-x-[18px] gap-y-2.5`}>
+          <Link
+            href="/blog"
+            className="pill mr-1.5 font-sans text-[13px] tracking-normal normal-case"
+          >
+            <span aria-hidden="true">←</span>All writing
+          </Link>
           <span className="border-accent text-accent-ink rounded-full border px-2.5 py-[5px]">
             {topic}
           </span>
@@ -196,7 +198,7 @@ export default function BlogPost({ post, next }: BlogPostProps) {
           <span>{readTime} min read</span>
         </div>
         <h1
-          className="m-0 max-w-[20ch] text-[clamp(42px,5.6vw,88px)] leading-[0.95] font-bold tracking-[-0.05em] [text-wrap:balance]"
+          className="m-0 max-w-[20ch] text-[clamp(40px,5vw,76px)] leading-[0.95] font-bold tracking-[-0.05em] [text-wrap:balance]"
           style={{ fontVariationSettings: "'opsz' 96" }}
         >
           {post.title}
