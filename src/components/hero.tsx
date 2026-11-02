@@ -85,56 +85,57 @@ export default function Hero() {
     <section id="top" className="relative overflow-hidden">
       <div className="grid-bg pointer-events-none absolute inset-0" aria-hidden="true" />
       <div className="wrap relative flex flex-col gap-14 pt-[clamp(56px,7vw,104px)] pb-[72px]">
-        {/* eyebrow row */}
-        <div className="rise text-muted flex flex-wrap items-center gap-x-7 gap-y-2.5 font-mono text-[11.5px] tracking-[0.14em] uppercase">
-          <span className="text-ink flex items-center gap-2.5">
-            <span className="pulse bg-accent h-2 w-2 rounded-full" />
-            Open to interesting problems
-          </span>
-          <span>Backend · Distributed systems · Dev tooling</span>
-          <span>
-            Kolkata <span className="text-ink">{clock?.clock ?? "--:--"} IST</span> —{" "}
-            {clock ? clockNote(clock.hour) : "probably shipping"}
-          </span>
-        </div>
-
         {/* headline + portrait */}
         <div className="flex flex-wrap items-end gap-12">
-          <h1
-            ref={h1Ref}
-            aria-label="Systems that outlast the hype."
-            className="rise d1 relative m-0 min-w-0 flex-[999_1_640px] font-bold tracking-[-0.055em]"
-            style={{
-              fontSize: fit.px ? `${fit.px.toFixed(1)}px` : "clamp(48px, 7.2vw, 112px)",
-              lineHeight: 0.86,
-              fontVariationSettings: "'opsz' 96",
-            }}
-          >
-            <span
-              aria-hidden="true"
-              className="block"
-              style={{ whiteSpace: fit.wrap ? "normal" : "nowrap" }}
-            >
-              Systems that{" "}
-              <span className="si text-accent relative [isolation:isolate] inline-block text-[1.08em] tracking-[-0.03em]">
-                outlast
-                <span className="hl-band" aria-hidden="true" />
+          <div className="flex min-w-0 flex-[999_1_640px] flex-col gap-7">
+            {/* eyebrow row */}
+            <div className="rise text-muted flex flex-wrap items-center gap-x-7 gap-y-2.5 font-mono text-[11.5px] tracking-[0.14em] uppercase">
+              <span className="text-ink flex items-center gap-2.5">
+                <span className="pulse bg-accent h-2 w-2 rounded-full" />
+                Open to interesting problems
               </span>
-            </span>
-            <span
-              ref={measureRef}
-              aria-hidden="true"
-              className="pointer-events-none invisible absolute top-0 left-0 whitespace-nowrap"
-              style={{ fontSize: 100 }}
-            >
-              Systems that <span className="si text-[1.08em] tracking-[-0.03em]">outlast</span>
-            </span>
-            <span aria-hidden="true" className="block min-h-[0.9em] whitespace-nowrap">
-              <span key={wordIdx} className={reduced ? "" : "swap"}>
-                {WORDS[wordIdx]}
+              <span>Backend · Distributed systems · Dev tooling</span>
+              <span>
+                Kolkata <span className="text-ink">{clock?.clock ?? "--:--"} IST</span> —{" "}
+                {clock ? clockNote(clock.hour) : "probably shipping"}
               </span>
-            </span>
-          </h1>
+            </div>
+            <h1
+              ref={h1Ref}
+              aria-label="Systems that outlast the hype."
+              className="rise d1 relative m-0 min-w-0 font-bold tracking-[-0.055em]"
+              style={{
+                fontSize: fit.px ? `${fit.px.toFixed(1)}px` : "clamp(48px, 7.2vw, 112px)",
+                lineHeight: 0.86,
+                fontVariationSettings: "'opsz' 96",
+              }}
+            >
+              <span
+                aria-hidden="true"
+                className="block"
+                style={{ whiteSpace: fit.wrap ? "normal" : "nowrap" }}
+              >
+                Systems that{" "}
+                <span className="si text-accent relative [isolation:isolate] inline-block text-[1.08em] tracking-[-0.03em]">
+                  outlast
+                  <span className="hl-band" aria-hidden="true" />
+                </span>
+              </span>
+              <span
+                ref={measureRef}
+                aria-hidden="true"
+                className="pointer-events-none invisible absolute top-0 left-0 whitespace-nowrap"
+                style={{ fontSize: 100 }}
+              >
+                Systems that <span className="si text-[1.08em] tracking-[-0.03em]">outlast</span>
+              </span>
+              <span aria-hidden="true" className="block min-h-[0.9em] whitespace-nowrap">
+                <span key={wordIdx} className={reduced ? "" : "swap"}>
+                  {WORDS[wordIdx]}
+                </span>
+              </span>
+            </h1>
+          </div>
 
           <figure className="portrait-figure rise d3 m-0 flex max-w-[300px] flex-[1_1_260px] flex-col gap-3.5">
             <div className="relative w-full">
